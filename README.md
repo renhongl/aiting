@@ -1,2 +1,1 @@
-# AiTing
-One beautiful desktop app for listenning music.
+[点击这里查看文档](https://renhongl.github.io/)
