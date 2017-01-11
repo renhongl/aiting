@@ -15,12 +15,11 @@ function createWindow () {
   mainWindow = new BrowserWindow({
       width: size.width * 0.6, 
       height: size.height * 0.8,
-      frame: false
+      //frame: false
     })
 
   // 加载应用的 index.html。
-  //mainWindow.loadURL(`file://${__dirname}/build/index.html`)
-  mainWindow.loadURL(`http://127.0.0.1:8080`);
+  mainWindow.loadURL(`file://${__dirname}/build/index.html`)
 
   // 启用开发工具。
   mainWindow.webContents.openDevTools()
