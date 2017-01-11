@@ -1,13 +1,13 @@
 const path = require('path');
 module.exports = {
-    entry: path.resolve(__dirname, 'app/main.js'),
+    entry: path.resolve(__dirname, 'src/app.js'),
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'server/public'),
         filename: 'bundle.js',
     },
     module: {
         loaders: [{
-            test: /\.js?$/,
+            test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel',
             query: {
@@ -17,5 +17,10 @@ module.exports = {
             test: /\.css$/,
             loader: 'style!css'
         }]
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.common.js'
+        }
     }
 };
