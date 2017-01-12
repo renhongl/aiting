@@ -14,6 +14,16 @@ export default class Footer extends Component {
         }
     }
 
+    parseTime(time) {
+        let minutes = parseInt(time / 60);
+        let seconds = parseInt(time % 60);
+        return this.addZero(minutes) + ' : ' + this.addZero(seconds);
+    }
+
+    addZero(number) {
+        return number < 10 ? '0' + number : number + '';
+    }
+
     componentDidMount() {
         this.timeThread = setInterval(() => {
             let finishTime = this.state.finishTime;
@@ -24,7 +34,13 @@ export default class Footer extends Component {
             }   
         }, 1000);
 
-        let appAudio = document
+        let appAudio = this.refs.appAudio;
+        appAudio.src = this.state.url;
+        appAudio.volume = this.state.volume;
+        appAudio.play();
+        appAudio.onloadedmetadata = () => {
+            this.setState({totalTime: appAudio.duration});
+        }
     }
 
     render() {
@@ -45,13 +61,13 @@ export default class Footer extends Component {
                 <i className="fa fa-backward" aria-hidden="true"></i>
                 <i className="fa fa-pause" aria-hidden="true"></i>
                 <i className="fa fa-forward" aria-hidden="true"></i>
-                <span className="finishTime">{this.state.finishTime}</span>
+                <span className="finishTime">{this.parseTime(this.state.finishTime)}</span>
                 <div className="progress"><span className="finish" style={progressStyle}></span><span className="progressHeader button" style={progressHeaderStyle}></span></div>
-                <span className="totalTime">{this.state.totalTime}</span>
+                <span className="totalTime">{this.parseTime(this.state.totalTime)}</span>
                 <i className="fa fa-volume-up" aria-hidden="true"></i>
                 <div className="volumeProgress"><span className="finish" style={volumeProgressStyle}></span><span className="volumeProgressHeader button" style={volumeProgressHeaderStyle}></span></div>
                 <i className="fa fa-repeat" aria-hidden="true"></i>
-                <audio id="appAudio"></audio>
+                <audio ref="appAudio"></audio>
             </div>
         )
     }

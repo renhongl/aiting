@@ -22166,6 +22166,18 @@
 	    }
 
 	    _createClass(Footer, [{
+	        key: 'parseTime',
+	        value: function parseTime(time) {
+	            var minutes = parseInt(time / 60);
+	            var seconds = parseInt(time % 60);
+	            return this.addZero(minutes) + ' : ' + this.addZero(seconds);
+	        }
+	    }, {
+	        key: 'addZero',
+	        value: function addZero(number) {
+	            return number < 10 ? '0' + number : number + '';
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var _this2 = this;
@@ -22179,7 +22191,15 @@
 	                }
 	            }, 1000);
 
-	            var appAudio = document;
+	            var appAudio = this.refs.appAudio;
+	            appAudio.src = this.state.url;
+	            appAudio.volume = this.state.volume;
+	            appAudio.play();
+	            console.log(appAudio.duration);
+
+	            appAudio.onloadedmetadata = function () {
+	                _this2.setState({ totalTime: appAudio.duration });
+	            };
 	        }
 	    }, {
 	        key: 'render',
@@ -22205,7 +22225,7 @@
 	                _react2.default.createElement(
 	                    'span',
 	                    { className: 'finishTime' },
-	                    this.state.finishTime
+	                    this.parseTime(this.state.finishTime)
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -22216,7 +22236,7 @@
 	                _react2.default.createElement(
 	                    'span',
 	                    { className: 'totalTime' },
-	                    this.state.totalTime
+	                    this.parseTime(this.state.totalTime)
 	                ),
 	                _react2.default.createElement('i', { className: 'fa fa-volume-up', 'aria-hidden': 'true' }),
 	                _react2.default.createElement(
@@ -22226,7 +22246,7 @@
 	                    _react2.default.createElement('span', { className: 'volumeProgressHeader button', style: volumeProgressHeaderStyle })
 	                ),
 	                _react2.default.createElement('i', { className: 'fa fa-repeat', 'aria-hidden': 'true' }),
-	                _react2.default.createElement('audio', { id: 'appAudio' })
+	                _react2.default.createElement('audio', { ref: 'appAudio' })
 	            );
 	        }
 	    }]);
@@ -22271,7 +22291,7 @@
 
 
 	// module
-	exports.push([module.id, ".footer{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #cccccc;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.footer i{\r\n    width: 30px;\r\n    margin-left: 20px;\r\n    color: #fff;\r\n    border-radius: 18px;\r\n    height: 30px;\r\n    text-align: center;\r\n    line-height: 30px;\r\n    background: #e6245a;\r\n}\r\n\r\n.footer i:hover{\r\n    animation: iHover 1s;\r\n    cursor: pointer;\r\n}\r\n\r\n@keyframes iHover{\r\n    0%  {background: #e6245a;}\r\n    100%    {background: #e44b76;}\r\n}\r\n\r\n.progress{\r\n    width: 300px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.progress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.progress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.volumeProgress{\r\n    width: 100px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.volumeProgress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.volumeProgress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.footer .finishTime, .footer .totalTime{\r\n    margin-left: 20px;\r\n    font-size: 12px;\r\n}\r\n\r\n.footer .fa-volume-up{\r\n    background: none;\r\n    color: grey;\r\n}\r\n\r\n.footer .fa-volume-up:hover{\r\n    background: none;\r\n    animation: none;\r\n    cursor: default;\r\n}\r\n\r\n.footer .fa-repeat{\r\n    margin-left: 30px;\r\n}", ""]);
+	exports.push([module.id, ".footer{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #cccccc;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.footer i{\r\n    width: 30px;\r\n    margin-left: 20px;\r\n    color: #fff;\r\n    border-radius: 18px;\r\n    height: 30px;\r\n    text-align: center;\r\n    line-height: 30px;\r\n    background: #e6245a;\r\n}\r\n\r\n.footer i:hover{\r\n    animation: iHover 1s;\r\n    cursor: pointer;\r\n}\r\n\r\n@keyframes iHover{\r\n    0%  {background: #e6245a;}\r\n    100%    {background: #e44b76;}\r\n}\r\n\r\n.progress{\r\n    width: 300px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.progress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.progress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.volumeProgress{\r\n    width: 100px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.volumeProgress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.volumeProgress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.footer .finishTime, .footer .totalTime{\r\n    margin-left: 20px;\r\n    font-size: 12px;\r\n}\r\n\r\n.footer .fa-volume-up{\r\n    background: none;\r\n    color: grey;\r\n}\r\n\r\n.footer .fa-volume-up:hover{\r\n    background: none;\r\n    animation: none;\r\n    cursor: default;\r\n}\r\n\r\n.footer .fa-repeat{\r\n    margin-left: 30px;\r\n}", ""]);
 
 	// exports
 
