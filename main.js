@@ -4,6 +4,8 @@ const {app} = electron
 // 创建原生浏览器窗口的模块。
 const {BrowserWindow} = electron
 
+const ipcMain = electron.ipcMain;
+
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
 let mainWindow
@@ -13,9 +15,16 @@ function createWindow () {
   let size = electronScreen.getPrimaryDisplay().workAreaSize;
   // 创建浏览器窗口。
   mainWindow = new BrowserWindow({
-      width: size.width * 0.6, 
-      height: size.height * 0.8,
-      //frame: false
+      //width: size.width * 0.6, 
+      //height: size.height * 0.8,
+      width: 800,
+      height: 600,
+      minWidth: 800,
+      minHeight: 600,
+      maxWidth: 800,
+      maxHeight: 600,
+      fullscreen: false,
+      frame: false
     })
 
   // 加载应用的 index.html。
@@ -54,6 +63,14 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('closeWindow', () => {
+  app.quit();
+});
+
+ipcMain.on('minMainWindow', () => {
+  mainWindow.minimize();
+});
 
 // 在这文件，你可以续写应用剩下主进程代码。
 // 也可以拆分成几个文件，然后用 require 导入。

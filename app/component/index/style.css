@@ -1,0 +1,27 @@
+html, body, #container{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-app-region: drag;
+}
+
+.button, i, input{
+    -webkit-app-region: no-drag;
+}
+
+div, p, ol, ul{
+    margin: 0;
+    padding: 0;
+}
+
+.index{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+
+
+
+

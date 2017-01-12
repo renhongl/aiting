@@ -1,0 +1,109 @@
+.footer{
+    width: 100%;
+    height: 50px;
+    background: #cccccc;
+    display: flex;
+    align-items: center;
+}
+
+.footer i{
+    width: 30px;
+    margin-left: 20px;
+    color: #fff;
+    border-radius: 18px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background: #e6245a;
+}
+
+.footer i:hover{
+    animation: iHover 1s;
+    cursor: pointer;
+}
+
+@keyframes iHover{
+    0%  {background: #e6245a;}
+    100%    {background: #e44b76;}
+}
+
+.progress{
+    width: 300px;
+    background: #fff;
+    height: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.progress .finish{
+    width: 100px;
+    background: #e6245a;
+    height: 5px;
+    position: absolute;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.progress .progressHeader{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #e6245a;
+    left: 96px;
+    top: -5px;
+    border-radius: 9px;
+    border: 5px solid #fff;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.volumeProgress{
+    width: 100px;
+    background: #fff;
+    height: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.volumeProgress .finish{
+    width: 100px;
+    background: #e6245a;
+    height: 5px;
+    position: absolute;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.volumeProgress .progressHeader{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #e6245a;
+    left: 96px;
+    top: -5px;
+    border-radius: 9px;
+    border: 5px solid #fff;
+    cursor: pointer;
+}
+
+.footer .finishTime, .footer .totalTime{
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+.footer .fa-volume-up{
+    background: none;
+    color: grey;
+}
+
+.footer .fa-volume-up:hover{
+    background: none;
+    animation: none;
+    cursor: default;
+}
+
+.footer .fa-repeat{
+    margin-left: 30px;
+}
