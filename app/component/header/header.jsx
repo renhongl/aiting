@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 const electron = window.require('electron');
+import $ from 'jquery';
 
 export default class Header extends Component {
     constructor() {
@@ -18,11 +19,32 @@ export default class Header extends Component {
         this.ipcRenderer.send('minMainWindow');
     }
 
+    searchMusic(e) {
+        if (e.keyCode === 13) {
+            let value = this.refs.searchInput.value;
+            let url = `http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=${value}&page=1&pagesize=15&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>`;
+            $.ajax({
+                url: url,
+                method: 'GET',
+                contentType: 'json',
+                success: (result) => {
+                    result = result.substring(1, result.length -1);
+                    $.publish('showMusicByThisList', {result: result});
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }else{
+            //console.log(e.keyCode);
+        }
+    }
+
     render() {
         return (
             <div className="header">
                 <div className="title"><i className="fa fa-assistive-listening-systems" aria-hidden="true"></i><span>爱 听</span></div>
-                <div className="searchDiv"><input type="text" placeholder="搜索歌曲"/></div>
+                <div className="searchDiv"><input type="text" placeholder="搜索歌曲" onKeyUp={this.searchMusic.bind(this)} ref="searchInput" /></div>
                 <div className="controlContainer">
                     <div className="setting"><i className="fa fa-cog" aria-hidden="true" title="设置"></i></div>
                     <div className="console"><i className="fa fa-chain-broken" aria-hidden="true" title="控制台"></i></div>

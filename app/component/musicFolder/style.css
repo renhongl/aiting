@@ -1,0 +1,35 @@
+.musicFolder{
+    width: 20%;
+    height: 100%;
+}
+
+.smallWindow{
+    width: 100%;
+    height: 69px;
+    background: #fff;
+    cursor: pointer;
+    border-top: 1px solid #cebaba;
+}
+
+.folderList{
+    width: 100%;
+    background: #fff;
+    height: 430px;
+}
+
+.smallWindow img{
+    width: 40%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+
+.smallWindow span{
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 55%;
+    font-size: 12px;
+    overflow: hidden;
+}
+

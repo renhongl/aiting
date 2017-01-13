@@ -106,6 +106,6 @@
     cursor: default;
 }
 
-.footer .fa-repeat{
+.footer .fa-repeat, .footer .fa-random{
     margin-left: 30px;
 }

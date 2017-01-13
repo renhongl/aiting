@@ -58,7 +58,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Observer = __webpack_require__(193);
+	var _Observer = __webpack_require__(202);
 
 	var _Observer2 = _interopRequireDefault(_Observer);
 
@@ -21517,15 +21517,15 @@
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _content = __webpack_require__(184);
+	var _content = __webpack_require__(185);
 
 	var _content2 = _interopRequireDefault(_content);
 
-	var _footer = __webpack_require__(187);
+	var _footer = __webpack_require__(197);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	__webpack_require__(191);
+	__webpack_require__(200);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21587,6 +21587,10 @@
 
 	__webpack_require__(180);
 
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21620,6 +21624,28 @@
 	            this.ipcRenderer.send('minMainWindow');
 	        }
 	    }, {
+	        key: 'searchMusic',
+	        value: function searchMusic(e) {
+	            if (e.keyCode === 13) {
+	                var value = this.refs.searchInput.value;
+	                var url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=15&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
+	                _jquery2.default.ajax({
+	                    url: url,
+	                    method: 'GET',
+	                    contentType: 'json',
+	                    success: function success(result) {
+	                        result = result.substring(1, result.length - 1);
+	                        _jquery2.default.publish('showMusicByThisList', { result: result });
+	                    },
+	                    error: function error(_error) {
+	                        console.log(_error);
+	                    }
+	                });
+	            } else {
+	                //console.log(e.keyCode);
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -21638,7 +21664,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'searchDiv' },
-	                    _react2.default.createElement('input', { type: 'text', placeholder: '\u641C\u7D22\u6B4C\u66F2' })
+	                    _react2.default.createElement('input', { type: 'text', placeholder: '\u641C\u7D22\u6B4C\u66F2', onKeyUp: this.searchMusic.bind(this), ref: 'searchInput' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -22024,307 +22050,6 @@
 
 /***/ },
 /* 184 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	__webpack_require__(185);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Content = function (_Component) {
-	    _inherits(Content, _Component);
-
-	    function Content() {
-	        _classCallCheck(this, Content);
-
-	        var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
-
-	        _this.state = {
-	            height: '100%'
-	        };
-	        return _this;
-	    }
-
-	    _createClass(Content, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement('div', { className: 'content' });
-	        }
-	    }]);
-
-	    return Content;
-	}(_react.Component);
-
-	exports.default = Content;
-
-/***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(186);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(183)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(182)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".content{\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #fff;\r\n}", ""]);
-
-	// exports
-
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	__webpack_require__(188);
-
-	var _jquery = __webpack_require__(190);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Footer = function (_Component) {
-	    _inherits(Footer, _Component);
-
-	    function Footer() {
-	        _classCallCheck(this, Footer);
-
-	        var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this));
-
-	        _this.state = {
-	            finishTime: 0,
-	            totalTime: 300,
-	            volume: 0.5,
-	            url: './static/testData/冬天的秘密.mp3'
-	        };
-	        return _this;
-	    }
-
-	    _createClass(Footer, [{
-	        key: 'parseTime',
-	        value: function parseTime(time) {
-	            var minutes = parseInt(time / 60);
-	            var seconds = parseInt(time % 60);
-	            return this.addZero(minutes) + ' : ' + this.addZero(seconds);
-	        }
-	    }, {
-	        key: 'addZero',
-	        value: function addZero(number) {
-	            return number < 10 ? '0' + number : number + '';
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this2 = this;
-
-	            _jquery2.default.subscribe('setCurrentMusic', function (o, args) {
-	                _this2.setCurrentMuisc();
-	            });
-
-	            _jquery2.default.publish('setCurrentMusic');
-	        }
-	    }, {
-	        key: 'setCurrentMuisc',
-	        value: function setCurrentMuisc(url) {
-	            var _this3 = this;
-
-	            this.appAudio = this.refs.appAudio;
-	            if (url) {} else {
-	                this.appAudio.src = this.state.url;
-	                this.appAudio.volume = this.state.volume;
-	                this.appAudio.onloadedmetadata = function () {
-	                    _this3.setState({ totalTime: _this3.appAudio.duration });
-	                };
-	            }
-	        }
-	    }, {
-	        key: 'playMusic',
-	        value: function playMusic() {
-	            var _this4 = this;
-
-	            if ((0, _jquery2.default)(this.refs.playButton).hasClass('fa-play')) {
-	                (0, _jquery2.default)(this.refs.playButton).removeClass('fa-play').addClass('fa-pause');
-	                this.appAudio.play();
-	                this.timeThread = setInterval(function () {
-	                    var finishTime = _this4.state.finishTime;
-	                    if (finishTime >= _this4.state.totalTime) {
-	                        clearInterval(_this4.timeThread);
-	                    } else {
-	                        _this4.setState({ finishTime: finishTime + 1 });
-	                    }
-	                }, 1000);
-	            } else {
-	                this.appAudio.pause();
-	                clearInterval(this.timeThread);
-	                (0, _jquery2.default)(this.refs.playButton).removeClass('fa-pause').addClass('fa-play');
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var progressStyle = {
-	                width: this.state.finishTime / this.state.totalTime * 300
-	            };
-	            var progressHeaderStyle = {
-	                left: this.state.finishTime / this.state.totalTime * 300 - 5
-	            };
-	            var volumeProgressStyle = {
-	                width: this.state.volume * 100
-	            };
-	            var volumeProgressHeaderStyle = {
-	                left: this.state.volume * 100 - 5
-	            };
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'footer' },
-	                _react2.default.createElement('i', { className: 'fa fa-backward', 'aria-hidden': 'true' }),
-	                _react2.default.createElement('i', { className: 'fa fa-play', 'aria-hidden': 'true', ref: 'playButton', onClick: this.playMusic.bind(this) }),
-	                _react2.default.createElement('i', { className: 'fa fa-forward', 'aria-hidden': 'true' }),
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'finishTime' },
-	                    this.parseTime(this.state.finishTime)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'progress' },
-	                    _react2.default.createElement('span', { className: 'finish', style: progressStyle }),
-	                    _react2.default.createElement('span', { className: 'progressHeader button', style: progressHeaderStyle })
-	                ),
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'totalTime' },
-	                    this.parseTime(this.state.totalTime)
-	                ),
-	                _react2.default.createElement('i', { className: 'fa fa-volume-up', 'aria-hidden': 'true' }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'volumeProgress' },
-	                    _react2.default.createElement('span', { className: 'finish', style: volumeProgressStyle }),
-	                    _react2.default.createElement('span', { className: 'volumeProgressHeader button', style: volumeProgressHeaderStyle })
-	                ),
-	                _react2.default.createElement('i', { className: 'fa fa-repeat', 'aria-hidden': 'true' }),
-	                _react2.default.createElement('audio', { ref: 'appAudio' })
-	            );
-	        }
-	    }]);
-
-	    return Footer;
-	}(_react.Component);
-
-	exports.default = Footer;
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(189);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(183)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(182)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".footer{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #cccccc;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.footer i{\r\n    width: 30px;\r\n    margin-left: 20px;\r\n    color: #fff;\r\n    border-radius: 18px;\r\n    height: 30px;\r\n    text-align: center;\r\n    line-height: 30px;\r\n    background: #e6245a;\r\n}\r\n\r\n.footer i:hover{\r\n    animation: iHover 3s;\r\n    animation-iteration-count: infinite;\r\n    cursor: pointer;\r\n}\r\n\r\n@keyframes iHover{\r\n    0%  {background: #e6245a;}\r\n    50%    {background: #09a579;box-shadow: 0 0 10px #232121;}\r\n}\r\n\r\n.progress{\r\n    width: 300px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.progress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.progress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.volumeProgress{\r\n    width: 100px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.volumeProgress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.volumeProgress .volumeProgressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.footer .finishTime, .footer .totalTime{\r\n    margin-left: 20px;\r\n    font-size: 12px;\r\n}\r\n\r\n.footer .fa-volume-up{\r\n    background: none;\r\n    color: grey;\r\n}\r\n\r\n.footer .fa-volume-up:hover{\r\n    background: none;\r\n    animation: none;\r\n    cursor: default;\r\n}\r\n\r\n.footer .fa-repeat{\r\n    margin-left: 30px;\r\n}", ""]);
-
-	// exports
-
-
-/***/ },
-/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32550,13 +32275,87 @@
 
 
 /***/ },
-/* 191 */
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(186);
+
+	var _musicList = __webpack_require__(188);
+
+	var _musicList2 = _interopRequireDefault(_musicList);
+
+	var _musicFolder = __webpack_require__(191);
+
+	var _musicFolder2 = _interopRequireDefault(_musicFolder);
+
+	var _musicDetail = __webpack_require__(194);
+
+	var _musicDetail2 = _interopRequireDefault(_musicDetail);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Content = function (_Component) {
+	    _inherits(Content, _Component);
+
+	    function Content() {
+	        _classCallCheck(this, Content);
+
+	        var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
+
+	        _this.state = {
+	            height: '100%'
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Content, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'content' },
+	                _react2.default.createElement(_musicFolder2.default, null),
+	                _react2.default.createElement(_musicList2.default, null),
+	                _react2.default.createElement(_musicDetail2.default, null)
+	            );
+	        }
+	    }]);
+
+	    return Content;
+	}(_react.Component);
+
+	exports.default = Content;
+
+/***/ },
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(192);
+	var content = __webpack_require__(187);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -32576,7 +32375,7 @@
 	}
 
 /***/ },
-/* 192 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -32584,13 +32383,13 @@
 
 
 	// module
-	exports.push([module.id, "html, body, #container{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    -webkit-app-region: drag;\r\n}\r\n\r\n.button, i, input{\r\n    -webkit-app-region: no-drag;\r\n}\r\n\r\ndiv, p, ol, ul{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.index{\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #fff;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+	exports.push([module.id, ".content{\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #fff;\r\n    display: flex;\r\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 193 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32599,7 +32398,863 @@
 	    value: true
 	});
 
-	var _jquery = __webpack_require__(190);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(189);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MusicList = function (_Component) {
+	    _inherits(MusicList, _Component);
+
+	    function MusicList() {
+	        _classCallCheck(this, MusicList);
+
+	        var _this = _possibleConstructorReturn(this, (MusicList.__proto__ || Object.getPrototypeOf(MusicList)).call(this));
+
+	        _this.state = {
+	            list: []
+	        };
+	        return _this;
+	    }
+
+	    _createClass(MusicList, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            _jquery2.default.subscribe('showMusicByThisList', function (o, args) {
+	                _this2.setState({ list: JSON.parse(args.result).data.info });
+	            });
+
+	            _jquery2.default.subscribe('nextMusic', function (o, args) {
+	                (0, _jquery2.default)('#' + args.hash).next().click();
+	                (0, _jquery2.default)('.listItem li').removeClass('selected');
+	                (0, _jquery2.default)('#' + args.hash).next().addClass('selected');
+	            });
+
+	            _jquery2.default.subscribe('randomMusic', function () {
+	                var number = Math.floor(Math.random() * (0, _jquery2.default)('.listItem li').length);
+	                (0, _jquery2.default)('.listItem li:eq(' + number + ')').click();
+	                (0, _jquery2.default)('.listItem li').removeClass('selected');
+	                (0, _jquery2.default)('.listItem li:eq(' + number + ')').addClass('selected');
+	            });
+	        }
+	    }, {
+	        key: 'selectedOneMusic',
+	        value: function selectedOneMusic(e) {
+	            var hash = e.target.id || e.target.parentNode.id;
+	            (0, _jquery2.default)('.listItem li').removeClass('selected');
+	            (0, _jquery2.default)(e.target.parentNode).addClass('selected');
+	            _jquery2.default.publish('selectedOneMusic', { hash: hash });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            var musicList = this.state.list.map(function (music) {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { key: music.hash, id: music.hash, className: 'button', onClick: _this3.selectedOneMusic.bind(_this3) },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { style: { fontWeight: 'bold', width: '40%' } },
+	                        music.songname
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        music.singername
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        music.album_name
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { style: { width: '10%' } },
+	                        music.duration
+	                    )
+	                );
+	            });
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'musicList' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'musicTitle' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { style: { fontWeight: 'bold', width: '40%' } },
+	                        '\u97F3\u4E50\u6807\u9898'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '\u6B4C\u624B'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '\u4E13\u8F91'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { style: { width: '10%' } },
+	                        '\u65F6\u957F'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'listItem' },
+	                    musicList
+	                )
+	            );
+	        }
+	    }]);
+
+	    return MusicList;
+	}(_react.Component);
+
+	exports.default = MusicList;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(190);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    padding-left: 15px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 15px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #e0e0e0;\r\n    cursor: pointer;\r\n    color: #fff;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #d4cece;\r\n    color: #fff;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(192);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MusicFolder = function (_Component) {
+	    _inherits(MusicFolder, _Component);
+
+	    function MusicFolder() {
+	        _classCallCheck(this, MusicFolder);
+
+	        var _this = _possibleConstructorReturn(this, (MusicFolder.__proto__ || Object.getPrototypeOf(MusicFolder)).call(this));
+
+	        _this.state = {
+	            image: '',
+	            songName: '',
+	            singername: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(MusicFolder, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            _jquery2.default.subscribe('selectedOneMusic', function (o, args) {
+	                _this2.showSmallDetail(args.hash);
+	            });
+	        }
+	    }, {
+	        key: 'showSmallDetail',
+	        value: function showSmallDetail(hash) {
+	            var _this3 = this;
+
+	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
+	            _jquery2.default.ajax({
+	                url: url,
+	                method: 'GET',
+	                contentType: 'json',
+	                success: function success(result) {
+	                    _this3.setState({ image: JSON.parse(result).data.img });
+	                    _this3.setState({ songName: JSON.parse(result).data.song_name });
+	                    _this3.setState({ singername: JSON.parse(result).data.author_name });
+	                },
+	                error: function error(_error) {
+	                    console.log(_error);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'openBigWindow',
+	        value: function openBigWindow() {
+	            _jquery2.default.publish('openBigWindow');
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'musicFolder' },
+	                _react2.default.createElement('div', { className: 'folderList' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'smallWindow button', onClick: this.openBigWindow.bind(this) },
+	                    _react2.default.createElement('img', { src: this.state.image }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.state.songName
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.state.singername
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return MusicFolder;
+	}(_react.Component);
+
+	exports.default = MusicFolder;
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(193);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".musicFolder{\r\n    width: 20%;\r\n    height: 100%;\r\n}\r\n\r\n.smallWindow{\r\n    width: 100%;\r\n    height: 69px;\r\n    background: #fff;\r\n    cursor: pointer;\r\n    border-top: 1px solid #cebaba;\r\n}\r\n\r\n.folderList{\r\n    width: 100%;\r\n    background: #fff;\r\n    height: 430px;\r\n}\r\n\r\n.smallWindow img{\r\n    width: 40%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    float: left;\r\n}\r\n\r\n.smallWindow span{\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    margin-top: 10px;\r\n    width: 55%;\r\n    font-size: 12px;\r\n    overflow: hidden;\r\n}\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(195);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MusicDetail = function (_Component) {
+	    _inherits(MusicDetail, _Component);
+
+	    function MusicDetail() {
+	        _classCallCheck(this, MusicDetail);
+
+	        var _this = _possibleConstructorReturn(this, (MusicDetail.__proto__ || Object.getPrototypeOf(MusicDetail)).call(this));
+
+	        _this.state = {
+	            image: '',
+	            songName: '',
+	            singername: '',
+	            lyric: '',
+	            audioName: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(MusicDetail, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            _jquery2.default.subscribe('openBigWindow', function () {
+	                (0, _jquery2.default)('.musicDetail').show();
+	            });
+
+	            _jquery2.default.subscribe('selectedOneMusic', function (o, args) {
+	                _this2.setDetail(args.hash);
+	            });
+
+	            _jquery2.default.subscribe('changeLyricLine', function (o, args) {
+	                _this2.changeLyricLine(args);
+	            });
+	        }
+	    }, {
+	        key: 'changeLyricLine',
+	        value: function changeLyricLine(args) {
+	            var $lyricLineGroup = (0, _jquery2.default)('.lyricLine');
+	            _jquery2.default.each($lyricLineGroup, function (i, item) {
+	                var timeStr = (0, _jquery2.default)(item).attr('id').substring(1, 6);
+	                var time = Number(timeStr.split(':')[0]) * 60 + Number(timeStr.split(':')[1]);
+	                if (time === args.time) {
+	                    item.scrollIntoView(true);
+	                    (0, _jquery2.default)('.lyricLine').css({
+	                        color: '#000'
+	                    });
+	                    (0, _jquery2.default)(item).css({
+	                        color: '#fff'
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'setDetail',
+	        value: function setDetail(hash) {
+	            var _this3 = this;
+
+	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
+	            _jquery2.default.ajax({
+	                url: url,
+	                method: 'GET',
+	                contentType: 'json',
+	                success: function success(result) {
+	                    _this3.setState({ image: JSON.parse(result).data.img });
+	                    _this3.setState({ songName: JSON.parse(result).data.song_name });
+	                    _this3.setState({ singername: JSON.parse(result).data.author_name });
+	                    _this3.setState({ lyric: JSON.parse(result).data.lyrics });
+	                    _this3.setState({ audioName: JSON.parse(result).data.audio_name });
+	                },
+	                error: function error(_error) {
+	                    console.log(_error);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'closeBigWindow',
+	        value: function closeBigWindow() {
+	            (0, _jquery2.default)('.musicDetail').hide();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            this.lyrics = this.state.lyric.split('\r\n');
+	            var lyricLine = this.lyrics.map(function (line) {
+	                return _react2.default.createElement(
+	                    'p',
+	                    { className: 'lyricLine', key: line.split(']')[0], id: line.split(']')[0] },
+	                    line.split(']')[1]
+	                );
+	            });
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'musicDetail' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detailHeader' },
+	                    _react2.default.createElement('i', { className: 'fa fa-compress', 'aria-hidden': 'true', onClick: this.closeBigWindow.bind(this) })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detailContent' },
+	                    _react2.default.createElement('img', { src: this.state.image }),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'detailName' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { style: { fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' } },
+	                            this.state.songName
+	                        ),
+	                        _react2.default.createElement('br', null),
+	                        '\u6B4C\u624B: ',
+	                        this.state.singername,
+	                        '   \u4E13\u8F91: ',
+	                        this.state.audioName
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'detailLyric' },
+	                        lyricLine
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return MusicDetail;
+	}(_react.Component);
+
+	exports.default = MusicDetail;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(196);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent img{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 100px;\r\n    border-radius: 125px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 100px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(198);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Footer = function (_Component) {
+	    _inherits(Footer, _Component);
+
+	    function Footer() {
+	        _classCallCheck(this, Footer);
+
+	        var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this));
+
+	        _this.state = {
+	            finishTime: 0,
+	            totalTime: 300,
+	            volume: 0.5,
+	            url: './static/testData/冬天的秘密.mp3',
+	            hash: '',
+	            loop: true
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Footer, [{
+	        key: 'parseTime',
+	        value: function parseTime(time) {
+	            var minutes = parseInt(time / 60);
+	            var seconds = parseInt(time % 60);
+	            return this.addZero(minutes) + ' : ' + this.addZero(seconds);
+	        }
+	    }, {
+	        key: 'addZero',
+	        value: function addZero(number) {
+	            return number < 10 ? '0' + number : number + '';
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            _jquery2.default.subscribe('selectedOneMusic', function (o, args) {
+	                _this2.setState({ hash: args.hash });
+	                _this2.getCurrentMusic(args.hash);
+	            });
+	        }
+	    }, {
+	        key: 'getCurrentMusic',
+	        value: function getCurrentMusic(hash) {
+	            var _this3 = this;
+
+	            clearInterval(this.timeThread);
+	            this.setState({ finishTime: 0 });
+	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
+	            _jquery2.default.ajax({
+	                url: url,
+	                method: 'GET',
+	                contentType: 'json',
+	                success: function success(result) {
+	                    _this3.setState({ url: JSON.parse(result).data.play_url });
+	                    _this3.setCurrentMuisc();
+	                },
+	                error: function error(_error) {
+	                    console.log(_error);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'setCurrentMuisc',
+	        value: function setCurrentMuisc() {
+	            var _this4 = this;
+
+	            this.appAudio = this.refs.appAudio;
+	            this.appAudio.src = this.state.url;
+	            this.appAudio.volume = this.state.volume;
+	            this.appAudio.onloadedmetadata = function () {
+	                _this4.setState({ totalTime: _this4.appAudio.duration });
+	                _this4.playMusic(true);
+	            };
+	        }
+	    }, {
+	        key: 'controlMusic',
+	        value: function controlMusic() {
+	            var _this5 = this;
+
+	            if ((0, _jquery2.default)(this.refs.playButton).hasClass('fa-play')) {
+	                (0, _jquery2.default)(this.refs.playButton).removeClass('fa-play').addClass('fa-pause');
+	                this.appAudio.play();
+	                this.timeThread = setInterval(function () {
+	                    var finishTime = _this5.state.finishTime;
+	                    if (finishTime >= _this5.state.totalTime) {
+	                        clearInterval(_this5.timeThread);
+	                        if (_this5.state.loop) {
+	                            _jquery2.default.publish('nextMusic', { hash: _this5.state.hash });
+	                        } else {
+	                            _jquery2.default.publish('randomMusic', { hash: _this5.state.hash });
+	                        }
+	                    } else {
+	                        _this5.setState({ finishTime: finishTime + 1 });
+	                        _jquery2.default.publish('changeLyricLine', { time: _this5.state.finishTime });
+	                    }
+	                }, 1000);
+	            } else {
+	                this.appAudio.pause();
+	                clearInterval(this.timeThread);
+	                (0, _jquery2.default)(this.refs.playButton).removeClass('fa-pause').addClass('fa-play');
+	            }
+	        }
+	    }, {
+	        key: 'playMusic',
+	        value: function playMusic() {
+	            var _this6 = this;
+
+	            (0, _jquery2.default)(this.refs.playButton).removeClass('fa-play').addClass('fa-pause');
+	            this.appAudio.play();
+	            this.timeThread = setInterval(function () {
+	                var finishTime = _this6.state.finishTime;
+	                if (finishTime >= _this6.state.totalTime) {
+	                    clearInterval(_this6.timeThread);
+	                    if (_this6.state.loop) {
+	                        _jquery2.default.publish('nextMusic', { hash: _this6.state.hash });
+	                    } else {
+	                        _jquery2.default.publish('randomMusic', { hash: _this6.state.hash });
+	                    }
+	                } else {
+	                    _this6.setState({ finishTime: finishTime + 1 });
+	                    _jquery2.default.publish('changeLyricLine', { time: _this6.state.finishTime });
+	                }
+	            }, 1000);
+	        }
+	    }, {
+	        key: 'changeLoop',
+	        value: function changeLoop(e) {
+	            if ((0, _jquery2.default)(e.target).hasClass('fa-repeat')) {
+	                (0, _jquery2.default)(e.target).addClass('fa-random').removeClass('fa-repeat');
+	                this.setState({ loop: false });
+	            } else {
+	                (0, _jquery2.default)(e.target).removeClass('fa-random').addClass('fa-repeat');
+	                this.setState({ loop: true });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var progressStyle = {
+	                width: this.state.finishTime / this.state.totalTime * 300
+	            };
+	            var progressHeaderStyle = {
+	                left: this.state.finishTime / this.state.totalTime * 300 - 5
+	            };
+	            var volumeProgressStyle = {
+	                width: this.state.volume * 100
+	            };
+	            var volumeProgressHeaderStyle = {
+	                left: this.state.volume * 100 - 5
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'footer' },
+	                _react2.default.createElement('i', { className: 'fa fa-backward', 'aria-hidden': 'true' }),
+	                _react2.default.createElement('i', { className: 'fa fa-play', 'aria-hidden': 'true', ref: 'playButton', onClick: this.controlMusic.bind(this) }),
+	                _react2.default.createElement('i', { className: 'fa fa-forward', 'aria-hidden': 'true' }),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'finishTime' },
+	                    this.parseTime(this.state.finishTime)
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'progress' },
+	                    _react2.default.createElement('span', { className: 'finish', style: progressStyle }),
+	                    _react2.default.createElement('span', { className: 'progressHeader button', style: progressHeaderStyle })
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'totalTime' },
+	                    this.parseTime(this.state.totalTime)
+	                ),
+	                _react2.default.createElement('i', { className: 'fa fa-volume-up', 'aria-hidden': 'true' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'volumeProgress' },
+	                    _react2.default.createElement('span', { className: 'finish', style: volumeProgressStyle }),
+	                    _react2.default.createElement('span', { className: 'volumeProgressHeader button', style: volumeProgressHeaderStyle })
+	                ),
+	                _react2.default.createElement('i', { className: 'fa fa-repeat', 'aria-hidden': 'true', onClick: this.changeLoop.bind(this) }),
+	                _react2.default.createElement('audio', { ref: 'appAudio' })
+	            );
+	        }
+	    }]);
+
+	    return Footer;
+	}(_react.Component);
+
+	exports.default = Footer;
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(199);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".footer{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #cccccc;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.footer i{\r\n    width: 30px;\r\n    margin-left: 20px;\r\n    color: #fff;\r\n    border-radius: 18px;\r\n    height: 30px;\r\n    text-align: center;\r\n    line-height: 30px;\r\n    background: #e6245a;\r\n}\r\n\r\n.footer i:hover{\r\n    animation: iHover 3s;\r\n    animation-iteration-count: infinite;\r\n    cursor: pointer;\r\n}\r\n\r\n@keyframes iHover{\r\n    0%  {background: #e6245a;}\r\n    50%    {background: #09a579;box-shadow: 0 0 10px #232121;}\r\n}\r\n\r\n.progress{\r\n    width: 300px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.progress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.progress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.volumeProgress{\r\n    width: 100px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.volumeProgress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.volumeProgress .volumeProgressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.footer .finishTime, .footer .totalTime{\r\n    margin-left: 20px;\r\n    font-size: 12px;\r\n}\r\n\r\n.footer .fa-volume-up{\r\n    background: none;\r\n    color: grey;\r\n}\r\n\r\n.footer .fa-volume-up:hover{\r\n    background: none;\r\n    animation: none;\r\n    cursor: default;\r\n}\r\n\r\n.footer .fa-repeat, .footer .fa-random{\r\n    margin-left: 30px;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(201);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "html, body, #container{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    -webkit-app-region: drag;\r\n}\r\n\r\n#container{\r\n    position: relative;\r\n}\r\n\r\n.button, i, input{\r\n    -webkit-app-region: no-drag;\r\n}\r\n\r\ndiv, p, ol, ul{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.index{\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #fff;\r\n}\r\n\r\n/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  \r\n::-webkit-scrollbar  \r\n{  \r\n    width: 7px;  \r\n    /*background-color: #F5F5F5;  */\r\n}  \r\n  \r\n/*定义滚动条轨道 内阴影+圆角*/  \r\n::-webkit-scrollbar-track  \r\n{  \r\n        /* -webkit-box-shadow: inset 0 0 6px #fff; */\r\n    border-radius: 10px;\r\n    /*background-color: #219ec5; */\r\n    background-color: none;\r\n}  \r\n  \r\n/*定义滑块 内阴影+圆角*/  \r\n::-webkit-scrollbar-thumb  \r\n{  \r\n    border-radius: 10px;\r\n    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); */\r\n    background-color: #fff;\r\n} \r\n\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _jquery = __webpack_require__(184);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
