@@ -35,9 +35,9 @@
 }
 
 .searchDiv input{
-    height: 35%;
+    height: 50%;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 70%;
     padding-left: 10px;
     outline: none;

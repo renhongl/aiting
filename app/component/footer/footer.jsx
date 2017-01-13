@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
+import $ from 'jquery';
 
 export default class Footer extends Component {
     constructor() {
@@ -25,21 +26,42 @@ export default class Footer extends Component {
     }
 
     componentDidMount() {
-        this.timeThread = setInterval(() => {
-            let finishTime = this.state.finishTime;
-            if(finishTime >= this.state.totalTime){
-                clearInterval(this.timeThread);
-            }else{
-                this.setState({finishTime: finishTime + 1});
-            }   
-        }, 1000);
+        $.subscribe('setCurrentMusic', (o, args) => {
+            this.setCurrentMuisc();
+        });
+        
+        $.publish('setCurrentMusic');
+    }
 
-        let appAudio = this.refs.appAudio;
-        appAudio.src = this.state.url;
-        appAudio.volume = this.state.volume;
-        appAudio.play();
-        appAudio.onloadedmetadata = () => {
-            this.setState({totalTime: appAudio.duration});
+    setCurrentMuisc(url) {
+        this.appAudio = this.refs.appAudio;
+        if(url){
+
+        }else{
+            this.appAudio.src = this.state.url;
+            this.appAudio.volume = this.state.volume;
+            this.appAudio.onloadedmetadata = () => {
+                this.setState({totalTime: this.appAudio.duration});
+            }
+        }
+    }
+
+    playMusic() {
+        if($(this.refs.playButton).hasClass('fa-play')){
+            $(this.refs.playButton).removeClass('fa-play').addClass('fa-pause');
+            this.appAudio.play();
+            this.timeThread = setInterval(() => {
+                let finishTime = this.state.finishTime;
+                if(finishTime >= this.state.totalTime){
+                    clearInterval(this.timeThread);
+                }else{
+                    this.setState({finishTime: finishTime + 1});
+                }   
+            }, 1000);
+        }else{
+            this.appAudio.pause();
+            clearInterval(this.timeThread);
+            $(this.refs.playButton).removeClass('fa-pause').addClass('fa-play');
         }
     }
 
@@ -59,7 +81,7 @@ export default class Footer extends Component {
         return (
             <div className="footer">
                 <i className="fa fa-backward" aria-hidden="true"></i>
-                <i className="fa fa-pause" aria-hidden="true"></i>
+                <i className="fa fa-play" aria-hidden="true" ref="playButton" onClick={this.playMusic.bind(this)}></i>
                 <i className="fa fa-forward" aria-hidden="true"></i>
                 <span className="finishTime">{this.parseTime(this.state.finishTime)}</span>
                 <div className="progress"><span className="finish" style={progressStyle}></span><span className="progressHeader button" style={progressHeaderStyle}></span></div>

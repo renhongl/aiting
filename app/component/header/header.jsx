@@ -21,7 +21,7 @@ export default class Header extends Component {
     render() {
         return (
             <div className="header">
-                <div className="title"><i className="fa fa-assistive-listening-systems" aria-hidden="true"></i><span>爱听</span></div>
+                <div className="title"><i className="fa fa-assistive-listening-systems" aria-hidden="true"></i><span>爱 听</span></div>
                 <div className="searchDiv"><input type="text" placeholder="搜索歌曲"/></div>
                 <div className="controlContainer">
                     <div className="setting"><i className="fa fa-cog" aria-hidden="true" title="设置"></i></div>

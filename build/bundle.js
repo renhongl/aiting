@@ -58,7 +58,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Observer = __webpack_require__(192);
+	var _Observer = __webpack_require__(193);
 
 	var _Observer2 = _interopRequireDefault(_Observer);
 
@@ -21525,7 +21525,7 @@
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	__webpack_require__(190);
+	__webpack_require__(191);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21632,7 +21632,7 @@
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        '\u7231\u542C'
+	                        '\u7231 \u542C'
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -21709,7 +21709,7 @@
 
 
 	// module
-	exports.push([module.id, ".header{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #e6245a;\r\n}\r\n\r\n.title{\r\n    width: 30%;\r\n    border: 0px solid #fff;\r\n    height: 100%;\r\n    float: left;\r\n    display: flex;\r\n    align-items: center;\r\n    color: #fff;\r\n}\r\n\r\n.title span{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left: 10px;\r\n    float: left;\r\n    font-weight: bold;\r\n}\r\n\r\n.title i{\r\n    margin-left: 10px;\r\n}\r\n\r\n.searchDiv{\r\n    width: 40%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.searchDiv input{\r\n    height: 35%;\r\n    border: none;\r\n    border-radius: 10px;\r\n    width: 70%;\r\n    padding-left: 10px;\r\n    outline: none;\r\n}\r\n\r\n.searchDiv input:focus{\r\n    border: none;\r\n}\r\n\r\n.controlContainer{\r\n    width: 30%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.controlContainer div{\r\n    margin-left: 5px;\r\n    color: #e2e1e1;\r\n    height: 30%;\r\n    text-align: center;\r\n    width: 20px;\r\n    font-size: 15px;\r\n}\r\n\r\n.controlContainer i:hover{\r\n    color: #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.controlContainer .setting{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .console{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .minus{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .close{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 0px;\r\n    margin-right: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .line{\r\n    width: 1px;\r\n    border-left: 1px solid #aba5a5;\r\n}", ""]);
+	exports.push([module.id, ".header{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #e6245a;\r\n}\r\n\r\n.title{\r\n    width: 30%;\r\n    border: 0px solid #fff;\r\n    height: 100%;\r\n    float: left;\r\n    display: flex;\r\n    align-items: center;\r\n    color: #fff;\r\n}\r\n\r\n.title span{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left: 10px;\r\n    float: left;\r\n    font-weight: bold;\r\n}\r\n\r\n.title i{\r\n    margin-left: 10px;\r\n}\r\n\r\n.searchDiv{\r\n    width: 40%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.searchDiv input{\r\n    height: 50%;\r\n    border: none;\r\n    border-radius: 20px;\r\n    width: 70%;\r\n    padding-left: 10px;\r\n    outline: none;\r\n}\r\n\r\n.searchDiv input:focus{\r\n    border: none;\r\n}\r\n\r\n.controlContainer{\r\n    width: 30%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.controlContainer div{\r\n    margin-left: 5px;\r\n    color: #e2e1e1;\r\n    height: 30%;\r\n    text-align: center;\r\n    width: 20px;\r\n    font-size: 15px;\r\n}\r\n\r\n.controlContainer i:hover{\r\n    color: #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.controlContainer .setting{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .console{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .minus{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .close{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 0px;\r\n    margin-right: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .line{\r\n    width: 1px;\r\n    border-left: 1px solid #aba5a5;\r\n}", ""]);
 
 	// exports
 
@@ -22140,6 +22140,10 @@
 
 	__webpack_require__(188);
 
+	var _jquery = __webpack_require__(190);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22182,24 +22186,47 @@
 	        value: function componentDidMount() {
 	            var _this2 = this;
 
-	            this.timeThread = setInterval(function () {
-	                var finishTime = _this2.state.finishTime;
-	                if (finishTime >= _this2.state.totalTime) {
-	                    clearInterval(_this2.timeThread);
-	                } else {
-	                    _this2.setState({ finishTime: finishTime + 1 });
-	                }
-	            }, 1000);
+	            _jquery2.default.subscribe('setCurrentMusic', function (o, args) {
+	                _this2.setCurrentMuisc();
+	            });
 
-	            var appAudio = this.refs.appAudio;
-	            appAudio.src = this.state.url;
-	            appAudio.volume = this.state.volume;
-	            appAudio.play();
-	            console.log(appAudio.duration);
+	            _jquery2.default.publish('setCurrentMusic');
+	        }
+	    }, {
+	        key: 'setCurrentMuisc',
+	        value: function setCurrentMuisc(url) {
+	            var _this3 = this;
 
-	            appAudio.onloadedmetadata = function () {
-	                _this2.setState({ totalTime: appAudio.duration });
-	            };
+	            this.appAudio = this.refs.appAudio;
+	            if (url) {} else {
+	                this.appAudio.src = this.state.url;
+	                this.appAudio.volume = this.state.volume;
+	                this.appAudio.onloadedmetadata = function () {
+	                    _this3.setState({ totalTime: _this3.appAudio.duration });
+	                };
+	            }
+	        }
+	    }, {
+	        key: 'playMusic',
+	        value: function playMusic() {
+	            var _this4 = this;
+
+	            if ((0, _jquery2.default)(this.refs.playButton).hasClass('fa-play')) {
+	                (0, _jquery2.default)(this.refs.playButton).removeClass('fa-play').addClass('fa-pause');
+	                this.appAudio.play();
+	                this.timeThread = setInterval(function () {
+	                    var finishTime = _this4.state.finishTime;
+	                    if (finishTime >= _this4.state.totalTime) {
+	                        clearInterval(_this4.timeThread);
+	                    } else {
+	                        _this4.setState({ finishTime: finishTime + 1 });
+	                    }
+	                }, 1000);
+	            } else {
+	                this.appAudio.pause();
+	                clearInterval(this.timeThread);
+	                (0, _jquery2.default)(this.refs.playButton).removeClass('fa-pause').addClass('fa-play');
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -22220,7 +22247,7 @@
 	                'div',
 	                { className: 'footer' },
 	                _react2.default.createElement('i', { className: 'fa fa-backward', 'aria-hidden': 'true' }),
-	                _react2.default.createElement('i', { className: 'fa fa-pause', 'aria-hidden': 'true' }),
+	                _react2.default.createElement('i', { className: 'fa fa-play', 'aria-hidden': 'true', ref: 'playButton', onClick: this.playMusic.bind(this) }),
 	                _react2.default.createElement('i', { className: 'fa fa-forward', 'aria-hidden': 'true' }),
 	                _react2.default.createElement(
 	                    'span',
@@ -22291,91 +22318,13 @@
 
 
 	// module
-	exports.push([module.id, ".footer{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #cccccc;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.footer i{\r\n    width: 30px;\r\n    margin-left: 20px;\r\n    color: #fff;\r\n    border-radius: 18px;\r\n    height: 30px;\r\n    text-align: center;\r\n    line-height: 30px;\r\n    background: #e6245a;\r\n}\r\n\r\n.footer i:hover{\r\n    animation: iHover 1s;\r\n    cursor: pointer;\r\n}\r\n\r\n@keyframes iHover{\r\n    0%  {background: #e6245a;}\r\n    100%    {background: #e44b76;}\r\n}\r\n\r\n.progress{\r\n    width: 300px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.progress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.progress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.volumeProgress{\r\n    width: 100px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.volumeProgress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.volumeProgress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.footer .finishTime, .footer .totalTime{\r\n    margin-left: 20px;\r\n    font-size: 12px;\r\n}\r\n\r\n.footer .fa-volume-up{\r\n    background: none;\r\n    color: grey;\r\n}\r\n\r\n.footer .fa-volume-up:hover{\r\n    background: none;\r\n    animation: none;\r\n    cursor: default;\r\n}\r\n\r\n.footer .fa-repeat{\r\n    margin-left: 30px;\r\n}", ""]);
+	exports.push([module.id, ".footer{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #cccccc;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.footer i{\r\n    width: 30px;\r\n    margin-left: 20px;\r\n    color: #fff;\r\n    border-radius: 18px;\r\n    height: 30px;\r\n    text-align: center;\r\n    line-height: 30px;\r\n    background: #e6245a;\r\n}\r\n\r\n.footer i:hover{\r\n    animation: iHover 3s;\r\n    animation-iteration-count: infinite;\r\n    cursor: pointer;\r\n}\r\n\r\n@keyframes iHover{\r\n    0%  {background: #e6245a;}\r\n    50%    {background: #09a579;box-shadow: 0 0 10px #232121;}\r\n}\r\n\r\n.progress{\r\n    width: 300px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.progress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.progress .progressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.volumeProgress{\r\n    width: 100px;\r\n    background: #fff;\r\n    height: 5px;\r\n    border-radius: 5px;\r\n    margin-left: 10px;\r\n    position: relative;\r\n}\r\n\r\n.volumeProgress .finish{\r\n    width: 100px;\r\n    background: #e6245a;\r\n    height: 5px;\r\n    position: absolute;\r\n    border-radius: 5px;\r\n    display: inline-block;\r\n}\r\n\r\n.volumeProgress .volumeProgressHeader{\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 5px;\r\n    background: #e6245a;\r\n    left: 96px;\r\n    top: -5px;\r\n    border-radius: 9px;\r\n    border: 5px solid #fff;\r\n    cursor: pointer;\r\n    box-shadow: 0 0 5px rgba(0,0,0,0.5);\r\n}\r\n\r\n.footer .finishTime, .footer .totalTime{\r\n    margin-left: 20px;\r\n    font-size: 12px;\r\n}\r\n\r\n.footer .fa-volume-up{\r\n    background: none;\r\n    color: grey;\r\n}\r\n\r\n.footer .fa-volume-up:hover{\r\n    background: none;\r\n    animation: none;\r\n    cursor: default;\r\n}\r\n\r\n.footer .fa-repeat{\r\n    margin-left: 30px;\r\n}", ""]);
 
 	// exports
 
 
 /***/ },
 /* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(191);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(183)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 191 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(182)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "html, body, #container{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    -webkit-app-region: drag;\r\n}\r\n\r\n.button, i, input{\r\n    -webkit-app-region: no-drag;\r\n}\r\n\r\ndiv, p, ol, ul{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.index{\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #fff;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _jquery = __webpack_require__(193);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Observer = function Observer() {
-	    _classCallCheck(this, Observer);
-
-	    var O = (0, _jquery2.default)({});
-	    _jquery2.default.extend({
-	        publish: function publish(topic, data) {
-	            O.trigger(topic, data);
-	        },
-	        subscribe: function subscribe(topic, callback) {
-	            O.on(topic, callback);
-	        },
-	        unsubscribe: function unsubscribe(topic) {
-	            O.off(topic);
-	        }
-	    });
-	};
-
-	var observer = new Observer();
-	exports.default = observer;
-
-/***/ },
-/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32599,6 +32548,84 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(192);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "html, body, #container{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    -webkit-app-region: drag;\r\n}\r\n\r\n.button, i, input{\r\n    -webkit-app-region: no-drag;\r\n}\r\n\r\ndiv, p, ol, ul{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.index{\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #fff;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _jquery = __webpack_require__(190);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Observer = function Observer() {
+	    _classCallCheck(this, Observer);
+
+	    var O = (0, _jquery2.default)({});
+	    _jquery2.default.extend({
+	        publish: function publish(topic, data) {
+	            O.trigger(topic, data);
+	        },
+	        subscribe: function subscribe(topic, callback) {
+	            O.on(topic, callback);
+	        },
+	        unsubscribe: function unsubscribe(topic) {
+	            O.off(topic);
+	        }
+	    });
+	};
+
+	var observer = new Observer();
+	exports.default = observer;
 
 /***/ }
 /******/ ]);
