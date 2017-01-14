@@ -38,17 +38,25 @@ export default class MusicList extends Component {
         $.publish('selectedOneMusic', {hash: hash});
     }
 
+    addZero(n) {
+        return n < 10 ? '0' + n + '\t' : n + '\t';
+    }
+
     render() {
-        let musicList = this.state.list.map((music) => {
+        let musicList = this.state.list.map((music, index) => {
             return (
                 <li key={music.hash} id={music.hash} className="button" onClick={this.selectedOneMusic.bind(this)}>
-                    <span style={{fontWeight:'bold',width: '40%'}}>{music.songname}</span><span>{music.singername}</span><span>{music.album_name}</span><span style={{width: '10%'}}>{music.duration}</span>
+                    <span style={{width: '3%', paddingLeft: '5px'}}>{this.addZero(index + 1)}</span>
+                    <span title={music.songname} style={{fontWeight:'bold',width: '40%'}}>{ music.songname.substring(0, 15)}</span>
+                    <span style={{width: '25%', paddingLeft: '25px'}}>{music.singername}</span>
+                    <span title={music.album_name} >{music.album_name.substring(0, 10)}</span>
+                    <span style={{width: '10%'}}>{music.duration}</span>
                 </li>
             )
         });
         return (
             <div className="musicList">
-                <div className="musicTitle"><span style={{fontWeight:'bold',width: '40%'}}>音乐标题</span><span>歌手</span><span>专辑</span><span style={{width: '10%'}}>时长</span></div>
+                <div className="musicTitle"><span style={{fontWeight:'bold',width: '43%', paddingLeft: '30px'}}>音乐标题</span><span>歌手</span><span>专辑</span><span style={{width: '10%'}}>时长</span></div>
                 <ul className="listItem">
                     {musicList}
                 </ul>

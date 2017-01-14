@@ -82,7 +82,7 @@ export default class MusicDetail extends Component {
                 <div className="detailHeader"><i className="fa fa-compress" aria-hidden="true" onClick={this.closeBigWindow.bind(this)}></i></div>
                 <div className="detailContent">
                     <img src={this.state.image} />
-                    <p className="detailName"><span style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' }}>{this.state.songName}</span><br />歌手: {this.state.singername}   专辑: {this.state.audioName}</p>
+                    <p className="detailName"><span style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' }}>{this.state.songName.substring(0, 10)}</span><br />歌手: {this.state.singername}   专辑: {this.state.audioName.substring(0, 10)}</p>
                     <div className="detailLyric">{lyricLine}</div>
                 </div>
             </div>

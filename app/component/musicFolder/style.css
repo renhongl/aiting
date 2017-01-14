@@ -17,6 +17,35 @@
     height: 430px;
 }
 
+.folderList .intro{
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+.folderList .paiHangBang{
+    background: #fff;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+    color: grey;
+    border-left: 3px solid #fff;
+}
+
+.folderList .paiHangBang:hover{
+    color: #000;
+    cursor: pointer;
+}
+
+.folderList .selected{
+    background: #f1efef;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+    color: #272525;
+    border-left: 3px solid #e6245a;
+}
+
 .smallWindow img{
     width: 40%;
     height: 100%;
@@ -27,9 +56,10 @@
 .smallWindow span{
     display: inline-block;
     margin-left: 5px;
-    margin-top: 10px;
+    margin-top: 6px;
     width: 55%;
     font-size: 12px;
     overflow: hidden;
+    height: 30px;
 }
 

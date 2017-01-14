@@ -22,7 +22,7 @@ export default class Header extends Component {
     searchMusic(e) {
         if (e.keyCode === 13) {
             let value = this.refs.searchInput.value;
-            let url = `http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=${value}&page=1&pagesize=15&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>`;
+            let url = `http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=${value}&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>`;
             $.ajax({
                 url: url,
                 method: 'GET',

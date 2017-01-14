@@ -21628,7 +21628,7 @@
 	        value: function searchMusic(e) {
 	            if (e.keyCode === 13) {
 	                var value = this.refs.searchInput.value;
-	                var url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=15&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
+	                var url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
 	                _jquery2.default.ajax({
 	                    url: url,
 	                    method: 'GET',
@@ -32467,28 +32467,38 @@
 	            _jquery2.default.publish('selectedOneMusic', { hash: hash });
 	        }
 	    }, {
+	        key: 'addZero',
+	        value: function addZero(n) {
+	            return n < 10 ? '0' + n + '\t' : n + '\t';
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this3 = this;
 
-	            var musicList = this.state.list.map(function (music) {
+	            var musicList = this.state.list.map(function (music, index) {
 	                return _react2.default.createElement(
 	                    'li',
 	                    { key: music.hash, id: music.hash, className: 'button', onClick: _this3.selectedOneMusic.bind(_this3) },
 	                    _react2.default.createElement(
 	                        'span',
-	                        { style: { fontWeight: 'bold', width: '40%' } },
-	                        music.songname
+	                        { style: { width: '3%', paddingLeft: '5px' } },
+	                        _this3.addZero(index + 1)
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        null,
+	                        { title: music.songname, style: { fontWeight: 'bold', width: '40%' } },
+	                        music.songname.substring(0, 15)
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { style: { width: '25%', paddingLeft: '25px' } },
 	                        music.singername
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        null,
-	                        music.album_name
+	                        { title: music.album_name },
+	                        music.album_name.substring(0, 10)
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
@@ -32505,7 +32515,7 @@
 	                    { className: 'musicTitle' },
 	                    _react2.default.createElement(
 	                        'span',
-	                        { style: { fontWeight: 'bold', width: '40%' } },
+	                        { style: { fontWeight: 'bold', width: '43%', paddingLeft: '30px' } },
 	                        '\u97F3\u4E50\u6807\u9898'
 	                    ),
 	                    _react2.default.createElement(
@@ -32573,7 +32583,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    padding-left: 15px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 15px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #e0e0e0;\r\n    cursor: pointer;\r\n    color: #fff;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #d4cece;\r\n    color: #fff;\r\n}", ""]);
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n    overflow: auto;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    padding-left: 10px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #d4cece !important;\r\n    color: #000;\r\n}", ""]);
 
 	// exports
 
@@ -32638,6 +32648,13 @@
 	            });
 	        }
 	    }, {
+	        key: 'addSelectedClass',
+	        value: function addSelectedClass(e) {
+	            var t = (0, _jquery2.default)(this.refs.folderList);
+	            t.find('.paiHangBang').removeClass('selected');
+	            (0, _jquery2.default)(e.target).addClass('selected');
+	        }
+	    }, {
 	        key: 'showSmallDetail',
 	        value: function showSmallDetail(hash) {
 	            var _this3 = this;
@@ -32658,6 +32675,107 @@
 	            });
 	        }
 	    }, {
+	        key: 'loadHeJi',
+	        value: function loadHeJi(e) {
+	            this.addSelectedClass(e);
+	            var url = 'http://www.kugou.com/yy/special/single/120265.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#songs li');
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
+	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
+	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
+	                        album_name: '',
+	                        duration: ''
+	                    };
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            });
+	            ;
+	        }
+	    }, {
+	        key: 'loadKuGouYueYu',
+	        value: function loadKuGouYueYu(e) {
+	            this.addSelectedClass(e);
+	            var url = 'http://www.kugou.com/yy/special/single/121585.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#songs li');
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
+	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
+	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
+	                        album_name: '',
+	                        duration: ''
+	                    };
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            });
+	        }
+	    }, {
+	        key: 'loadKuGouHuaYu',
+	        value: function loadKuGouHuaYu(e) {
+	            this.addSelectedClass(e);
+	            var url = 'http://www.kugou.com/yy/special/single/29084.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#songs li');
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
+	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
+	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
+	                        album_name: '',
+	                        duration: ''
+	                    };
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            });
+	        }
+	    }, {
+	        key: 'loadCunYinYue',
+	        value: function loadCunYinYue(e) {
+	            this.addSelectedClass(e);
+	            var url = 'http://www.kugou.com/yy/special/single/121512.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#songs li');
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
+	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
+	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
+	                        album_name: '',
+	                        duration: ''
+	                    };
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            });
+	        }
+	    }, {
 	        key: 'openBigWindow',
 	        value: function openBigWindow() {
 	            _jquery2.default.publish('openBigWindow');
@@ -32668,7 +32786,35 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'musicFolder' },
-	                _react2.default.createElement('div', { className: 'folderList' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'folderList', ref: 'folderList' },
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'intro' },
+	                        '\u63A8\u8350'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang', onClick: this.loadHeJi.bind(this) },
+	                        '\u68A6\u60F3\u7684\u58F0\u97F3 \u5408\u96C6'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang', onClick: this.loadKuGouHuaYu.bind(this) },
+	                        '\u9177\u72D7\u534E\u8BED\u6392\u884C\u699C'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang', onClick: this.loadKuGouYueYu.bind(this) },
+	                        '\u9177\u72D7\u7CA4\u8BED\u6392\u884C\u699C'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang', onClick: this.loadCunYinYue.bind(this) },
+	                        '\u7EAF\u97F3\u4E50'
+	                    )
+	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'smallWindow button', onClick: this.openBigWindow.bind(this) },
@@ -32676,12 +32822,12 @@
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        this.state.songName
+	                        this.state.songName.substring(0, 10)
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        this.state.singername
+	                        this.state.singername.substring(0, 10)
 	                    )
 	                )
 	            );
@@ -32728,7 +32874,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicFolder{\r\n    width: 20%;\r\n    height: 100%;\r\n}\r\n\r\n.smallWindow{\r\n    width: 100%;\r\n    height: 69px;\r\n    background: #fff;\r\n    cursor: pointer;\r\n    border-top: 1px solid #cebaba;\r\n}\r\n\r\n.folderList{\r\n    width: 100%;\r\n    background: #fff;\r\n    height: 430px;\r\n}\r\n\r\n.smallWindow img{\r\n    width: 40%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    float: left;\r\n}\r\n\r\n.smallWindow span{\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    margin-top: 10px;\r\n    width: 55%;\r\n    font-size: 12px;\r\n    overflow: hidden;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, ".musicFolder{\r\n    width: 20%;\r\n    height: 100%;\r\n}\r\n\r\n.smallWindow{\r\n    width: 100%;\r\n    height: 69px;\r\n    background: #fff;\r\n    cursor: pointer;\r\n    border-top: 1px solid #cebaba;\r\n}\r\n\r\n.folderList{\r\n    width: 100%;\r\n    background: #fff;\r\n    height: 430px;\r\n}\r\n\r\n.folderList .intro{\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 10px;\r\n}\r\n\r\n.folderList .paiHangBang{\r\n    background: #fff;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 15px;\r\n    color: grey;\r\n    border-left: 3px solid #fff;\r\n}\r\n\r\n.folderList .paiHangBang:hover{\r\n    color: #000;\r\n    cursor: pointer;\r\n}\r\n\r\n.folderList .selected{\r\n    background: #f1efef;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 15px;\r\n    color: #272525;\r\n    border-left: 3px solid #e6245a;\r\n}\r\n\r\n.smallWindow img{\r\n    width: 40%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    float: left;\r\n}\r\n\r\n.smallWindow span{\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    margin-top: 6px;\r\n    width: 55%;\r\n    font-size: 12px;\r\n    overflow: hidden;\r\n    height: 30px;\r\n}\r\n\r\n", ""]);
 
 	// exports
 
@@ -32876,13 +33022,13 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            { style: { fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' } },
-	                            this.state.songName
+	                            this.state.songName.substring(0, 10)
 	                        ),
 	                        _react2.default.createElement('br', null),
 	                        '\u6B4C\u624B: ',
 	                        this.state.singername,
 	                        '   \u4E13\u8F91: ',
-	                        this.state.audioName
+	                        this.state.audioName.substring(0, 10)
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -32934,7 +33080,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent img{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 100px;\r\n    border-radius: 125px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 100px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n}", ""]);
+	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent img{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 100px;\r\n    border-radius: 125px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n}", ""]);
 
 	// exports
 
@@ -33239,7 +33385,7 @@
 
 
 	// module
-	exports.push([module.id, "html, body, #container{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    -webkit-app-region: drag;\r\n}\r\n\r\n#container{\r\n    position: relative;\r\n}\r\n\r\n.button, i, input{\r\n    -webkit-app-region: no-drag;\r\n}\r\n\r\ndiv, p, ol, ul{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.index{\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #fff;\r\n}\r\n\r\n/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  \r\n::-webkit-scrollbar  \r\n{  \r\n    width: 7px;  \r\n    /*background-color: #F5F5F5;  */\r\n}  \r\n  \r\n/*定义滚动条轨道 内阴影+圆角*/  \r\n::-webkit-scrollbar-track  \r\n{  \r\n        /* -webkit-box-shadow: inset 0 0 6px #fff; */\r\n    border-radius: 10px;\r\n    /*background-color: #219ec5; */\r\n    background-color: none;\r\n}  \r\n  \r\n/*定义滑块 内阴影+圆角*/  \r\n::-webkit-scrollbar-thumb  \r\n{  \r\n    border-radius: 10px;\r\n    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); */\r\n    background-color: #fff;\r\n} \r\n\r\n\r\n", ""]);
+	exports.push([module.id, "html, body, #container{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.header{\r\n    -webkit-app-region: drag;\r\n}\r\n\r\n#container{\r\n    position: relative;\r\n}\r\n\r\n.button, i, input{\r\n    -webkit-app-region: no-drag;\r\n}\r\n\r\ndiv, p, ol, ul{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.index{\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #fff;\r\n}\r\n\r\n/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  \r\n::-webkit-scrollbar  \r\n{  \r\n    width: 7px;  \r\n    /*background-color: #F5F5F5;  */\r\n}  \r\n  \r\n/*定义滚动条轨道 内阴影+圆角*/  \r\n::-webkit-scrollbar-track  \r\n{  \r\n        /* -webkit-box-shadow: inset 0 0 6px #fff; */\r\n    border-radius: 10px;\r\n    /*background-color: #219ec5; */\r\n    background-color: none;\r\n}  \r\n  \r\n/*定义滑块 内阴影+圆角*/  \r\n::-webkit-scrollbar-thumb  \r\n{  \r\n    border-radius: 10px;\r\n    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); */\r\n    background-color: #cccccc;\r\n} \r\n\r\n\r\n", ""]);
 
 	// exports
 
