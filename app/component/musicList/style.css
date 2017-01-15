@@ -3,7 +3,6 @@
     height: 100%;
     background: #fff;
     border-left: 1px solid #ded7d7;
-    overflow: auto;
 }
 
 .musicList li{
@@ -26,7 +25,12 @@
 .musicTitle span{
     border-bottom: 1px solid #d0d0d0;
     width: 25%;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
+}
+
+.listItem {
+    overflow: auto;
+    height: 465px;
 }
 
 .listItem li span{

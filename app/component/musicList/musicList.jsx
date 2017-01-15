@@ -97,8 +97,9 @@ export default class MusicList extends Component {
             <div className="musicList">
                 <div className="musicTitle">
                     <span style={{fontWeight:'bold',width: '43%', paddingLeft: '30px'}}>音乐标题</span>
-                    <span>歌手</span><span>专辑</span>
-                    <span style={{width: '10%'}}>时长</span>
+                    <span style={{width: '26%'}}>歌手</span>
+                    <span style={{width: '26%'}}>专辑</span>
+                    <span style={{width: '11%'}}>时长</span>
                 </div>
                 <ul className="listItem">
                     {musicList}

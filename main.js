@@ -25,7 +25,9 @@ function createWindow () {
       maxWidth: 800,
       maxHeight: 600,
       fullscreen: false,
-      frame: false
+      frame: false,
+      resizable: false,
+      title: '爱听'
     })
 
   // 加载应用的 index.html。
