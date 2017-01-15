@@ -21669,7 +21669,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'searchDiv' },
-	                    _react2.default.createElement('input', { type: 'text', placeholder: '\u641C\u7D22\u6B4C\u66F2', onKeyUp: this.searchMusic.bind(this), ref: 'searchInput' })
+	                    _react2.default.createElement('input', { type: 'text', placeholder: '\u641C\u7D22\u6B4C\u540D, \u6B4C\u624B, \u6B4C\u8BCD', onKeyUp: this.searchMusic.bind(this), ref: 'searchInput' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -32904,9 +32904,10 @@
 	        _this.ipcRenderer = electron.ipcRenderer;
 	        _this.state = {
 	            image: './static/images/panda.jpg',
-	            songName: '',
-	            singername: '',
-	            path: ''
+	            songName: '未知',
+	            singername: '未知',
+	            path: '',
+	            folderList: []
 	        };
 	        return _this;
 	    }
@@ -32924,6 +32925,29 @@
 	                var folderList = (0, _jquery2.default)(_this2.refs.folderList);
 	                folderList.find('.paiHangBang').removeClass('selected');
 	            });
+
+	            this.loadMusicFolder();
+	        }
+	    }, {
+	        key: 'loadMusicFolder',
+	        value: function loadMusicFolder() {
+	            var _this3 = this;
+
+	            var url = 'http://www.kugou.com/yy/special/index/1-0-1.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#ulAlbums li');
+	                var list = [];
+	                _jquery2.default.each($li, function (i, item) {
+	                    var folder = {
+	                        title: (0, _jquery2.default)(item).find('a').attr('title'),
+	                        url: (0, _jquery2.default)(item).find('a').attr('href')
+	                    };
+	                    list.push(folder);
+	                });
+	                _this3.setState({ folderList: list });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '载入歌曲分类失败。');
+	            });
 	        }
 	    }, {
 	        key: 'addSelectedClass',
@@ -32935,9 +32959,12 @@
 	    }, {
 	        key: 'showSmallDetail',
 	        value: function showSmallDetail(hash) {
-	            var _this3 = this;
+	            var _this4 = this;
 
 	            if (hash.indexOf('local') !== -1) {
+	                this.setState({ image: './static/images/panda.jpg' });
+	                this.setState({ songName: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[0].split('/')[1] });
+	                this.setState({ singername: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[1].split('.mp3')[0] });
 	                return;
 	            }
 	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
@@ -32946,9 +32973,9 @@
 	                method: 'GET',
 	                contentType: 'json',
 	                success: function success(result) {
-	                    _this3.setState({ image: JSON.parse(result).data.img });
-	                    _this3.setState({ songName: JSON.parse(result).data.song_name });
-	                    _this3.setState({ singername: JSON.parse(result).data.author_name });
+	                    _this4.setState({ image: JSON.parse(result).data.img });
+	                    _this4.setState({ songName: JSON.parse(result).data.song_name });
+	                    _this4.setState({ singername: JSON.parse(result).data.author_name });
 	                },
 	                error: function error(_error) {
 	                    new _lrhMessage2.default('warning', '小窗口显示错误');
@@ -32956,91 +32983,10 @@
 	            });
 	        }
 	    }, {
-	        key: 'loadHeJi',
-	        value: function loadHeJi(e) {
+	        key: 'loadKuGouFengLei',
+	        value: function loadKuGouFengLei(e) {
 	            this.addSelectedClass(e);
-	            var url = 'http://www.kugou.com/yy/special/single/120265.html';
-	            _jquery2.default.get(url, function (result) {
-	                var $li = (0, _jquery2.default)(result).find('#songs li');
-	                var songs = {
-	                    data: {
-	                        info: []
-	                    }
-	                };
-	                _jquery2.default.each($li, function (i, item) {
-	                    var music = {
-	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
-	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
-	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
-	                        album_name: '',
-	                        duration: ''
-	                    };
-	                    songs.data.info.push(music);
-	                });
-	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	            }).fail(function () {
-	                new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
-	            });
-	        }
-	    }, {
-	        key: 'loadKuGouYueYu',
-	        value: function loadKuGouYueYu(e) {
-	            this.addSelectedClass(e);
-	            var url = 'http://www.kugou.com/yy/special/single/121585.html';
-	            _jquery2.default.get(url, function (result) {
-	                var $li = (0, _jquery2.default)(result).find('#songs li');
-	                var songs = {
-	                    data: {
-	                        info: []
-	                    }
-	                };
-	                _jquery2.default.each($li, function (i, item) {
-	                    var music = {
-	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
-	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
-	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
-	                        album_name: '',
-	                        duration: ''
-	                    };
-	                    songs.data.info.push(music);
-	                });
-	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	            }).fail(function () {
-	                new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
-	            });
-	        }
-	    }, {
-	        key: 'loadKuGouHuaYu',
-	        value: function loadKuGouHuaYu(e) {
-	            this.addSelectedClass(e);
-	            var url = 'http://www.kugou.com/yy/special/single/29084.html';
-	            _jquery2.default.get(url, function (result) {
-	                var $li = (0, _jquery2.default)(result).find('#songs li');
-	                var songs = {
-	                    data: {
-	                        info: []
-	                    }
-	                };
-	                _jquery2.default.each($li, function (i, item) {
-	                    var music = {
-	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
-	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
-	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
-	                        album_name: '',
-	                        duration: ''
-	                    };
-	                    songs.data.info.push(music);
-	                });
-	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	            }).fail(function () {
-	                new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
-	            });
-	        }
-	    }, {
-	        key: 'loadCunYinYue',
-	        value: function loadCunYinYue(e) {
-	            this.addSelectedClass(e);
-	            var url = 'http://www.kugou.com/yy/special/single/121512.html';
+	            var url = (0, _jquery2.default)(e.target).attr('data');
 	            _jquery2.default.get(url, function (result) {
 	                var $li = (0, _jquery2.default)(result).find('#songs li');
 	                var songs = {
@@ -33080,20 +33026,21 @@
 	        }
 	    }, {
 	        key: 'openLocalMusic',
-	        value: function openLocalMusic() {
-	            var _this4 = this;
+	        value: function openLocalMusic(e) {
+	            var _this5 = this;
 
+	            this.addSelectedClass(e);
 	            this.ipcRenderer.send('openLocalMusic');
 	            this.ipcRenderer.on('loadedFolder', function (e, args) {
 	                var path = args[0];
-	                _this4.setState({ path: path });
+	                _this5.setState({ path: path });
 	                _jquery2.default.publish('localPathChanged', { path: path });
 	                fs.readdir(path, function (err, fiels) {
 	                    if (err) {
 	                        new _lrhMessage2.default('warning', '打开本地歌曲失败。');
 	                        return;
 	                    } else {
-	                        _this4.showLocalMusic(fiels);
+	                        _this5.showLocalMusic(fiels);
 	                    }
 	                });
 	            });
@@ -33101,7 +33048,7 @@
 	    }, {
 	        key: 'showLocalMusic',
 	        value: function showLocalMusic(fiels) {
-	            var _this5 = this;
+	            var _this6 = this;
 
 	            var songs = {
 	                data: {
@@ -33109,21 +33056,41 @@
 	                }
 	            };
 	            _jquery2.default.each(fiels, function (i, fullName) {
-	                var music = {
-	                    songname: fullName.split(' - ')[0],
-	                    singername: fullName.split(' - ')[1].split('.mp3')[0],
-	                    hash: 'local' + i,
-	                    album_name: '',
-	                    duration: '',
-	                    data: _this5.state.path + '/' + fullName
-	                };
-	                songs.data.info.push(music);
+	                if (fullName.indexOf('.mp3') !== -1) {
+	                    var music = {
+	                        songname: fullName.split(' - ')[0],
+	                        singername: fullName.split(' - ')[1].split('.mp3')[0],
+	                        hash: 'local' + i,
+	                        album_name: '',
+	                        duration: '',
+	                        data: _this6.state.path + '/' + fullName
+	                    };
+	                    songs.data.info.push(music);
+	                }
 	            });
 	            _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
 	        }
 	    }, {
+	        key: 'parseString',
+	        value: function parseString(str) {
+	            if (str.length > 8) {
+	                return str.substring(0, 8) + '...';
+	            } else {
+	                return str;
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this7 = this;
+
+	            var folderList = this.state.folderList.map(function (folder, i) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { key: i, title: folder.title, className: 'paiHangBang', onClick: _this7.loadKuGouFengLei.bind(_this7), data: folder.url },
+	                    _this7.parseString(folder.title)
+	                );
+	            });
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'musicFolder' },
@@ -33135,26 +33102,7 @@
 	                        { className: 'intro' },
 	                        '\u63A8\u8350'
 	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'paiHangBang', onClick: this.loadHeJi.bind(this) },
-	                        '\u68A6\u60F3\u7684\u58F0\u97F3 \u5408\u96C6'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'paiHangBang', onClick: this.loadKuGouHuaYu.bind(this) },
-	                        '\u534E\u8BED\u6392\u884C\u699C'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'paiHangBang', onClick: this.loadKuGouYueYu.bind(this) },
-	                        '\u7CA4\u8BED\u6392\u884C\u699C'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'paiHangBang', onClick: this.loadCunYinYue.bind(this) },
-	                        '\u7EAF\u97F3\u4E50'
-	                    ),
+	                    folderList,
 	                    _react2.default.createElement(
 	                        'p',
 	                        { className: 'intro' },
@@ -33163,12 +33111,8 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'paiHangBang', onClick: this.openLocalMusic.bind(this) },
+	                        _react2.default.createElement('i', { className: 'fa fa-folder-open', 'aria-hidden': 'true' }),
 	                        '\u672C\u5730\u6B4C\u66F2'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'paiHangBang', onClick: this.loadHeJi.bind(this) },
-	                        '\u6211\u559C\u6B22\u7684\u97F3\u4E50'
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -33178,7 +33122,7 @@
 	                    _react2.default.createElement('img', { src: this.state.image }),
 	                    _react2.default.createElement(
 	                        'span',
-	                        { style: { fontSize: 'bold' } },
+	                        { style: { fontWeight: 'bold' } },
 	                        this.state.songName.substring(0, 10)
 	                    ),
 	                    _react2.default.createElement(
@@ -33284,10 +33228,10 @@
 
 	        _this.state = {
 	            image: './static/images/panda.jpg',
-	            songName: '',
-	            singername: '',
-	            lyric: '',
-	            audioName: ''
+	            songName: '未知',
+	            singername: '未知',
+	            lyric: '没有歌词',
+	            audioName: '未知'
 	        };
 	        return _this;
 	    }
@@ -33318,6 +33262,8 @@
 	                var time = Number(timeStr.split(':')[0]) * 60 + Number(timeStr.split(':')[1]);
 	                if (time === args.time) {
 	                    (0, _jquery2.default)(item).get(0).scrollIntoView(true);
+	                    var top = (0, _jquery2.default)('.detailLyric').get(0).scrollTop;
+	                    (0, _jquery2.default)('.detailLyric').get(0).scrollTop = top - 100;
 	                    (0, _jquery2.default)('.lyricLine').css({
 	                        color: '#000'
 	                    });
@@ -33333,6 +33279,11 @@
 	            var _this3 = this;
 
 	            if (hash.indexOf('local') !== -1) {
+	                this.setState({ image: './static/images/panda.jpg' });
+	                this.setState({ songName: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[0].split('/')[1] });
+	                this.setState({ singername: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[1].split('.mp3')[0] });
+	                this.setState({ lyric: '没有歌词' });
+	                this.setState({ audioName: '未知' });
 	                return;
 	            }
 	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
@@ -33344,8 +33295,12 @@
 	                    _this3.setState({ image: JSON.parse(result).data.img });
 	                    _this3.setState({ songName: JSON.parse(result).data.song_name });
 	                    _this3.setState({ singername: JSON.parse(result).data.author_name });
-	                    _this3.setState({ lyric: JSON.parse(result).data.lyrics });
 	                    _this3.setState({ audioName: JSON.parse(result).data.audio_name });
+	                    var lyrics = JSON.parse(result).data.lyrics;
+	                    for (var i = 0; i < 13; i++) {
+	                        lyrics += '[lyric' + i + '] \r\n';
+	                    }
+	                    _this3.setState({ lyric: lyrics });
 	                },
 	                error: function error(_error) {
 	                    new _lrhMessage2.default('warning', '获取歌曲信息失败。');
@@ -33364,7 +33319,7 @@
 	            var lyricLine = this.lyrics.map(function (line) {
 	                return _react2.default.createElement(
 	                    'p',
-	                    { className: 'lyricLine', key: line.split(']')[0], id: line.split(']')[0] },
+	                    { className: 'lyricLine', key: Math.random(), id: line.split(']')[0] },
 	                    line.split(']')[1]
 	                );
 	            });
@@ -33379,7 +33334,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'detailContent' },
-	                    _react2.default.createElement('img', { src: this.state.image }),
+	                    _react2.default.createElement('img', { className: 'musicImg', src: this.state.image }),
 	                    _react2.default.createElement(
 	                        'p',
 	                        { className: 'detailName' },
@@ -33390,9 +33345,17 @@
 	                        ),
 	                        _react2.default.createElement('br', null),
 	                        '\u6B4C\u624B: ',
-	                        this.state.singername,
-	                        '   \u4E13\u8F91: ',
-	                        this.state.audioName.substring(0, 10)
+	                        _react2.default.createElement(
+	                            'span',
+	                            { style: { fontWeight: 'bold', display: 'inline-block', marginRight: '10px' } },
+	                            this.state.singername
+	                        ),
+	                        '\u4E13\u8F91: ',
+	                        _react2.default.createElement(
+	                            'span',
+	                            { style: { fontWeight: 'bold' } },
+	                            this.state.audioName.substring(0, 10)
+	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -33444,7 +33407,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent img{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 100px;\r\n    border-radius: 125px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n}", ""]);
+	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
 
 	// exports
 

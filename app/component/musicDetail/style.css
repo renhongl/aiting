@@ -31,15 +31,17 @@
     position: relative;
 }
 
-.detailContent img{
+.detailContent .musicImg{
     width: 200px;
     height: 200px;
-    margin: 100px;
-    border-radius: 125px;
+    margin: 60px;
+    border-radius: 200px;
     float: left;
     animation: imageRotate 5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    border: 40px solid #3a3838;
+
 }
 
 @keyframes imageRotate{
@@ -55,6 +57,7 @@
     top: 28px;
     position: absolute;
     right: 88px;
+    font-size: 13px;
 }
 
 .detailLyric{
@@ -70,4 +73,5 @@
 
 .detailLyric p{
     margin: 10px;
+    height: 20px;
 }

@@ -46,7 +46,7 @@ export default class Header extends Component {
         return (
             <div className="header">
                 <div className="title"><i className="fa fa-assistive-listening-systems" aria-hidden="true"></i><span>爱 听</span></div>
-                <div className="searchDiv"><input type="text" placeholder="搜索歌曲" onKeyUp={this.searchMusic.bind(this)} ref="searchInput" /></div>
+                <div className="searchDiv"><input type="text" placeholder="搜索歌名, 歌手, 歌词" onKeyUp={this.searchMusic.bind(this)} ref="searchInput" /></div>
                 <div className="controlContainer">
                     <div className="setting"><i className="fa fa-cog" aria-hidden="true" title="设置"></i></div>
                     <div className="console"><i className="fa fa-chain-broken" aria-hidden="true" title="控制台"></i></div>

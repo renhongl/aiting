@@ -14,9 +14,10 @@ export default class MusicFolder extends Component {
         this.ipcRenderer = electron.ipcRenderer;
         this.state = {
             image: './static/images/panda.jpg',
-            songName: '',
-            singername: '',
-            path: ''
+            songName: '未知',
+            singername: '未知',
+            path: '',
+            folderList: []
         }
     }
 
@@ -29,6 +30,26 @@ export default class MusicFolder extends Component {
             let folderList = $(this.refs.folderList);
             folderList.find('.paiHangBang').removeClass('selected');
         });
+
+        this.loadMusicFolder();
+    }
+
+    loadMusicFolder() {
+        let url = 'http://www.kugou.com/yy/special/index/1-0-1.html';
+        $.get(url, (result) => {
+            let $li = $(result).find('#ulAlbums li');
+            let list = [];
+            $.each($li, (i, item) => {
+                let folder = {
+                    title: $(item).find('a').attr('title'),
+                    url: $(item).find('a').attr('href'),
+                }
+                list.push(folder);
+            });
+            this.setState({folderList: list});
+        }).fail(function() {
+            new Message('warning', '载入歌曲分类失败。');
+        });
     }
 
     addSelectedClass(e) {
@@ -39,6 +60,9 @@ export default class MusicFolder extends Component {
 
     showSmallDetail(hash) {
         if(hash.indexOf('local') !== -1){
+            this.setState({ image: './static/images/panda.jpg' });
+            this.setState({ songName: $('#' + hash).attr('data').split(' - ')[0].split('/')[1] });
+            this.setState({ singername: $('#' + hash).attr('data').split(' - ')[1].split('.mp3')[0] });
             return;
         }
         let url = `http://www.kugou.com/yy/index.php?r=play/getdata&hash=${hash}`;
@@ -57,87 +81,9 @@ export default class MusicFolder extends Component {
         })
     }
 
-    loadHeJi(e) {
+    loadKuGouFengLei(e) {
         this.addSelectedClass(e);
-        let url = 'http://www.kugou.com/yy/special/single/120265.html';
-        $.get(url, (result) => {
-            let $li = $(result).find('#songs li');
-            let songs = {
-                data: {
-                    info: []
-                }
-            };
-            $.each($li, (i, item) => {
-                let music = {
-                    songname: $(item).find('.text').text().split(' - ')[1],
-                    singername: $(item).find('.text').text().split(' - ')[0],
-                    hash: $(item).find('a').attr('data').split('|')[0],
-                    album_name: '',
-                    duration: ''
-                };
-                songs.data.info.push(music);
-            });
-            $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-        }).fail(function () {
-            new Message('warning', '歌曲加载失败，请重新点击。');
-        });
-    }
-
-    loadKuGouYueYu(e) {
-        this.addSelectedClass(e);
-        let url = 'http://www.kugou.com/yy/special/single/121585.html';
-        $.get(url, (result) => {
-            let $li = $(result).find('#songs li');
-            let songs = {
-                data: {
-                    info: []
-                }
-            };
-            $.each($li, (i, item) => {
-                let music = {
-                    songname: $(item).find('.text').text().split(' - ')[1],
-                    singername: $(item).find('.text').text().split(' - ')[0],
-                    hash: $(item).find('a').attr('data').split('|')[0],
-                    album_name: '',
-                    duration: ''
-                };
-                songs.data.info.push(music);
-            });
-            $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-        }).fail(function () {
-            new Message('warning', '歌曲加载失败，请重新点击。');
-        });
-    }
-
-    loadKuGouHuaYu(e) {
-        this.addSelectedClass(e);
-        let url = 'http://www.kugou.com/yy/special/single/29084.html';
-        $.get(url, (result) => {
-            let $li = $(result).find('#songs li');
-            let songs = {
-                data: {
-                    info: []
-                }
-            };
-            $.each($li, (i, item) => {
-                let music = {
-                    songname: $(item).find('.text').text().split(' - ')[1],
-                    singername: $(item).find('.text').text().split(' - ')[0],
-                    hash: $(item).find('a').attr('data').split('|')[0],
-                    album_name: '',
-                    duration: ''
-                };
-                songs.data.info.push(music);
-            });
-            $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-        }).fail(function () {
-            new Message('warning', '歌曲加载失败，请重新点击。');
-        });
-    }
-
-    loadCunYinYue(e) {
-        this.addSelectedClass(e);
-        let url = 'http://www.kugou.com/yy/special/single/121512.html';
+        let url = $(e.target).attr('data');
         $.get(url, (result) => {
             let $li = $(result).find('#songs li');
             let songs = {
@@ -173,7 +119,8 @@ export default class MusicFolder extends Component {
         $('.fa-expand').hide();
     }
 
-    openLocalMusic() {
+    openLocalMusic(e) {
+        this.addSelectedClass(e);
         this.ipcRenderer.send('openLocalMusic');
         this.ipcRenderer.on('loadedFolder', (e, args) => {
             let path = args[0];
@@ -197,36 +144,47 @@ export default class MusicFolder extends Component {
             }
         };
         $.each(fiels, (i, fullName) => {
-            let music = {
-                songname: fullName.split(' - ')[0],
-                singername: fullName.split(' - ')[1].split('.mp3')[0],
-                hash: 'local' + i,
-                album_name: '',
-                duration: '',
-                data: this.state.path + '/' + fullName
-            };
-            songs.data.info.push(music);
+            if(fullName.indexOf('.mp3') !== -1){
+                let music = {
+                    songname: fullName.split(' - ')[0],
+                    singername: fullName.split(' - ')[1].split('.mp3')[0],
+                    hash: 'local' + i,
+                    album_name: '',
+                    duration: '',
+                    data: this.state.path + '/' + fullName
+                };
+                songs.data.info.push(music);
+            }
         });
         $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
     }
 
+    parseString(str) {
+        if(str.length > 8){
+            return str.substring(0, 8) + '...';
+        }else{
+            return str;
+        }
+    }
+
     render() {
+        let folderList = this.state.folderList.map((folder, i) => {
+            return (
+                <div key={i} title={folder.title} className="paiHangBang" onClick={this.loadKuGouFengLei.bind(this)} data={folder.url}>{this.parseString(folder.title)}</div>
+            )
+        });
         return (
             <div className="musicFolder">
                 <div className="folderList" ref="folderList">
                     <p className="intro">推荐</p>
-                    <div className="paiHangBang" onClick={this.loadHeJi.bind(this)}>梦想的声音 合集</div>
-                    <div className="paiHangBang" onClick={this.loadKuGouHuaYu.bind(this)}>华语排行榜</div>
-                    <div className="paiHangBang" onClick={this.loadKuGouYueYu.bind(this)}>粤语排行榜</div>
-                    <div className="paiHangBang" onClick={this.loadCunYinYue.bind(this)}>纯音乐</div>
+                    {folderList}
                     <p className="intro">我的音乐</p>
-                    <div className="paiHangBang" onClick={this.openLocalMusic.bind(this)}>本地歌曲</div>
-                    <div className="paiHangBang" onClick={this.loadHeJi.bind(this)}>我喜欢的音乐</div>
+                    <div className="paiHangBang" onClick={this.openLocalMusic.bind(this)}><i className="fa fa-folder-open" aria-hidden="true"></i>本地歌曲</div>
                 </div>
                 <div className="smallWindow button" onClick={this.openBigWindow.bind(this)} onMouseEnter={this.showOpenBigIcon.bind(this)} onMouseLeave={this.hideOpenBigIcon.bind(this)}>
                     <i className="fa fa-expand" aria-hidden="true"></i>
                     <img src={this.state.image} />
-                    <span style={{ fontSize: 'bold' }}>{this.state.songName.substring(0, 10)}</span>
+                    <span style={{ fontWeight: 'bold' }}>{this.state.songName.substring(0, 10)}</span>
                     <span>{this.state.singername.substring(0, 10)}</span>
                 </div>
             </div>
