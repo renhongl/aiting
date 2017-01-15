@@ -43,6 +43,13 @@
 }
 
 .listItem .selected{
-    background: #d4cece !important;
+    background: #efe8e8 !important;
     color: #000;
+}
+
+.fa-headphones{
+    line-height: 30px;
+    display: inline-block;
+    margin-left: 5px;
+    color: #e6245a;
 }

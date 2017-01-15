@@ -5,6 +5,7 @@ const {app} = electron
 const {BrowserWindow} = electron
 
 const ipcMain = electron.ipcMain;
+const dialog = electron.dialog;
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -70,6 +71,20 @@ ipcMain.on('closeWindow', () => {
 
 ipcMain.on('minMainWindow', () => {
   mainWindow.minimize();
+});
+
+ipcMain.on('openLocalMusic', function () {
+  let path = dialog.showOpenDialog({
+    title : "选择文件夹",
+    properties: [ 'openFile','openDirectory','multiSelections' ],
+    filters: [
+      { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+      { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
+      { name: 'Custom File Type', extensions: ['as'] },
+      { name: 'All Files', extensions: ['*'] }
+    ]
+  });
+  mainWindow.webContents.send('loadedFolder', path);
 });
 
 // 在这文件，你可以续写应用剩下主进程代码。

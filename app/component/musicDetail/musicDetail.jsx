@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import $ from 'jquery';
+import Message from 'lrh-message';
 
 export default class MusicDetail extends Component {
     constructor() {
         super();
         this.state = {
-            image: '',
+            image: './static/images/panda.jpg',
             songName: '',
             singername: '',
             lyric: '',
@@ -36,7 +37,7 @@ export default class MusicDetail extends Component {
             let timeStr = $(item).attr('id').substring(1, 6);
             let time = Number(timeStr.split(':')[0]) * 60 + Number(timeStr.split(':')[1]);
             if (time === args.time) {
-                item.scrollIntoView(true);
+                $(item).get(0).scrollIntoView(true);
                 $('.lyricLine').css({
                     color: '#000'
                 });
@@ -48,6 +49,9 @@ export default class MusicDetail extends Component {
     }
 
     setDetail(hash) {
+        if(hash.indexOf('local') !== -1){
+            return;
+        }
         let url = `http://www.kugou.com/yy/index.php?r=play/getdata&hash=${hash}`;
         $.ajax({
             url: url,
@@ -61,7 +65,7 @@ export default class MusicDetail extends Component {
                 this.setState({ audioName: JSON.parse(result).data.audio_name });
             },
             error: (error) => {
-                console.log(error);
+                new Message('warning', '获取歌曲信息失败。');
             }
         })
     }
@@ -82,7 +86,10 @@ export default class MusicDetail extends Component {
                 <div className="detailHeader"><i className="fa fa-compress" aria-hidden="true" onClick={this.closeBigWindow.bind(this)}></i></div>
                 <div className="detailContent">
                     <img src={this.state.image} />
-                    <p className="detailName"><span style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' }}>{this.state.songName.substring(0, 10)}</span><br />歌手: {this.state.singername}   专辑: {this.state.audioName.substring(0, 10)}</p>
+                    <p className="detailName">
+                        <span style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' }}>{this.state.songName.substring(0, 10)}</span><br />
+                        歌手: {this.state.singername}   专辑: {this.state.audioName.substring(0, 10)}
+                    </p>
                     <div className="detailLyric">{lyricLine}</div>
                 </div>
             </div>

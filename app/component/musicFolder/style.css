@@ -9,6 +9,7 @@
     background: #fff;
     cursor: pointer;
     border-top: 1px solid #cebaba;
+    position: relative;
 }
 
 .folderList{
@@ -30,6 +31,7 @@
     padding-left: 15px;
     color: grey;
     border-left: 3px solid #fff;
+    font-size: 15px;
 }
 
 .folderList .paiHangBang:hover{
@@ -63,3 +65,14 @@
     height: 30px;
 }
 
+.fa-expand{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    color: #d0cdcd;
+    top: 0;
+    left: 0;
+    font-size: 65px;
+    margin: 3px;
+    opacity: 0.8;
+}

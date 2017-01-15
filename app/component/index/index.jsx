@@ -17,7 +17,7 @@ export default class Index extends Component {
 
     render() {
         return (
-            <div className="index">
+            <div className="index lrh-message">
                 <Header />
                 <Content />
                 <Footer />

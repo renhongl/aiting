@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import $ from 'jquery';
+import Message from 'lrh-message';
 
 export default class Footer extends Component {
     constructor() {
@@ -11,9 +12,13 @@ export default class Footer extends Component {
             finishTime: 0,
             totalTime: 300,
             volume: 0.5,
-            url: './static/testData/冬天的秘密.mp3',
+            url: '',
             hash: '',
-            loop: true
+            loop: true,
+            songName: '',
+            setVolume: false,
+            initX: 0,
+            path: ''
         }
     }
 
@@ -32,6 +37,14 @@ export default class Footer extends Component {
             this.setState({ hash: args.hash });
             this.getCurrentMusic(args.hash);
         });
+
+        $(document).on('mouseup', () => {
+            this.setState({setVolume: false});
+        });
+
+        $.subscribe('localPathChanged', (o, args) => {
+            this.setState({path: args.path});
+        });
     }
 
     getCurrentMusic(hash) {
@@ -44,21 +57,28 @@ export default class Footer extends Component {
             contentType: 'json',
             success: (result) => {
                 this.setState({ url: JSON.parse(result).data.play_url });
+                this.setState({songName: JSON.parse(result).data.song_name });
                 this.setCurrentMuisc();
             },
             error: (error) => {
-                console.log(error);
+                new Message('warning', '播放歌曲失败，请重新播放。');
             }
         })
     }
 
     setCurrentMuisc() {
         this.appAudio = this.refs.appAudio;
-        this.appAudio.src = this.state.url;
+        if(this.state.hash.indexOf('local') !== -1){
+            this.appAudio.src = $('#' + this.state.hash).attr('data');
+            this.state.songName = $('#' + this.state.hash).attr('data').split(' - ')[0].split('/')[1];
+        }else{
+            this.appAudio.src = this.state.url;
+        }
         this.appAudio.volume = this.state.volume;
         this.appAudio.onloadedmetadata = () => {
             this.setState({ totalTime: this.appAudio.duration });
-            this.playMusic(true);
+            this.playMusic();
+            new Message('success', '即将播放: ' + this.state.songName);
         }
     }
 
@@ -85,6 +105,14 @@ export default class Footer extends Component {
             clearInterval(this.timeThread);
             $(this.refs.playButton).removeClass('fa-pause').addClass('fa-play');
         }
+    }
+
+    playNextMusic() {
+        $.publish('nextMusic', { hash: this.state.hash });
+    }
+
+    playLastMusic() {
+        $.publish('lastMusic', { hash: this.state.hash });
     }
 
     playMusic() {
@@ -116,6 +144,31 @@ export default class Footer extends Component {
         }
     }
 
+    volumeMouseDown(e) {
+        this.setState({setVolume: true});
+        this.setState({initX: e.clientX});
+    }
+
+    volumeMouseUp() {
+        this.setState({setVolume: false});
+    }
+
+    changeVolume(e) {
+        if(this.state.setVolume){
+            let offSetX = this.state.initX - e.clientX;
+            this.setState({initX: e.clientX});
+            let newVolume = this.state.volume - offSetX / 100;
+            if(newVolume < 0){
+                newVolume = 0;
+            }
+            if(newVolume > 1){
+                newVolume = 1;
+            }
+            this.setState({volume: newVolume});
+            this.refs.appAudio.volume = newVolume;
+        }
+    }
+
     render() {
         let progressStyle = {
             width: this.state.finishTime / this.state.totalTime * 300
@@ -131,14 +184,20 @@ export default class Footer extends Component {
         }
         return (
             <div className="footer">
-                <i className="fa fa-backward" aria-hidden="true"></i>
+                <i className="fa fa-backward" aria-hidden="true" onClick={this.playLastMusic.bind(this)}></i>
                 <i className="fa fa-play" aria-hidden="true" ref="playButton" onClick={this.controlMusic.bind(this)}></i>
-                <i className="fa fa-forward" aria-hidden="true"></i>
+                <i className="fa fa-forward" aria-hidden="true" onClick={this.playNextMusic.bind(this)}></i>
                 <span className="finishTime">{this.parseTime(this.state.finishTime)}</span>
-                <div className="progress"><span className="finish" style={progressStyle}></span><span className="progressHeader button" style={progressHeaderStyle}></span></div>
+                <div className="progress">
+                    <span className="finish" style={progressStyle}></span>
+                    <span className="progressHeader button" style={progressHeaderStyle}></span>
+                </div>
                 <span className="totalTime">{this.parseTime(this.state.totalTime)}</span>
                 <i className="fa fa-volume-up" aria-hidden="true"></i>
-                <div className="volumeProgress"><span className="finish" style={volumeProgressStyle}></span><span className="volumeProgressHeader button" style={volumeProgressHeaderStyle}></span></div>
+                <div className="volumeProgress">
+                    <span className="finish" style={volumeProgressStyle}></span>
+                    <span className="volumeProgressHeader button" style={volumeProgressHeaderStyle} onMouseDown={this.volumeMouseDown.bind(this)} onMouseMove={this.changeVolume.bind(this)} onMouseUp={this.volumeMouseUp.bind(this)}></span>
+                </div>
                 <i className="fa fa-repeat" aria-hidden="true" onClick={this.changeLoop.bind(this)}></i>
                 <audio ref="appAudio"></audio>
             </div>

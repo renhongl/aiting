@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './style.css';
 const electron = window.require('electron');
 import $ from 'jquery';
+import Message from 'lrh-message';
 
 export default class Header extends Component {
     constructor() {
@@ -30,9 +31,10 @@ export default class Header extends Component {
                 success: (result) => {
                     result = result.substring(1, result.length -1);
                     $.publish('showMusicByThisList', {result: result});
+                    $.publish('listBySearch');
                 },
                 error: (error) => {
-                    console.log(error);
+                    new Message('warning', '搜索歌曲失败，请重新搜索。');
                 }
             })
         }else{

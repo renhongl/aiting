@@ -20,6 +20,7 @@
 .footer i:hover{
     animation: iHover 3s;
     animation-iteration-count: infinite;
+    animation-timing-function: linear;
     cursor: pointer;
 }
 
