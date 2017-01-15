@@ -1,0 +1,5 @@
+{"hash":"047CA061CBFB5BA625A18F7448E19B07","songName":"我们总是在寻找","singerName":"花粥"}
+{"hash":"745C18477266BF8B89BDABE93A8CC451","songName":"鸽子","singerName":"宋冬野"}
+{"hash":"0E29CC2EC919A2B40C6DE6CB4C41F8E1","songName":"不找了","singerName":"郭旭"}
+{"hash":"52599f460fc5ba426a2e495a89640fb3","songName":"野子","singerName":"苏运莹"}
+{"hash":"39255358CB1E2C2583507550E481CA08","songName":"Bye Bye Bye","singerName":"Lovestoned"}

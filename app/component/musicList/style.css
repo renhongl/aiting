@@ -11,6 +11,7 @@
     line-height: 30px;
     display: flex;
     color: #808080;
+    position: relative;
 }
 
 .musicTitle{
@@ -56,4 +57,18 @@
     display: inline-block;
     margin-left: 5px;
     color: #e6245a;
+}
+
+.addToLove{
+    position: absolute;
+    left: 251px;
+    top: 8px
+}
+
+.addToLove:hover{
+    color: #e6245a;
+}
+
+.addToLove.loved{
+    display: none;
 }

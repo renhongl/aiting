@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import $ from 'jquery';
+const fs = window.require('fs');
+import Message from 'lrh-message';
 
 export default class MusicList extends Component {
     constructor() {
@@ -81,15 +83,34 @@ export default class MusicList extends Component {
         return this.addZero(minutes) + ' : ' + this.addZero(seconds);
     }
 
+    addToLove(e) {
+        let $li = $(e.target).parent();
+        let music = {
+            hash: $li.attr('id'),
+            songName: $li.find('.songName').attr('title'),
+            singerName: $li.find('.singerName').text()
+        };
+        fs.appendFile('./build/static/love.txt', JSON.stringify(music) + '\n');
+        new Message('success', '歌曲已经加入喜欢歌曲列表。');
+    }
+
     render() {
+
         let musicList = this.state.list.map((music, index) => {
+            let love;
+            if(music.loved || music.hash.indexOf('local') !== -1){
+                love = (<i className="fa fa-heart addToLove loved" aria-hidden="true" onClick={this.addToLove.bind(this)}></i>);
+            }else{
+                love = (<i className="fa fa-heart addToLove" aria-hidden="true" onClick={this.addToLove.bind(this)}></i>)
+            }
             return (
                 <li key={music.hash} id={music.hash} data={music.data} className="button" onDoubleClick={this.selectedOneMusic.bind(this)} onClick={this.addSelectedClass.bind(this)}>
                     <span className="musicIndex" style={{width: '3%', paddingLeft: '5px'}}>{this.addZero(index + 1)}</span>
-                    <span title={music.songname} style={{fontWeight:'bold',width: '40%'}}>{ music.songname.substring(0, 15)}</span>
+                    <span className="songName" title={music.songname} style={{fontWeight:'bold',width: '40%'}}>{ music.songname.substring(0, 15)}</span>
                     <span className="singerName" style={{width: '25%', paddingLeft: '25px'}}>{music.singername}</span>
                     <span title={music.album_name} >{music.album_name.substring(0, 10)}</span>
                     <span style={{width: '10%'}}>{this.parseTime(music.duration)}</span>
+                    {love}
                 </li>
             )
         });

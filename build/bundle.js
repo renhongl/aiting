@@ -32636,6 +32636,10 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _lrhMessage = __webpack_require__(185);
+
+	var _lrhMessage2 = _interopRequireDefault(_lrhMessage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32643,6 +32647,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var fs = window.require('fs');
 
 	var MusicList = function (_Component) {
 	    _inherits(MusicList, _Component);
@@ -32736,11 +32742,29 @@
 	            return this.addZero(minutes) + ' : ' + this.addZero(seconds);
 	        }
 	    }, {
+	        key: 'addToLove',
+	        value: function addToLove(e) {
+	            var $li = (0, _jquery2.default)(e.target).parent();
+	            var music = {
+	                hash: $li.attr('id'),
+	                songName: $li.find('.songName').attr('title'),
+	                singerName: $li.find('.singerName').text()
+	            };
+	            fs.appendFile('./build/static/love.txt', JSON.stringify(music) + '\n');
+	            new _lrhMessage2.default('success', '歌曲已经加入喜欢歌曲列表。');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this3 = this;
 
 	            var musicList = this.state.list.map(function (music, index) {
+	                var love = void 0;
+	                if (music.loved || music.hash.indexOf('local') !== -1) {
+	                    love = _react2.default.createElement('i', { className: 'fa fa-heart addToLove loved', 'aria-hidden': 'true', onClick: _this3.addToLove.bind(_this3) });
+	                } else {
+	                    love = _react2.default.createElement('i', { className: 'fa fa-heart addToLove', 'aria-hidden': 'true', onClick: _this3.addToLove.bind(_this3) });
+	                }
 	                return _react2.default.createElement(
 	                    'li',
 	                    { key: music.hash, id: music.hash, data: music.data, className: 'button', onDoubleClick: _this3.selectedOneMusic.bind(_this3), onClick: _this3.addSelectedClass.bind(_this3) },
@@ -32751,7 +32775,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        { title: music.songname, style: { fontWeight: 'bold', width: '40%' } },
+	                        { className: 'songName', title: music.songname, style: { fontWeight: 'bold', width: '40%' } },
 	                        music.songname.substring(0, 15)
 	                    ),
 	                    _react2.default.createElement(
@@ -32768,7 +32792,8 @@
 	                        'span',
 	                        { style: { width: '10%' } },
 	                        _this3.parseTime(music.duration)
-	                    )
+	                    ),
+	                    love
 	                );
 	            });
 	            return _react2.default.createElement(
@@ -32789,7 +32814,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        null,
+	                        { style: { width: '26%' } },
 	                        '\u4E13\u8F91'
 	                    ),
 	                    _react2.default.createElement(
@@ -32847,7 +32872,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    overflow: auto;\r\n    height: 465px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n}", ""]);
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    overflow: auto;\r\n    height: 465px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 251px;\r\n    top: 8px\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}", ""]);
 
 	// exports
 
@@ -32944,6 +32969,9 @@
 	                    };
 	                    list.push(folder);
 	                });
+	                if (list.length > 10) {
+	                    list.length = 10;
+	                }
 	                _this3.setState({ folderList: list });
 	            }).fail(function () {
 	                new _lrhMessage2.default('warning', '载入歌曲分类失败。');
@@ -33080,6 +33108,35 @@
 	            }
 	        }
 	    }, {
+	        key: 'openLoveMusic',
+	        value: function openLoveMusic(e) {
+	            this.addSelectedClass(e);
+	            _jquery2.default.get('./static/love.txt', function (result) {
+	                var loveMusic = result.split('\n');
+	                loveMusic.length = loveMusic.length - 1;
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                for (var i = 0; i < loveMusic.length; i++) {
+	                    var one = JSON.parse(loveMusic[i]);
+	                    var music = {
+	                        songname: one.songName,
+	                        singername: one.singerName,
+	                        hash: one.hash,
+	                        album_name: '',
+	                        duration: '',
+	                        loved: true
+	                    };
+	                    songs.data.info.push(music);
+	                }
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '载入喜欢的歌曲失败。');
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this7 = this;
@@ -33113,6 +33170,12 @@
 	                        { className: 'paiHangBang', onClick: this.openLocalMusic.bind(this) },
 	                        _react2.default.createElement('i', { className: 'fa fa-folder-open', 'aria-hidden': 'true' }),
 	                        '\u672C\u5730\u6B4C\u66F2'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang', onClick: this.openLoveMusic.bind(this) },
+	                        _react2.default.createElement('i', { className: 'fa fa-heart', 'aria-hidden': 'true' }),
+	                        '\u6211\u559C\u6B22\u7684\u97F3\u4E50'
 	                    )
 	                ),
 	                _react2.default.createElement(
