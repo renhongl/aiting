@@ -90,7 +90,7 @@ export default class MusicList extends Component {
             songName: $li.find('.songName').attr('title'),
             singerName: $li.find('.singerName').text()
         };
-        fs.appendFile('./build/static/love.txt', JSON.stringify(music) + '\n');
+        fs.appendFile('./resources/app/build/static/love.txt', JSON.stringify(music) + '\n');
         new Message('success', '歌曲已经加入喜欢歌曲列表。');
     }
 
