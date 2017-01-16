@@ -21632,12 +21632,18 @@
 	        value: function searchMusic(e) {
 	            if (e.keyCode === 13) {
 	                var value = this.refs.searchInput.value;
-	                var url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
+	                var url = '';
+	                if (value.indexOf('/小说') !== -1) {
+	                    url = 'http://www.kting.cn/html/search.html?keyword=' + value;
+	                } else {
+	                    url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
+	                }
 	                _jquery2.default.ajax({
 	                    url: url,
 	                    method: 'GET',
 	                    contentType: 'json',
 	                    success: function success(result) {
+	                        debugger;
 	                        result = result.substring(1, result.length - 1);
 	                        _jquery2.default.publish('showMusicByThisList', { result: result });
 	                        _jquery2.default.publish('listBySearch');
@@ -32303,9 +32309,8 @@
 	            zIndex: 110,
 	            margin: '2px 5px',
 	            clear: 'both',
-	            top: 50,
-	            right: 0,
-	            position: 'absolute',
+	            float: 'right',
+	            position: 'relative',
 	            boxShadow: '0px 0px 10px rgba(255, 255, 255, 1)',
 	            opacity: 0.9,
 	        }).addClass('message');
