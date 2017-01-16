@@ -58,7 +58,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Observer = __webpack_require__(203);
+	var _Observer = __webpack_require__(206);
 
 	var _Observer2 = _interopRequireDefault(_Observer);
 
@@ -21525,7 +21525,11 @@
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	__webpack_require__(201);
+	var _dashboard = __webpack_require__(201);
+
+	var _dashboard2 = _interopRequireDefault(_dashboard);
+
+	__webpack_require__(204);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21554,6 +21558,7 @@
 	                'div',
 	                { className: 'index lrh-message' },
 	                _react2.default.createElement(_header2.default, null),
+	                _react2.default.createElement(_dashboard2.default, null),
 	                _react2.default.createElement(_content2.default, null),
 	                _react2.default.createElement(_footer2.default, null)
 	            );
@@ -21643,10 +21648,10 @@
 	                    method: 'GET',
 	                    contentType: 'json',
 	                    success: function success(result) {
-	                        debugger;
 	                        result = result.substring(1, result.length - 1);
 	                        _jquery2.default.publish('showMusicByThisList', { result: result });
 	                        _jquery2.default.publish('listBySearch');
+	                        _jquery2.default.publish('closeDashboard');
 	                    },
 	                    error: function error(_error) {
 	                        new _lrhMessage2.default('warning', '搜索歌曲失败，请重新搜索。');
@@ -21746,7 +21751,7 @@
 
 
 	// module
-	exports.push([module.id, ".header{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #e6245a;\r\n}\r\n\r\n.title{\r\n    width: 30%;\r\n    border: 0px solid #fff;\r\n    height: 100%;\r\n    float: left;\r\n    display: flex;\r\n    align-items: center;\r\n    color: #fff;\r\n}\r\n\r\n.title span{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left: 10px;\r\n    float: left;\r\n    font-weight: bold;\r\n}\r\n\r\n.title i{\r\n    margin-left: 10px;\r\n}\r\n\r\n.searchDiv{\r\n    width: 40%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.searchDiv input{\r\n    height: 50%;\r\n    border: none;\r\n    border-radius: 20px;\r\n    width: 70%;\r\n    padding-left: 10px;\r\n    outline: none;\r\n}\r\n\r\n.searchDiv input:focus{\r\n    border: none;\r\n}\r\n\r\n.controlContainer{\r\n    width: 30%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.controlContainer div{\r\n    margin-left: 5px;\r\n    color: #e2e1e1;\r\n    height: 30%;\r\n    text-align: center;\r\n    width: 20px;\r\n    font-size: 15px;\r\n}\r\n\r\n.controlContainer i:hover{\r\n    color: #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.controlContainer .setting{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .console{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .minus{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .close{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 0px;\r\n    margin-right: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .line{\r\n    width: 1px;\r\n    border-left: 1px solid #aba5a5;\r\n}", ""]);
+	exports.push([module.id, ".header{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #e6245a;\r\n}\r\n\r\n.title{\r\n    width: 161px;\r\n    border: 0px solid #fff;\r\n    height: 100%;\r\n    float: left;\r\n    display: flex;\r\n    align-items: center;\r\n    color: #fff;\r\n}\r\n\r\n.title span{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left: 10px;\r\n    float: left;\r\n    font-weight: bold;\r\n}\r\n\r\n.title i{\r\n    margin-left: 10px;\r\n}\r\n\r\n.searchDiv{\r\n    width: 49%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.searchDiv input{\r\n    height: 50%;\r\n    border: none;\r\n    border-radius: 20px;\r\n    width: 80%;\r\n    padding-left: 10px;\r\n    outline: none;\r\n}\r\n\r\n.searchDiv input:focus{\r\n    border: none;\r\n}\r\n\r\n.controlContainer{\r\n    width: 30%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.controlContainer div{\r\n    margin-left: 5px;\r\n    color: #cccccc;\r\n    height: 30%;\r\n    text-align: center;\r\n    width: 20px;\r\n    font-size: 15px;\r\n}\r\n\r\n.controlContainer i:hover{\r\n    color: #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.controlContainer .setting{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .console{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .minus{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .close{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 0px;\r\n    margin-right: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .line{\r\n    width: 1px;\r\n    border-left: 1px solid #aba5a5;\r\n}", ""]);
 
 	// exports
 
@@ -32309,8 +32314,9 @@
 	            zIndex: 110,
 	            margin: '2px 5px',
 	            clear: 'both',
-	            float: 'right',
-	            position: 'relative',
+	            top: 50,
+	            right: 0,
+	            position: 'absolute',
 	            boxShadow: '0px 0px 10px rgba(255, 255, 255, 1)',
 	            opacity: 0.9,
 	        }).addClass('message');
@@ -32755,33 +32761,70 @@
 	                songName: $li.find('.songName').attr('title'),
 	                singerName: $li.find('.singerName').text()
 	            };
-	            fs.appendFile('./resources/app/build/static/love.txt', JSON.stringify(music) + '\n');
-	            new _lrhMessage2.default('success', '歌曲已经加入喜欢歌曲列表。');
+	            fs.appendFile('./resources/app/build/static/love.txt', JSON.stringify(music) + '\n', function () {
+	                new _lrhMessage2.default('success', '歌曲已经加入喜欢歌曲列表。');
+	            });
+	        }
+	    }, {
+	        key: 'removeFromLove',
+	        value: function removeFromLove(e) {
+	            var _this3 = this;
+
+	            var $li = (0, _jquery2.default)(e.target).parent();
+	            var hash = $li.attr('id');
+	            _jquery2.default.get('./static/love.txt', function (result) {
+	                var loveMusic = result.split('\n');
+	                loveMusic.length = loveMusic.length - 1;
+
+	                var newLoveMusic = '';
+
+	                for (var i = 0; i < loveMusic.length; i++) {
+	                    var one = JSON.parse(loveMusic[i]);
+	                    if (one.hash !== hash) {
+	                        newLoveMusic = newLoveMusic + loveMusic[i] + '\n';
+	                    }
+	                }
+
+	                fs.writeFile('./resources/app/build/static/love.txt', newLoveMusic, function () {
+	                    var newList = [];
+	                    for (var _i = 0; _i < _this3.state.list.length; _i++) {
+	                        if (_this3.state.list[_i].hash !== hash) {
+	                            newList.push(_this3.state.list[_i]);
+	                        }
+	                    }
+	                    _this3.setState({ list: newList });
+	                    new _lrhMessage2.default('success', '歌曲已移出喜欢列表。');
+	                });
+	            }).fail(function () {
+	                new _lrhMessage2.default('success', '获取喜欢歌曲列表失败。');
+	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this3 = this;
+	            var _this4 = this;
 
 	            var musicList = this.state.list.map(function (music, index) {
 	                var love = void 0;
-	                if (music.loved || music.hash.indexOf('local') !== -1) {
-	                    love = _react2.default.createElement('i', { className: 'fa fa-heart addToLove loved', 'aria-hidden': 'true', onClick: _this3.addToLove.bind(_this3) });
+	                if (music.loved) {
+	                    love = _react2.default.createElement('i', { title: '\u4ECE\u559C\u6B22\u5217\u8868\u4E2D\u5220\u9664', className: 'fa fa fa-trash addToLove', 'aria-hidden': 'true', onClick: _this4.removeFromLove.bind(_this4) });
+	                } else if (music.hash.indexOf('local') !== -1) {
+	                    love = _react2.default.createElement('i', { className: 'fa fa-heart addToLove loved', 'aria-hidden': 'true', onClick: _this4.addToLove.bind(_this4) });
 	                } else {
-	                    love = _react2.default.createElement('i', { className: 'fa fa-heart addToLove', 'aria-hidden': 'true', onClick: _this3.addToLove.bind(_this3) });
+	                    love = _react2.default.createElement('i', { title: '\u6DFB\u52A0\u5230\u559C\u6B22\u5217\u8868', className: 'fa fa-heart addToLove', 'aria-hidden': 'true', onClick: _this4.addToLove.bind(_this4) });
 	                }
 	                return _react2.default.createElement(
 	                    'li',
-	                    { key: music.hash, id: music.hash, data: music.data, className: 'button', onDoubleClick: _this3.selectedOneMusic.bind(_this3), onClick: _this3.addSelectedClass.bind(_this3) },
+	                    { key: music.hash, id: music.hash, data: music.data, className: 'row' + index % 2 + " button", onDoubleClick: _this4.selectedOneMusic.bind(_this4), onClick: _this4.addSelectedClass.bind(_this4) },
 	                    _react2.default.createElement(
 	                        'span',
 	                        { className: 'musicIndex', style: { width: '3%', paddingLeft: '5px' } },
-	                        _this3.addZero(index + 1)
+	                        _this4.addZero(index + 1)
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        { className: 'songName', title: music.songname, style: { fontWeight: 'bold', width: '40%' } },
-	                        music.songname.substring(0, 15)
+	                        { className: 'songName', title: music.songname, style: { fontWeight: 'bold', width: '40%', overflow: 'hidden', paddingLeft: '33px' } },
+	                        music.songname
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
@@ -32796,7 +32839,7 @@
 	                    _react2.default.createElement(
 	                        'span',
 	                        { style: { width: '10%' } },
-	                        _this3.parseTime(music.duration)
+	                        _this4.parseTime(music.duration)
 	                    ),
 	                    love
 	                );
@@ -32809,7 +32852,7 @@
 	                    { className: 'musicTitle' },
 	                    _react2.default.createElement(
 	                        'span',
-	                        { style: { fontWeight: 'bold', width: '43%', paddingLeft: '30px' } },
+	                        { style: { fontWeight: 'bold', width: '43%', paddingLeft: '52px' } },
 	                        '\u97F3\u4E50\u6807\u9898'
 	                    ),
 	                    _react2.default.createElement(
@@ -32877,7 +32920,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    overflow: auto;\r\n    height: 465px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 251px;\r\n    top: 8px\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}", ""]);
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    overflow: auto;\r\n    height: 465px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}", ""]);
 
 	// exports
 
@@ -32988,6 +33031,7 @@
 	            var folderList = (0, _jquery2.default)(this.refs.folderList);
 	            folderList.find('.paiHangBang').removeClass('selected');
 	            (0, _jquery2.default)(e.target).addClass('selected');
+	            _jquery2.default.publish('closeDashboard');
 	        }
 	    }, {
 	        key: 'showSmallDetail',
@@ -33243,7 +33287,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicFolder{\r\n    width: 20%;\r\n    height: 100%;\r\n}\r\n\r\n.smallWindow{\r\n    width: 100%;\r\n    height: 69px;\r\n    background: #fff;\r\n    cursor: pointer;\r\n    border-top: 1px solid #cebaba;\r\n    position: relative;\r\n}\r\n\r\n.folderList{\r\n    width: 100%;\r\n    background: #fff;\r\n    height: 430px;\r\n}\r\n\r\n.folderList .intro{\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 10px;\r\n}\r\n\r\n.folderList .paiHangBang{\r\n    background: #fff;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 15px;\r\n    color: grey;\r\n    border-left: 3px solid #fff;\r\n    font-size: 15px;\r\n}\r\n\r\n.folderList .paiHangBang:hover{\r\n    color: #000;\r\n    cursor: pointer;\r\n}\r\n\r\n.folderList .selected{\r\n    background: #f1efef;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 15px;\r\n    color: #272525;\r\n    border-left: 3px solid #e6245a;\r\n}\r\n\r\n.smallWindow img{\r\n    width: 40%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    float: left;\r\n}\r\n\r\n.smallWindow span{\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    margin-top: 6px;\r\n    width: 55%;\r\n    font-size: 12px;\r\n    overflow: hidden;\r\n    height: 30px;\r\n}\r\n\r\n.fa-expand{\r\n    display: none;\r\n    position: absolute;\r\n    z-index: 1;\r\n    color: #d0cdcd;\r\n    top: 0;\r\n    left: 0;\r\n    font-size: 65px;\r\n    margin: 3px;\r\n    opacity: 0.8;\r\n}", ""]);
+	exports.push([module.id, ".musicFolder{\r\n    width: 20%;\r\n    height: 100%;\r\n}\r\n\r\n.smallWindow{\r\n    width: 100%;\r\n    height: 69px;\r\n    background: #fff;\r\n    cursor: pointer;\r\n    border-top: 1px solid #cebaba;\r\n    position: relative;\r\n}\r\n\r\n.folderList{\r\n    width: 100%;\r\n    background: #fff;\r\n    height: 430px;\r\n}\r\n\r\n.folderList .intro{\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 10px;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n}\r\n\r\n.folderList .paiHangBang{\r\n    background: #fff;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 15px;\r\n    color: grey;\r\n    border-left: 3px solid #fff;\r\n    font-size: 13px;\r\n}\r\n\r\n.folderList .paiHangBang:hover{\r\n    color: #000;\r\n    cursor: pointer;\r\n}\r\n\r\n.folderList .selected{\r\n    background: #f1efef;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    padding-left: 15px;\r\n    color: #272525;\r\n    border-left: 3px solid #e6245a;\r\n}\r\n\r\n.smallWindow img{\r\n    width: 40%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    float: left;\r\n}\r\n\r\n.smallWindow span{\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    margin-top: 6px;\r\n    width: 55%;\r\n    font-size: 12px;\r\n    overflow: hidden;\r\n    height: 30px;\r\n}\r\n\r\n.fa-expand{\r\n    display: none;\r\n    position: absolute;\r\n    z-index: 1;\r\n    color: #d0cdcd;\r\n    top: 0;\r\n    left: 0;\r\n    font-size: 65px;\r\n    margin: 3px;\r\n    opacity: 0.8;\r\n}", ""]);
 
 	// exports
 
@@ -33408,8 +33452,8 @@
 	                        { className: 'detailName' },
 	                        _react2.default.createElement(
 	                            'span',
-	                            { style: { fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' } },
-	                            this.state.songName.substring(0, 10)
+	                            { title: this.state.songName, style: { fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px', overflow: 'hidden' } },
+	                            this.state.songName
 	                        ),
 	                        _react2.default.createElement('br', null),
 	                        '\u6B4C\u624B: ',
@@ -33475,7 +33519,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
+	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 2;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
 
 	// exports
 
@@ -33528,7 +33572,7 @@
 
 	        _this.state = {
 	            finishTime: 0,
-	            totalTime: 300,
+	            totalTime: 0,
 	            volume: 0.5,
 	            url: '',
 	            hash: '',
@@ -33659,7 +33703,7 @@
 	            this.appAudio.play();
 	            this.timeThread = setInterval(function () {
 	                var finishTime = _this6.state.finishTime;
-	                if (finishTime >= _this6.state.totalTime) {
+	                if (finishTime >= _this6.state.totalTime - 1) {
 	                    clearInterval(_this6.timeThread);
 	                    if (_this6.state.loop) {
 	                        _jquery2.default.publish('nextMusic', { hash: _this6.state.hash });
@@ -33714,11 +33758,15 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var offset = 0;
+	            if (this.state.totalTime !== 0) {
+	                offset = this.state.finishTime / this.state.totalTime;
+	            }
 	            var progressStyle = {
-	                width: this.state.finishTime / this.state.totalTime * 300
+	                width: offset * 300
 	            };
 	            var progressHeaderStyle = {
-	                left: this.state.finishTime / this.state.totalTime * 300 - 5
+	                left: offset * 300 - 5
 	            };
 	            var volumeProgressStyle = {
 	                width: this.state.volume * 100
@@ -33810,10 +33858,94 @@
 /* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(202);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Dashboard = function (_Component) {
+	    _inherits(Dashboard, _Component);
+
+	    function Dashboard() {
+	        _classCallCheck(this, Dashboard);
+
+	        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this));
+
+	        _this.state = {
+	            height: '100%'
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Dashboard, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            _jquery2.default.subscribe('closeDashboard', function () {
+	                (0, _jquery2.default)('.dashboard').hide();
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'dashboard' },
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '\u6B22\u8FCE\u4F7F\u7528\u7231\u542C\u64AD\u653E\u5668',
+	                    _react2.default.createElement('br', null),
+	                    '\u73B0\u5728\u4F60\u53EF\u4EE5\u901A\u8FC7\u5DE6\u8FB9\u7684\u6B4C\u66F2\u5206\u7EC4\u9009\u62E9\u97F3\u4E50\u64AD\u653E',
+	                    _react2.default.createElement('br', null),
+	                    '\u6216\u8005\u5728\u5934\u90E8\u4F7F\u7528\u641C\u7D22\u6846\u641C\u7D22\u6B4C\u66F2'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '\u4E3B\u9875\u529F\u80FD\u5F00\u53D1\u4E2D\u3002\u3002\u3002'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Dashboard;
+	}(_react.Component);
+
+	exports.default = Dashboard;
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(202);
+	var content = __webpack_require__(203);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -33833,7 +33965,47 @@
 	}
 
 /***/ },
-/* 202 */
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 204 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(205);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -33847,7 +34019,7 @@
 
 
 /***/ },
-/* 203 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

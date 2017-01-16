@@ -1,0 +1,9 @@
+.dashboard{
+    position: absolute;
+    z-index: 1;
+    width: 639px;
+    height: 500px;
+    top: 50px;
+    left: 161px;
+    background: #fff;
+}

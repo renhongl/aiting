@@ -34,10 +34,10 @@ export default class Header extends Component {
                 method: 'GET',
                 contentType: 'json',
                 success: (result) => {
-                    debugger;
                     result = result.substring(1, result.length -1);
                     $.publish('showMusicByThisList', {result: result});
                     $.publish('listBySearch');
+                    $.publish('closeDashboard');
                 },
                 error: (error) => {
                     new Message('warning', '搜索歌曲失败，请重新搜索。');

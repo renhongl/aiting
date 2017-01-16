@@ -59,6 +59,7 @@ export default class MusicFolder extends Component {
         let folderList = $(this.refs.folderList);
         folderList.find('.paiHangBang').removeClass('selected');
         $(e.target).addClass('selected');
+        $.publish('closeDashboard');
     }
 
     showSmallDetail(hash) {

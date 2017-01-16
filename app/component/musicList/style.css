@@ -41,6 +41,10 @@
     overflow: hidden;
 }
 
+.listItem .row1{
+    background: #fbfbfb;
+}
+
 .listItem li:hover{
     background: #f1efef;
     cursor: pointer;
@@ -57,12 +61,26 @@
     display: inline-block;
     margin-left: 5px;
     color: #e6245a;
+    animation: listenning;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes listenning{
+    0% {color: orangered}
+    20% {color: limegreen}
+    40% {color: blueviolet}
+    60% {color: yellow}
+    80% {color: deepskyblue}
+    100% {color: pink}
 }
 
 .addToLove{
     position: absolute;
-    left: 251px;
-    top: 8px
+    left: 28px;
+    top: 9px;
+    font-size: 12px;
 }
 
 .addToLove:hover{
@@ -71,4 +89,10 @@
 
 .addToLove.loved{
     display: none;
+}
+
+.fa-trash{
+    position: absolute;
+    left: 28px;
+    top: 9px;
 }

@@ -10,7 +10,7 @@ export default class Footer extends Component {
         super();
         this.state = {
             finishTime: 0,
-            totalTime: 300,
+            totalTime: 0,
             volume: 0.5,
             url: '',
             hash: '',
@@ -120,7 +120,7 @@ export default class Footer extends Component {
         this.appAudio.play();
         this.timeThread = setInterval(() => {
             let finishTime = this.state.finishTime;
-            if (finishTime >= this.state.totalTime) {
+            if (finishTime >= this.state.totalTime - 1) {
                 clearInterval(this.timeThread);
                 if (this.state.loop) {
                     $.publish('nextMusic', { hash: this.state.hash });
@@ -170,11 +170,15 @@ export default class Footer extends Component {
     }
 
     render() {
+        let offset = 0;
+        if(this.state.totalTime !== 0){
+            offset = this.state.finishTime / this.state.totalTime;
+        }
         let progressStyle = {
-            width: this.state.finishTime / this.state.totalTime * 300
+            width: offset * 300
         };
         let progressHeaderStyle = {
-            left: this.state.finishTime / this.state.totalTime * 300 - 5
+            left: offset * 300 - 5
         };
         let volumeProgressStyle = {
             width: this.state.volume * 100

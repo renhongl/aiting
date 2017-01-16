@@ -98,7 +98,7 @@ export default class MusicDetail extends Component {
                 <div className="detailContent">
                     <img className="musicImg" src={this.state.image} />
                     <p className="detailName">
-                        <span style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px' }}>{this.state.songName.substring(0, 10)}</span><br />
+                        <span title={this.state.songName} style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px',overflow:'hidden' }}>{this.state.songName}</span><br />
                         歌手: <span style={{fontWeight: 'bold',display: 'inline-block', marginRight: '10px'}}>{this.state.singername}</span>
                         专辑: <span style={{fontWeight: 'bold'}}>{this.state.audioName.substring(0, 10)}</span>
                     </p>

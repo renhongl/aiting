@@ -22,6 +22,8 @@
     height: 30px;
     line-height: 30px;
     padding-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .folderList .paiHangBang{
@@ -31,7 +33,7 @@
     padding-left: 15px;
     color: grey;
     border-left: 3px solid #fff;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .folderList .paiHangBang:hover{

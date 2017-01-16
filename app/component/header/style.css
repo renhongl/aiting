@@ -5,7 +5,7 @@
 }
 
 .title{
-    width: 30%;
+    width: 161px;
     border: 0px solid #fff;
     height: 100%;
     float: left;
@@ -27,7 +27,7 @@
 }
 
 .searchDiv{
-    width: 40%;
+    width: 49%;
     float: left;
     height: 100%;
     display: flex;
@@ -38,7 +38,7 @@
     height: 50%;
     border: none;
     border-radius: 20px;
-    width: 70%;
+    width: 80%;
     padding-left: 10px;
     outline: none;
 }
@@ -59,7 +59,7 @@
 
 .controlContainer div{
     margin-left: 5px;
-    color: #e2e1e1;
+    color: #cccccc;
     height: 30%;
     text-align: center;
     width: 20px;
