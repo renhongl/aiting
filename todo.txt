@@ -5,3 +5,35 @@
 
 增加首页导航页面
 增加小说搜索功能
+
+小说API：
+
+搜书： http://www.kting.cn/book/searchBook
+Method: POST //application/x-www-form-urlencoded;
+Request: keyword=%E9%AC%BC%E5%90%B9%E7%81%AF&sortField=0&bookStatus=0&pageSize=28&page=1
+
+章节列表： http://www.kting.cn/book/getBookArticleList
+Method: POST //application/x-www-form-urlencoded;
+Request: id=3923&page=1&pageSize=10
+
+
+Folder List:
+发现音乐（默认选中）------主页（dashboard）----->歌曲列表
+小说、相声--------小说操作页----->小说列表
+搜索歌曲------->歌曲列表
+
+增加分页功能。
+
+主页：
+	导航： 个性推荐，排行榜，歌手，最新音乐
+	List： 就是上面导航的搜索结果
+	
+小说页： 酷听： http://www.kting.cn/
+	导航： 主编推荐，有声首发，出版，综艺，以及搜索框。
+	List: 就是上面导航的搜索结果
+	
+
+
+
+
+
