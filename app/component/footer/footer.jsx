@@ -45,6 +45,15 @@ export default class Footer extends Component {
         $.subscribe('localPathChanged', (o, args) => {
             this.setState({path: args.path});
         });
+
+        $.subscribe('playThisArticle', (o, args) => {
+            this.setState({url: args.url});
+            this.setCurrentMuisc();
+        });
+
+        $.subscribe('thisArticleDetail', (o, args) => {
+            this.setState({url: args.one.title});
+        });
     }
 
     getCurrentMusic(hash) {

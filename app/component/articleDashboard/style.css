@@ -1,0 +1,61 @@
+.articleDashboard{
+    position: absolute;
+    z-index: 1;
+    width: 639px;
+    height: 500px;
+    top: 50px;
+    left: 161px;
+    background: #fff;
+    overflow-y: auto;
+    display: none;
+}
+
+.articleList img:hover{
+    border: 1px solid #e6245a;
+}
+
+.articlecNavbar{
+    height: 40px;
+    border-bottom: 1px solid #cccccc;
+    width: 86%;
+    margin: 50px auto;
+}
+
+.articlecNavbar li{
+    width: 69px;
+    float: left;
+    height: 39px;
+    text-align: center;
+    margin-left: 80px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.articlecNavbar .selectedNavbar{
+    border-bottom: 2px solid #e6245a;
+}
+
+.articleDashboard .articleSearch{
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 24px;
+    height: 23px;
+    outline: none;
+    border: 1px solid #cccccc;
+    padding-left: 5px;
+}
+
+.articleDashboard .articleList li{
+    float: left;
+    list-style-type: none;
+    height: 232px;
+    width: 150px;
+    margin-left: 46px;
+    cursor: pointer;
+}
+
+.articleDashboard .articleList li img:hover{
+    border: 1px solid #e6245a;
+}

@@ -5,6 +5,8 @@ import Header from '../header/header.jsx';
 import Content from '../content/content.jsx';
 import Footer from '../footer/footer.jsx';
 import Dashboard from '../dashboard/dashboard.jsx';
+import ArticleDashboard from '../articleDashboard/articleDashboard.jsx';
+import ArticleList from '../articleList/articleList.jsx';
 import './style.css';
 
 export default class Index extends Component {
@@ -21,6 +23,8 @@ export default class Index extends Component {
             <div className="index lrh-message">
                 <Header />
                 <Dashboard />
+                <ArticleDashboard />
+                <ArticleList />
                 <Content />
                 <Footer />
             </div>

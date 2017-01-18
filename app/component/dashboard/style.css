@@ -6,4 +6,43 @@
     top: 50px;
     left: 161px;
     background: #fff;
+    overflow-y: auto;
 }
+
+.oneFolder{
+    width: 154px;
+    height: 212px;
+    float: left;
+    margin-top: 25px;
+    margin-left: 45px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.oneFolder img:hover{
+    border: 1px solid #e6245a;
+}
+
+.musicNavbar{
+    height: 75px;
+    border-bottom: 1px solid #cccccc;
+    width: 86%;
+    margin: 0 auto;
+}
+
+.musicNavbar li{
+    width: 69px;
+    float: left;
+    height: 41px;
+    margin-top: 33px;
+    text-align: center;
+    margin-left: 80px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.musicNavbar .selectedNavbar{
+    border-bottom: 2px solid #e6245a;
+}
+
+    

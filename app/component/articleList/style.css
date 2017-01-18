@@ -1,0 +1,22 @@
+.thisArticleList{
+    position: absolute;
+    z-index: 1;
+    width: 639px;
+    height: 500px;
+    top: 50px;
+    left: 161px;
+    background: #fff;
+    overflow-y: auto;
+    display: none;
+}
+
+.thisArticleList li{
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.thisArticleList .selectedOne{
+    background: #efe8e8;
+}

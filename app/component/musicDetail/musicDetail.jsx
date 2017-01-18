@@ -97,6 +97,7 @@ export default class MusicDetail extends Component {
                 <div className="detailHeader"><i className="fa fa-compress" aria-hidden="true" onClick={this.closeBigWindow.bind(this)}></i></div>
                 <div className="detailContent">
                     <img className="musicImg" src={this.state.image} />
+                    <img className="musicBar" src="./static/images/bar.png" />
                     <p className="detailName">
                         <span title={this.state.songName} style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px',overflow:'hidden' }}>{this.state.songName}</span><br />
                         歌手: <span style={{fontWeight: 'bold',display: 'inline-block', marginRight: '10px'}}>{this.state.singername}</span>

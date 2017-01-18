@@ -58,7 +58,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Observer = __webpack_require__(206);
+	var _Observer = __webpack_require__(212);
 
 	var _Observer2 = _interopRequireDefault(_Observer);
 
@@ -21529,7 +21529,15 @@
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	__webpack_require__(204);
+	var _articleDashboard = __webpack_require__(204);
+
+	var _articleDashboard2 = _interopRequireDefault(_articleDashboard);
+
+	var _articleList = __webpack_require__(207);
+
+	var _articleList2 = _interopRequireDefault(_articleList);
+
+	__webpack_require__(210);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21559,6 +21567,8 @@
 	                { className: 'index lrh-message' },
 	                _react2.default.createElement(_header2.default, null),
 	                _react2.default.createElement(_dashboard2.default, null),
+	                _react2.default.createElement(_articleDashboard2.default, null),
+	                _react2.default.createElement(_articleList2.default, null),
 	                _react2.default.createElement(_content2.default, null),
 	                _react2.default.createElement(_footer2.default, null)
 	            );
@@ -21637,12 +21647,7 @@
 	        value: function searchMusic(e) {
 	            if (e.keyCode === 13) {
 	                var value = this.refs.searchInput.value;
-	                var url = '';
-	                if (value.indexOf('/小说') !== -1) {
-	                    url = 'http://www.kting.cn/html/search.html?keyword=' + value;
-	                } else {
-	                    url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
-	                }
+	                var url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
 	                _jquery2.default.ajax({
 	                    url: url,
 	                    method: 'GET',
@@ -32705,6 +32710,14 @@
 	                (0, _jquery2.default)('.listItem li:eq(' + number + ')').addClass('selected');
 	                _this2.changeOneMusic(hash);
 	            });
+
+	            _jquery2.default.subscribe('showMusicList', function () {
+	                (0, _jquery2.default)('.musicList').show();
+	            });
+
+	            _jquery2.default.subscribe('closeMusicList', function () {
+	                (0, _jquery2.default)('.musicList').hide();
+	            });
 	        }
 	    }, {
 	        key: 'changeOneMusic',
@@ -33059,33 +33072,33 @@
 	                }
 	            });
 	        }
-	    }, {
-	        key: 'loadKuGouFengLei',
-	        value: function loadKuGouFengLei(e) {
-	            this.addSelectedClass(e);
-	            var url = (0, _jquery2.default)(e.target).attr('data');
-	            _jquery2.default.get(url, function (result) {
-	                var $li = (0, _jquery2.default)(result).find('#songs li');
-	                var songs = {
-	                    data: {
-	                        info: []
-	                    }
-	                };
-	                _jquery2.default.each($li, function (i, item) {
-	                    var music = {
-	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
-	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
-	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
-	                        album_name: '',
-	                        duration: ''
-	                    };
-	                    songs.data.info.push(music);
-	                });
-	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	            }).fail(function () {
-	                new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
-	            });
-	        }
+
+	        // loadKuGouFengLei(e) {
+	        //     this.addSelectedClass(e);
+	        //     let url = $(e.target).attr('data');
+	        //     $.get(url, (result) => {
+	        //         let $li = $(result).find('#songs li');
+	        //         let songs = {
+	        //             data: {
+	        //                 info: []
+	        //             }
+	        //         };
+	        //         $.each($li, (i, item) => {
+	        //             let music = {
+	        //                 songname: $(item).find('.text').text().split(' - ')[1],
+	        //                 singername: $(item).find('.text').text().split(' - ')[0],
+	        //                 hash: $(item).find('a').attr('data').split('|')[0],
+	        //                 album_name: '',
+	        //                 duration: ''
+	        //             };
+	        //             songs.data.info.push(music);
+	        //         });
+	        //         $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	        //     }).fail(function () {
+	        //         new Message('warning', '歌曲加载失败，请重新点击。');
+	        //     });
+	        // }
+
 	    }, {
 	        key: 'openBigWindow',
 	        value: function openBigWindow() {
@@ -33186,17 +33199,29 @@
 	            });
 	        }
 	    }, {
+	        key: 'openDashboard',
+	        value: function openDashboard(e) {
+	            this.addSelectedClass(e);
+	            _jquery2.default.publish('showDashboard');
+	            _jquery2.default.publish('closeArticleDashboard');
+	            _jquery2.default.publish('closeArticleDList');
+	        }
+	    }, {
+	        key: 'openArticleDashboard',
+	        value: function openArticleDashboard(e) {
+	            this.addSelectedClass(e);
+	            _jquery2.default.publish('closeDashboard');
+	            _jquery2.default.publish('showArticleDashboard');
+	            _jquery2.default.publish('closeArticleDList');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this7 = this;
-
-	            var folderList = this.state.folderList.map(function (folder, i) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: i, title: folder.title, className: 'paiHangBang', onClick: _this7.loadKuGouFengLei.bind(_this7), data: folder.url },
-	                    _this7.parseString(folder.title)
-	                );
-	            });
+	            // let folderList = this.state.folderList.map((folder, i) => {
+	            //     return (
+	            //         <div key={i} title={folder.title} className="paiHangBang" onClick={this.loadKuGouFengLei.bind(this)} data={folder.url}>{this.parseString(folder.title)}</div>
+	            //     )
+	            // });
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'musicFolder' },
@@ -33208,7 +33233,16 @@
 	                        { className: 'intro' },
 	                        '\u63A8\u8350'
 	                    ),
-	                    folderList,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang selected', onClick: this.openDashboard.bind(this) },
+	                        '\u53D1\u73B0\u97F3\u4E50'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'paiHangBang', onClick: this.openArticleDashboard.bind(this) },
+	                        '\u53D1\u73B0\u5C0F\u8BF4'
+	                    ),
 	                    _react2.default.createElement(
 	                        'p',
 	                        { className: 'intro' },
@@ -33447,6 +33481,7 @@
 	                    'div',
 	                    { className: 'detailContent' },
 	                    _react2.default.createElement('img', { className: 'musicImg', src: this.state.image }),
+	                    _react2.default.createElement('img', { className: 'musicBar', src: './static/images/bar.png' }),
 	                    _react2.default.createElement(
 	                        'p',
 	                        { className: 'detailName' },
@@ -33519,7 +33554,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 2;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
+	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 2;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n}\r\n\r\n.detailContent .musicBar{\r\n    position: absolute;\r\n    top: 33px;\r\n    left: 224px;\r\n    width: 17%;\r\n    transform: rotate(55deg);\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
 
 	// exports
 
@@ -33613,6 +33648,15 @@
 
 	            _jquery2.default.subscribe('localPathChanged', function (o, args) {
 	                _this2.setState({ path: args.path });
+	            });
+
+	            _jquery2.default.subscribe('playThisArticle', function (o, args) {
+	                _this2.setState({ url: args.url });
+	                _this2.setCurrentMuisc();
+	            });
+
+	            _jquery2.default.subscribe('thisArticleDetail', function (o, args) {
+	                _this2.setState({ url: args.one.title });
 	            });
 	        }
 	    }, {
@@ -33880,6 +33924,10 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _lrhMessage = __webpack_require__(185);
+
+	var _lrhMessage2 = _interopRequireDefault(_lrhMessage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33897,7 +33945,7 @@
 	        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this));
 
 	        _this.state = {
-	            height: '100%'
+	            folderList: []
 	        };
 	        return _this;
 	    }
@@ -33908,26 +33956,108 @@
 	            _jquery2.default.subscribe('closeDashboard', function () {
 	                (0, _jquery2.default)('.dashboard').hide();
 	            });
+
+	            _jquery2.default.subscribe('showDashboard', function () {
+	                (0, _jquery2.default)('.dashboard').show();
+	            });
+
+	            this.loadTuiJianFolder();
+	        }
+	    }, {
+	        key: 'loadTuiJianFolder',
+	        value: function loadTuiJianFolder() {
+	            var _this2 = this;
+
+	            var url = 'http://www.kugou.com/yy/special/index/1-0-1.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#ulAlbums li');
+	                var list = [];
+	                _jquery2.default.each($li, function (i, item) {
+	                    var folder = {
+	                        title: (0, _jquery2.default)(item).find('a').attr('title'),
+	                        url: (0, _jquery2.default)(item).find('a').attr('href'),
+	                        image: (0, _jquery2.default)(item).find('img').attr('_src')
+	                    };
+	                    list.push(folder);
+	                });
+	                if (list.length > 10) {
+	                    list.length = 10;
+	                }
+	                _this2.setState({ folderList: list });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '载入歌曲分类失败。');
+	            });
+	        }
+	    }, {
+	        key: 'loadMusicList',
+	        value: function loadMusicList(e) {
+	            var url = (0, _jquery2.default)(e.target).parent().attr('data');
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#songs li');
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
+	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
+	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
+	                        album_name: '',
+	                        duration: ''
+	                    };
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	                _jquery2.default.publish('closeDashboard');
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
+	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
+	            var folderList = this.state.folderList.map(function (folder, i) {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { className: 'oneFolder', key: i, data: folder.url, onClick: _this3.loadMusicList.bind(_this3) },
+	                    _react2.default.createElement('img', { src: folder.image }),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        folder.title
+	                    )
+	                );
+	            });
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'dashboard' },
 	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    '\u6B22\u8FCE\u4F7F\u7528\u7231\u542C\u64AD\u653E\u5668',
-	                    _react2.default.createElement('br', null),
-	                    '\u73B0\u5728\u4F60\u53EF\u4EE5\u901A\u8FC7\u5DE6\u8FB9\u7684\u6B4C\u66F2\u5206\u7EC4\u9009\u62E9\u97F3\u4E50\u64AD\u653E',
-	                    _react2.default.createElement('br', null),
-	                    '\u6216\u8005\u5728\u5934\u90E8\u4F7F\u7528\u641C\u7D22\u6846\u641C\u7D22\u6B4C\u66F2'
+	                    'ul',
+	                    { className: 'musicNavbar' },
+	                    _react2.default.createElement(
+	                        'li',
+	                        { className: 'selectedNavbar', onClick: this.loadTuiJianFolder.bind(this) },
+	                        '\u4E2A\u6027\u63A8\u8350'
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        '\u70ED\u95E8\u6B4C\u624B'
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        '\u65B0\u6B4C'
+	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'p',
+	                    'ul',
 	                    null,
-	                    '\u4E3B\u9875\u529F\u80FD\u5F00\u53D1\u4E2D\u3002\u3002\u3002'
+	                    folderList
 	                )
 	            );
 	        }
@@ -33973,7 +34103,7 @@
 
 
 	// module
-	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n}", ""]);
+	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 154px;\r\n    height: 212px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.oneFolder img:hover{\r\n    border: 1px solid #e6245a;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 33px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n    ", ""]);
 
 	// exports
 
@@ -33982,10 +34112,176 @@
 /* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(205);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _lrhMessage = __webpack_require__(185);
+
+	var _lrhMessage2 = _interopRequireDefault(_lrhMessage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Dashboard = function (_Component) {
+	    _inherits(Dashboard, _Component);
+
+	    function Dashboard() {
+	        _classCallCheck(this, Dashboard);
+
+	        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this));
+
+	        _this.state = {
+	            bookList: []
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Dashboard, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            _jquery2.default.subscribe('closeArticleDashboard', function () {
+	                (0, _jquery2.default)('.articleDashboard').hide();
+	            });
+
+	            _jquery2.default.subscribe('showArticleDashboard', function () {
+	                (0, _jquery2.default)('.articleDashboard').show();
+	            });
+	        }
+	    }, {
+	        key: 'openThisArticleList',
+	        value: function openThisArticleList(e) {
+	            var id = (0, _jquery2.default)(e.target).parent().attr('data');
+	            var url = 'http://www.kting.cn/book/getBookArticleList';
+	            var name = (0, _jquery2.default)(e.target).attr('data');
+	            _jquery2.default.ajax({
+	                url: url,
+	                method: 'POST',
+	                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+	                data: 'id=' + id + '&page=1&pageSize=10',
+	                success: function success(result) {
+	                    var obj = {
+	                        list: result.bookArticleList,
+	                        name: name
+	                    };
+	                    _jquery2.default.publish('showThisArticleList', { obj: obj });
+	                    _jquery2.default.publish('closeArticleDashboard');
+	                    _jquery2.default.publish('showArticleList');
+	                },
+	                error: function error(err) {
+	                    new _lrhMessage2.default('warning', '显示章节失败，请重新选择。');
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'searchArticle',
+	        value: function searchArticle(e) {
+	            var _this2 = this;
+
+	            if (e.keyCode === 13) {
+	                var input = (0, _jquery2.default)('.articleSearch').val();
+	                var url = 'http://www.kting.cn/book/searchBook';
+	                _jquery2.default.ajax({
+	                    url: url,
+	                    method: 'POST',
+	                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+	                    data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=30&page=1',
+	                    success: function success(result) {
+	                        _this2.setState({ bookList: result.bookSearchList });
+	                    },
+	                    error: function error(err) {
+	                        new _lrhMessage2.default('warning', '搜索小说失败，请重试。');
+	                    }
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            var articleList = this.state.bookList.map(function (article, i) {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { key: i, data: article.id },
+	                    _react2.default.createElement('img', { src: article.image, data: article.name, onClick: _this3.openThisArticleList.bind(_this3) }),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        article.name,
+	                        ' \u4F5C\u8005: ',
+	                        article.anchor
+	                    )
+	                );
+	            });
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'articleDashboard' },
+	                _react2.default.createElement('input', { className: 'articleSearch', placeholder: '\u641C\u7D22\u5C0F\u8BF4, \u76F8\u58F0', onKeyUp: this.searchArticle.bind(this) }),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'articlecNavbar' },
+	                    _react2.default.createElement(
+	                        'li',
+	                        { className: 'selectedNavbar' },
+	                        '\u4E3B\u7F16\u63A8\u8350'
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        '\u6709\u58F0\u9996\u53D1'
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        '\u7EFC\u827A'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'articleList' },
+	                    articleList
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Dashboard;
+	}(_react.Component);
+
+	exports.default = Dashboard;
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(205);
+	var content = __webpack_require__(206);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -34005,7 +34301,214 @@
 	}
 
 /***/ },
-/* 205 */
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    border: 1px solid #e6245a;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 39px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 232px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleDashboard .articleList li img:hover{\r\n    border: 1px solid #e6245a;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(208);
+
+	var _jquery = __webpack_require__(184);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _lrhMessage = __webpack_require__(185);
+
+	var _lrhMessage2 = _interopRequireDefault(_lrhMessage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ArticleList = function (_Component) {
+	    _inherits(ArticleList, _Component);
+
+	    function ArticleList() {
+	        _classCallCheck(this, ArticleList);
+
+	        var _this = _possibleConstructorReturn(this, (ArticleList.__proto__ || Object.getPrototypeOf(ArticleList)).call(this));
+
+	        _this.state = {
+	            list: [],
+	            article: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(ArticleList, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            _jquery2.default.subscribe('showThisArticleList', function (o, args) {
+	                _this2.setState({ list: args.obj.list });
+	                _this2.setState({ article: args.obj.name });
+	            });
+
+	            _jquery2.default.subscribe('closeArticleDList', function () {
+	                (0, _jquery2.default)('.thisArticleList').hide();
+	            });
+
+	            _jquery2.default.subscribe('showArticleList', function () {
+	                (0, _jquery2.default)('.thisArticleList').show();
+	            });
+	        }
+	    }, {
+	        key: 'playOneArticle',
+	        value: function playOneArticle(e) {
+	            var url = (0, _jquery2.default)(e.target).parent().attr('id');
+	            var data = (0, _jquery2.default)(e.target).parent().attr('data');
+	            (0, _jquery2.default)('.oneArticle').removeClass('selectedOne');
+	            (0, _jquery2.default)(e.target).parent().addClass('selectedOne');
+	            _jquery2.default.publish('thisArticleDetail', { one: JSON.parse(data) });
+	            _jquery2.default.publish('playThisArticle', { url: url });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            var list = this.state.list.map(function (one, i) {
+	                var data = {
+	                    title: one.section_title,
+	                    updateTime: one.updateTime
+	                };
+	                return _react2.default.createElement(
+	                    'li',
+	                    { className: 'oneArticle', key: i, id: one.audio, data: JSON.stringify(data) },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { style: { width: '30%', paddingLeft: '20px', fontSize: '14px' } },
+	                        _this3.state.article,
+	                        ': ',
+	                        one.section_title
+	                    ),
+	                    '\u66F4\u65B0\u65F6\u95F4: ',
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        one.updateTime
+	                    ),
+	                    _react2.default.createElement('i', { className: 'fa fa-heart', 'aria-hidden': 'true', onClick: _this3.playOneArticle.bind(_this3) })
+	                );
+	            });
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'thisArticleList' },
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    list
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ArticleList;
+	}(_react.Component);
+
+	exports.default = ArticleList;
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(209);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".thisArticleList{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.thisArticleList li{\r\n    display: flex;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    cursor: pointer;\r\n}\r\n\r\n.thisArticleList .selectedOne{\r\n    background: #efe8e8;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(211);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -34019,7 +34522,7 @@
 
 
 /***/ },
-/* 206 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

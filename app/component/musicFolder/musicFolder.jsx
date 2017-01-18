@@ -85,31 +85,31 @@ export default class MusicFolder extends Component {
         })
     }
 
-    loadKuGouFengLei(e) {
-        this.addSelectedClass(e);
-        let url = $(e.target).attr('data');
-        $.get(url, (result) => {
-            let $li = $(result).find('#songs li');
-            let songs = {
-                data: {
-                    info: []
-                }
-            };
-            $.each($li, (i, item) => {
-                let music = {
-                    songname: $(item).find('.text').text().split(' - ')[1],
-                    singername: $(item).find('.text').text().split(' - ')[0],
-                    hash: $(item).find('a').attr('data').split('|')[0],
-                    album_name: '',
-                    duration: ''
-                };
-                songs.data.info.push(music);
-            });
-            $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-        }).fail(function () {
-            new Message('warning', '歌曲加载失败，请重新点击。');
-        });
-    }
+    // loadKuGouFengLei(e) {
+    //     this.addSelectedClass(e);
+    //     let url = $(e.target).attr('data');
+    //     $.get(url, (result) => {
+    //         let $li = $(result).find('#songs li');
+    //         let songs = {
+    //             data: {
+    //                 info: []
+    //             }
+    //         };
+    //         $.each($li, (i, item) => {
+    //             let music = {
+    //                 songname: $(item).find('.text').text().split(' - ')[1],
+    //                 singername: $(item).find('.text').text().split(' - ')[0],
+    //                 hash: $(item).find('a').attr('data').split('|')[0],
+    //                 album_name: '',
+    //                 duration: ''
+    //             };
+    //             songs.data.info.push(music);
+    //         });
+    //         $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+    //     }).fail(function () {
+    //         new Message('warning', '歌曲加载失败，请重新点击。');
+    //     });
+    // }
 
     openBigWindow() {
         $.publish('openBigWindow');
@@ -199,17 +199,32 @@ export default class MusicFolder extends Component {
         });
     }
 
+    openDashboard(e) {
+        this.addSelectedClass(e);
+        $.publish('showDashboard');
+        $.publish('closeArticleDashboard');
+        $.publish('closeArticleDList');
+    }
+
+    openArticleDashboard(e) {
+        this.addSelectedClass(e);
+        $.publish('closeDashboard');
+        $.publish('showArticleDashboard');
+        $.publish('closeArticleDList');
+    }
+
     render() {
-        let folderList = this.state.folderList.map((folder, i) => {
-            return (
-                <div key={i} title={folder.title} className="paiHangBang" onClick={this.loadKuGouFengLei.bind(this)} data={folder.url}>{this.parseString(folder.title)}</div>
-            )
-        });
+        // let folderList = this.state.folderList.map((folder, i) => {
+        //     return (
+        //         <div key={i} title={folder.title} className="paiHangBang" onClick={this.loadKuGouFengLei.bind(this)} data={folder.url}>{this.parseString(folder.title)}</div>
+        //     )
+        // });
         return (
             <div className="musicFolder">
                 <div className="folderList" ref="folderList">
                     <p className="intro">推荐</p>
-                    {folderList}
+                    <div className="paiHangBang selected" onClick={this.openDashboard.bind(this)}>发现音乐</div>
+                    <div className="paiHangBang" onClick={this.openArticleDashboard.bind(this)}>发现小说</div>
                     <p className="intro">我的音乐</p>
                     <div className="paiHangBang" onClick={this.openLocalMusic.bind(this)}><i className="fa fa-folder-open" aria-hidden="true"></i>本地歌曲</div>
                     <div className="paiHangBang" onClick={this.openLoveMusic.bind(this)}><i className="fa fa-heart" aria-hidden="true"></i>我喜欢的音乐</div>

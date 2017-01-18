@@ -40,6 +40,14 @@ export default class MusicList extends Component {
             $(`.listItem li:eq(${number})`).addClass('selected');
             this.changeOneMusic(hash);
         });
+
+        $.subscribe('showMusicList', () => {
+            $('.musicList').show();
+        });
+
+        $.subscribe('closeMusicList', () => {
+            $('.musicList').hide();
+        });
     }
 
     changeOneMusic(hash) {

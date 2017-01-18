@@ -41,7 +41,14 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     border: 40px solid #3a3838;
+}
 
+.detailContent .musicBar{
+    position: absolute;
+    top: 33px;
+    left: 224px;
+    width: 17%;
+    transform: rotate(55deg);
 }
 
 @keyframes imageRotate{
