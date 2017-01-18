@@ -21,6 +21,23 @@ export default class Dashboard extends Component {
         $.subscribe('showArticleDashboard', () => {
             $('.articleDashboard').show();
         });
+
+        this.loadTuiJian();
+    }
+
+    loadTuiJian() {
+        let url = 'http://www.kting.cn/recommend/getRecommendIndex';
+        $.ajax({
+            url: url,
+            method: 'POST',
+            success: (result) => {
+                let list = result.categoryList[0].contentList;
+                this.setState({ bookList: list });
+            },
+            error: (err) => {
+                new Message('warning', '载入小说列表失败。');
+            }
+        })
     }
 
     openThisArticleList(e) {
@@ -31,15 +48,28 @@ export default class Dashboard extends Component {
             url: url,
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-            data: 'id=' + id + '&page=1&pageSize=10',
+            data: 'id=' + id + '&page=1&pageSize=30',
             success: (result) => {
-                let obj = {
-                    list: result.bookArticleList,
-                    name: name
+                let list = result.bookArticleList;
+                let songs = {
+                    data: {
+                        info: []
+                    }
                 };
-                $.publish('showThisArticleList', {obj: obj});
+                $.each(list, (i, article) => {
+                    let music = {
+                        songname: article.section_title,
+                        singername: '',
+                        hash: 'article' + i,
+                        album_name: '',
+                        duration: '',
+                        data: article.audio
+                    };
+                    songs.data.info.push(music);
+                });
+                $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
                 $.publish('closeArticleDashboard');
-                $.publish('showArticleList');
+                $.publish('changeSongName', { songName: name });
             },
             error: (err) => {
                 new Message('warning', '显示章节失败，请重新选择。');
@@ -55,7 +85,7 @@ export default class Dashboard extends Component {
                 url: url,
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-                data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=30&page=1',
+                data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=10&page=1',
                 success: (result) => {
                     this.setState({ bookList: result.bookSearchList });
                 },

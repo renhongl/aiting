@@ -35,30 +35,31 @@ export default class Footer extends Component {
     componentDidMount() {
         $.subscribe('selectedOneMusic', (o, args) => {
             this.setState({ hash: args.hash });
-            this.getCurrentMusic(args.hash);
+            if(args.hash.indexOf('local') !== -1 || args.hash.indexOf('article') !== -1){
+                setTimeout(() => {
+                    this.setCurrentMuisc();
+                }, 1000);
+            }else{
+                this.getCurrentMusic(args.hash);
+            }
         });
 
         $(document).on('mouseup', () => {
-            this.setState({setVolume: false});
+            this.setState({ setVolume: false });
         });
 
         $.subscribe('localPathChanged', (o, args) => {
-            this.setState({path: args.path});
+            this.setState({ path: args.path });
         });
 
-        $.subscribe('playThisArticle', (o, args) => {
-            this.setState({url: args.url});
-            this.setCurrentMuisc();
-        });
-
-        $.subscribe('thisArticleDetail', (o, args) => {
-            this.setState({url: args.one.title});
+        $.subscribe('changeSongName', (o, args) => {
+            this.setState({songName: args.songName});
         });
     }
 
     getCurrentMusic(hash) {
-        clearInterval(this.timeThread);
-        this.setState({ finishTime: 0 });
+        // clearInterval(this.timeThread);
+        // this.setState({ finishTime: 0 });
         let url = `http://www.kugou.com/yy/index.php?r=play/getdata&hash=${hash}`;
         $.ajax({
             url: url,
@@ -76,11 +77,17 @@ export default class Footer extends Component {
     }
 
     setCurrentMuisc() {
+        clearInterval(this.timeThread);
+        this.setState({ finishTime: 0 });
         this.appAudio = this.refs.appAudio;
-        if(this.state.hash.indexOf('local') !== -1){
+        if (this.state.hash.indexOf('local') !== -1) {
             this.appAudio.src = $('#' + this.state.hash).attr('data');
             this.state.songName = $('#' + this.state.hash).attr('data').split(' - ')[0].split('/')[1];
-        }else{
+        } else if(this.state.hash.indexOf('article') !== -1){
+            this.appAudio.src = $('#' + this.state.hash).attr('data');
+            //this.state.songName = '';
+        }
+        else{
             this.appAudio.src = this.state.url;
         }
         this.appAudio.volume = this.state.volume;
@@ -144,43 +151,43 @@ export default class Footer extends Component {
     }
 
     changeLoop(e) {
-        if($(e.target).hasClass('fa-repeat')){
+        if ($(e.target).hasClass('fa-repeat')) {
             $(e.target).addClass('fa-random').removeClass('fa-repeat');
-            this.setState({loop: false});
-        }else{
+            this.setState({ loop: false });
+        } else {
             $(e.target).removeClass('fa-random').addClass('fa-repeat');
-            this.setState({loop: true});
+            this.setState({ loop: true });
         }
     }
 
     volumeMouseDown(e) {
-        this.setState({setVolume: true});
-        this.setState({initX: e.clientX});
+        this.setState({ setVolume: true });
+        this.setState({ initX: e.clientX });
     }
 
     volumeMouseUp() {
-        this.setState({setVolume: false});
+        this.setState({ setVolume: false });
     }
 
     changeVolume(e) {
-        if(this.state.setVolume){
+        if (this.state.setVolume) {
             let offSetX = this.state.initX - e.clientX;
-            this.setState({initX: e.clientX});
+            this.setState({ initX: e.clientX });
             let newVolume = this.state.volume - offSetX / 100;
-            if(newVolume < 0){
+            if (newVolume < 0) {
                 newVolume = 0;
             }
-            if(newVolume > 1){
+            if (newVolume > 1) {
                 newVolume = 1;
             }
-            this.setState({volume: newVolume});
+            this.setState({ volume: newVolume });
             this.refs.appAudio.volume = newVolume;
         }
     }
 
     render() {
         let offset = 0;
-        if(this.state.totalTime !== 0){
+        if (this.state.totalTime !== 0) {
             offset = this.state.finishTime / this.state.totalTime;
         }
         let progressStyle = {

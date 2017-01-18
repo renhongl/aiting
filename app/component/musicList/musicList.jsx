@@ -139,7 +139,7 @@ export default class MusicList extends Component {
             let love;
             if(music.loved){
                 love = (<i title="从喜欢列表中删除" className="fa fa fa-trash addToLove" aria-hidden="true" onClick={this.removeFromLove.bind(this)}></i>);
-            }else if(music.hash.indexOf('local') !== -1){
+            }else if(music.hash.indexOf('local') !== -1 || music.hash.indexOf('article') !== -1){
                 love = (<i className="fa fa-heart addToLove loved" aria-hidden="true" onClick={this.addToLove.bind(this)}></i>);
             }else{
                 love = (<i title="添加到喜欢列表" className="fa fa-heart addToLove" aria-hidden="true" onClick={this.addToLove.bind(this)}></i>)

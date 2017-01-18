@@ -58,7 +58,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Observer = __webpack_require__(212);
+	var _Observer = __webpack_require__(209);
 
 	var _Observer2 = _interopRequireDefault(_Observer);
 
@@ -21533,11 +21533,7 @@
 
 	var _articleDashboard2 = _interopRequireDefault(_articleDashboard);
 
-	var _articleList = __webpack_require__(207);
-
-	var _articleList2 = _interopRequireDefault(_articleList);
-
-	__webpack_require__(210);
+	__webpack_require__(207);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21568,7 +21564,6 @@
 	                _react2.default.createElement(_header2.default, null),
 	                _react2.default.createElement(_dashboard2.default, null),
 	                _react2.default.createElement(_articleDashboard2.default, null),
-	                _react2.default.createElement(_articleList2.default, null),
 	                _react2.default.createElement(_content2.default, null),
 	                _react2.default.createElement(_footer2.default, null)
 	            );
@@ -21657,6 +21652,7 @@
 	                        _jquery2.default.publish('showMusicByThisList', { result: result });
 	                        _jquery2.default.publish('listBySearch');
 	                        _jquery2.default.publish('closeDashboard');
+	                        _jquery2.default.publish('closeArticleDashboard');
 	                    },
 	                    error: function error(_error) {
 	                        new _lrhMessage2.default('warning', '搜索歌曲失败，请重新搜索。');
@@ -32821,7 +32817,7 @@
 	                var love = void 0;
 	                if (music.loved) {
 	                    love = _react2.default.createElement('i', { title: '\u4ECE\u559C\u6B22\u5217\u8868\u4E2D\u5220\u9664', className: 'fa fa fa-trash addToLove', 'aria-hidden': 'true', onClick: _this4.removeFromLove.bind(_this4) });
-	                } else if (music.hash.indexOf('local') !== -1) {
+	                } else if (music.hash.indexOf('local') !== -1 || music.hash.indexOf('article') !== -1) {
 	                    love = _react2.default.createElement('i', { className: 'fa fa-heart addToLove loved', 'aria-hidden': 'true', onClick: _this4.addToLove.bind(_this4) });
 	                } else {
 	                    love = _react2.default.createElement('i', { title: '\u6DFB\u52A0\u5230\u559C\u6B22\u5217\u8868', className: 'fa fa-heart addToLove', 'aria-hidden': 'true', onClick: _this4.addToLove.bind(_this4) });
@@ -33056,6 +33052,11 @@
 	                this.setState({ songName: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[0].split('/')[1] });
 	                this.setState({ singername: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[1].split('.mp3')[0] });
 	                return;
+	            } else if (hash.indexOf('article') !== -1) {
+	                this.setState({ image: './static/images/panda.jpg' });
+	                this.setState({ songName: '未知' });
+	                this.setState({ singername: '未知' });
+	                return;
 	            }
 	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
 	            _jquery2.default.ajax({
@@ -33072,33 +33073,6 @@
 	                }
 	            });
 	        }
-
-	        // loadKuGouFengLei(e) {
-	        //     this.addSelectedClass(e);
-	        //     let url = $(e.target).attr('data');
-	        //     $.get(url, (result) => {
-	        //         let $li = $(result).find('#songs li');
-	        //         let songs = {
-	        //             data: {
-	        //                 info: []
-	        //             }
-	        //         };
-	        //         $.each($li, (i, item) => {
-	        //             let music = {
-	        //                 songname: $(item).find('.text').text().split(' - ')[1],
-	        //                 singername: $(item).find('.text').text().split(' - ')[0],
-	        //                 hash: $(item).find('a').attr('data').split('|')[0],
-	        //                 album_name: '',
-	        //                 duration: ''
-	        //             };
-	        //             songs.data.info.push(music);
-	        //         });
-	        //         $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	        //     }).fail(function () {
-	        //         new Message('warning', '歌曲加载失败，请重新点击。');
-	        //     });
-	        // }
-
 	    }, {
 	        key: 'openBigWindow',
 	        value: function openBigWindow() {
@@ -33159,6 +33133,8 @@
 	                }
 	            });
 	            _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            _jquery2.default.publish('closeDashboard');
+	            _jquery2.default.publish('closeArticleDashboard');
 	        }
 	    }, {
 	        key: 'parseString',
@@ -33194,6 +33170,8 @@
 	                    songs.data.info.push(music);
 	                }
 	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	                _jquery2.default.publish('closeDashboard');
+	                _jquery2.default.publish('closeArticleDashboard');
 	            }).fail(function () {
 	                new _lrhMessage2.default('warning', '载入喜欢的歌曲失败。');
 	            });
@@ -33204,7 +33182,6 @@
 	            this.addSelectedClass(e);
 	            _jquery2.default.publish('showDashboard');
 	            _jquery2.default.publish('closeArticleDashboard');
-	            _jquery2.default.publish('closeArticleDList');
 	        }
 	    }, {
 	        key: 'openArticleDashboard',
@@ -33212,16 +33189,11 @@
 	            this.addSelectedClass(e);
 	            _jquery2.default.publish('closeDashboard');
 	            _jquery2.default.publish('showArticleDashboard');
-	            _jquery2.default.publish('closeArticleDList');
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            // let folderList = this.state.folderList.map((folder, i) => {
-	            //     return (
-	            //         <div key={i} title={folder.title} className="paiHangBang" onClick={this.loadKuGouFengLei.bind(this)} data={folder.url}>{this.parseString(folder.title)}</div>
-	            //     )
-	            // });
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'musicFolder' },
@@ -33428,6 +33400,13 @@
 	                this.setState({ image: './static/images/panda.jpg' });
 	                this.setState({ songName: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[0].split('/')[1] });
 	                this.setState({ singername: (0, _jquery2.default)('#' + hash).attr('data').split(' - ')[1].split('.mp3')[0] });
+	                this.setState({ lyric: '没有歌词' });
+	                this.setState({ audioName: '未知' });
+	                return;
+	            } else if (hash.indexOf('article') !== -1) {
+	                this.setState({ image: './static/images/panda.jpg' });
+	                this.setState({ songName: '未知' });
+	                this.setState({ singername: '未知' });
 	                this.setState({ lyric: '没有歌词' });
 	                this.setState({ audioName: '未知' });
 	                return;
@@ -33639,7 +33618,13 @@
 
 	            _jquery2.default.subscribe('selectedOneMusic', function (o, args) {
 	                _this2.setState({ hash: args.hash });
-	                _this2.getCurrentMusic(args.hash);
+	                if (args.hash.indexOf('local') !== -1 || args.hash.indexOf('article') !== -1) {
+	                    setTimeout(function () {
+	                        _this2.setCurrentMuisc();
+	                    }, 1000);
+	                } else {
+	                    _this2.getCurrentMusic(args.hash);
+	                }
 	            });
 
 	            (0, _jquery2.default)(document).on('mouseup', function () {
@@ -33650,13 +33635,8 @@
 	                _this2.setState({ path: args.path });
 	            });
 
-	            _jquery2.default.subscribe('playThisArticle', function (o, args) {
-	                _this2.setState({ url: args.url });
-	                _this2.setCurrentMuisc();
-	            });
-
-	            _jquery2.default.subscribe('thisArticleDetail', function (o, args) {
-	                _this2.setState({ url: args.one.title });
+	            _jquery2.default.subscribe('changeSongName', function (o, args) {
+	                _this2.setState({ songName: args.songName });
 	            });
 	        }
 	    }, {
@@ -33664,8 +33644,8 @@
 	        value: function getCurrentMusic(hash) {
 	            var _this3 = this;
 
-	            clearInterval(this.timeThread);
-	            this.setState({ finishTime: 0 });
+	            // clearInterval(this.timeThread);
+	            // this.setState({ finishTime: 0 });
 	            var url = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=' + hash;
 	            _jquery2.default.ajax({
 	                url: url,
@@ -33686,10 +33666,15 @@
 	        value: function setCurrentMuisc() {
 	            var _this4 = this;
 
+	            clearInterval(this.timeThread);
+	            this.setState({ finishTime: 0 });
 	            this.appAudio = this.refs.appAudio;
 	            if (this.state.hash.indexOf('local') !== -1) {
 	                this.appAudio.src = (0, _jquery2.default)('#' + this.state.hash).attr('data');
 	                this.state.songName = (0, _jquery2.default)('#' + this.state.hash).attr('data').split(' - ')[0].split('/')[1];
+	            } else if (this.state.hash.indexOf('article') !== -1) {
+	                this.appAudio.src = (0, _jquery2.default)('#' + this.state.hash).attr('data');
+	                //this.state.songName = '';
 	            } else {
 	                this.appAudio.src = this.state.url;
 	            }
@@ -34103,7 +34088,7 @@
 
 
 	// module
-	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 154px;\r\n    height: 212px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.oneFolder img:hover{\r\n    border: 1px solid #e6245a;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 33px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n    ", ""]);
+	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 154px;\r\n    height: 212px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.oneFolder img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 33px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n    ", ""]);
 
 	// exports
 
@@ -34170,6 +34155,26 @@
 	            _jquery2.default.subscribe('showArticleDashboard', function () {
 	                (0, _jquery2.default)('.articleDashboard').show();
 	            });
+
+	            this.loadTuiJian();
+	        }
+	    }, {
+	        key: 'loadTuiJian',
+	        value: function loadTuiJian() {
+	            var _this2 = this;
+
+	            var url = 'http://www.kting.cn/recommend/getRecommendIndex';
+	            _jquery2.default.ajax({
+	                url: url,
+	                method: 'POST',
+	                success: function success(result) {
+	                    var list = result.categoryList[0].contentList;
+	                    _this2.setState({ bookList: list });
+	                },
+	                error: function error(err) {
+	                    new _lrhMessage2.default('warning', '载入小说列表失败。');
+	                }
+	            });
 	        }
 	    }, {
 	        key: 'openThisArticleList',
@@ -34181,15 +34186,28 @@
 	                url: url,
 	                method: 'POST',
 	                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-	                data: 'id=' + id + '&page=1&pageSize=10',
+	                data: 'id=' + id + '&page=1&pageSize=30',
 	                success: function success(result) {
-	                    var obj = {
-	                        list: result.bookArticleList,
-	                        name: name
+	                    var list = result.bookArticleList;
+	                    var songs = {
+	                        data: {
+	                            info: []
+	                        }
 	                    };
-	                    _jquery2.default.publish('showThisArticleList', { obj: obj });
+	                    _jquery2.default.each(list, function (i, article) {
+	                        var music = {
+	                            songname: article.section_title,
+	                            singername: '',
+	                            hash: 'article' + i,
+	                            album_name: '',
+	                            duration: '',
+	                            data: article.audio
+	                        };
+	                        songs.data.info.push(music);
+	                    });
+	                    _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
 	                    _jquery2.default.publish('closeArticleDashboard');
-	                    _jquery2.default.publish('showArticleList');
+	                    _jquery2.default.publish('changeSongName', { songName: name });
 	                },
 	                error: function error(err) {
 	                    new _lrhMessage2.default('warning', '显示章节失败，请重新选择。');
@@ -34199,7 +34217,7 @@
 	    }, {
 	        key: 'searchArticle',
 	        value: function searchArticle(e) {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            if (e.keyCode === 13) {
 	                var input = (0, _jquery2.default)('.articleSearch').val();
@@ -34208,9 +34226,9 @@
 	                    url: url,
 	                    method: 'POST',
 	                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-	                    data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=30&page=1',
+	                    data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=10&page=1',
 	                    success: function success(result) {
-	                        _this2.setState({ bookList: result.bookSearchList });
+	                        _this3.setState({ bookList: result.bookSearchList });
 	                    },
 	                    error: function error(err) {
 	                        new _lrhMessage2.default('warning', '搜索小说失败，请重试。');
@@ -34221,13 +34239,13 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this3 = this;
+	            var _this4 = this;
 
 	            var articleList = this.state.bookList.map(function (article, i) {
 	                return _react2.default.createElement(
 	                    'li',
 	                    { key: i, data: article.id },
-	                    _react2.default.createElement('img', { src: article.image, data: article.name, onClick: _this3.openThisArticleList.bind(_this3) }),
+	                    _react2.default.createElement('img', { src: article.image, data: article.name, onClick: _this4.openThisArticleList.bind(_this4) }),
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
@@ -34309,7 +34327,7 @@
 
 
 	// module
-	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    border: 1px solid #e6245a;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 39px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 232px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleDashboard .articleList li img:hover{\r\n    border: 1px solid #e6245a;\r\n}", ""]);
+	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 39px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 232px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
 
 	// exports
 
@@ -34318,197 +34336,30 @@
 /* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	__webpack_require__(208);
-
-	var _jquery = __webpack_require__(184);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _lrhMessage = __webpack_require__(185);
-
-	var _lrhMessage2 = _interopRequireDefault(_lrhMessage);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ArticleList = function (_Component) {
-	    _inherits(ArticleList, _Component);
-
-	    function ArticleList() {
-	        _classCallCheck(this, ArticleList);
-
-	        var _this = _possibleConstructorReturn(this, (ArticleList.__proto__ || Object.getPrototypeOf(ArticleList)).call(this));
-
-	        _this.state = {
-	            list: [],
-	            article: ''
-	        };
-	        return _this;
-	    }
-
-	    _createClass(ArticleList, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this2 = this;
-
-	            _jquery2.default.subscribe('showThisArticleList', function (o, args) {
-	                _this2.setState({ list: args.obj.list });
-	                _this2.setState({ article: args.obj.name });
-	            });
-
-	            _jquery2.default.subscribe('closeArticleDList', function () {
-	                (0, _jquery2.default)('.thisArticleList').hide();
-	            });
-
-	            _jquery2.default.subscribe('showArticleList', function () {
-	                (0, _jquery2.default)('.thisArticleList').show();
-	            });
-	        }
-	    }, {
-	        key: 'playOneArticle',
-	        value: function playOneArticle(e) {
-	            var url = (0, _jquery2.default)(e.target).parent().attr('id');
-	            var data = (0, _jquery2.default)(e.target).parent().attr('data');
-	            (0, _jquery2.default)('.oneArticle').removeClass('selectedOne');
-	            (0, _jquery2.default)(e.target).parent().addClass('selectedOne');
-	            _jquery2.default.publish('thisArticleDetail', { one: JSON.parse(data) });
-	            _jquery2.default.publish('playThisArticle', { url: url });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this3 = this;
-
-	            var list = this.state.list.map(function (one, i) {
-	                var data = {
-	                    title: one.section_title,
-	                    updateTime: one.updateTime
-	                };
-	                return _react2.default.createElement(
-	                    'li',
-	                    { className: 'oneArticle', key: i, id: one.audio, data: JSON.stringify(data) },
-	                    _react2.default.createElement(
-	                        'span',
-	                        { style: { width: '30%', paddingLeft: '20px', fontSize: '14px' } },
-	                        _this3.state.article,
-	                        ': ',
-	                        one.section_title
-	                    ),
-	                    '\u66F4\u65B0\u65F6\u95F4: ',
-	                    _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        one.updateTime
-	                    ),
-	                    _react2.default.createElement('i', { className: 'fa fa-heart', 'aria-hidden': 'true', onClick: _this3.playOneArticle.bind(_this3) })
-	                );
-	            });
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'thisArticleList' },
-	                _react2.default.createElement(
-	                    'ul',
-	                    null,
-	                    list
-	                )
-	            );
-	        }
-	    }]);
-
-	    return ArticleList;
-	}(_react.Component);
-
-	exports.default = ArticleList;
+	// load the styles
+	var content = __webpack_require__(208);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
 /* 208 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(209);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(183)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(182)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".thisArticleList{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.thisArticleList li{\r\n    display: flex;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    cursor: pointer;\r\n}\r\n\r\n.thisArticleList .selectedOne{\r\n    background: #efe8e8;\r\n}", ""]);
-
-	// exports
-
-
-/***/ },
-/* 210 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(211);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(183)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -34522,7 +34373,7 @@
 
 
 /***/ },
-/* 212 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

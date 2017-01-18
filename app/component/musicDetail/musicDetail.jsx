@@ -58,6 +58,13 @@ export default class MusicDetail extends Component {
             this.setState({ lyric: '没有歌词' });
             this.setState({ audioName: '未知' });
             return;
+        }else if(hash.indexOf('article') !== -1){
+            this.setState({ image: './static/images/panda.jpg' });
+            this.setState({ songName: '未知'});
+            this.setState({ singername: '未知' });
+            this.setState({ lyric: '没有歌词' });
+            this.setState({ audioName: '未知' });
+            return;
         }
         let url = `http://www.kugou.com/yy/index.php?r=play/getdata&hash=${hash}`;
         $.ajax({

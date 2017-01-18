@@ -11,7 +11,12 @@
 }
 
 .articleList img:hover{
-    border: 1px solid #e6245a;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.articleList img{
+    width: 150px;
 }
 
 .articlecNavbar{
@@ -28,7 +33,6 @@
     text-align: center;
     margin-left: 80px;
     list-style-type: none;
-    cursor: pointer;
 }
 
 .articlecNavbar .selectedNavbar{
@@ -56,6 +60,3 @@
     cursor: pointer;
 }
 
-.articleDashboard .articleList li img:hover{
-    border: 1px solid #e6245a;
-}

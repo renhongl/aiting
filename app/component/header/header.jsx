@@ -33,6 +33,7 @@ export default class Header extends Component {
                     $.publish('showMusicByThisList', {result: result});
                     $.publish('listBySearch');
                     $.publish('closeDashboard');
+                    $.publish('closeArticleDashboard');
                 },
                 error: (error) => {
                     new Message('warning', '搜索歌曲失败，请重新搜索。');
