@@ -6,7 +6,7 @@
 增加首页导航页面
 增加小说搜索功能
 
-小说API：
+酷听API：
 
 搜书： http://www.kting.cn/book/searchBook
 Method: POST //application/x-www-form-urlencoded;
@@ -32,6 +32,15 @@ Folder List:
 	导航： 主编推荐，有声首发，出版，综艺，以及搜索框。
 	List: 就是上面导航的搜索结果
 	
+	
+	
+懒人听书api:
+
+搜索: http://www.lrts.me/search/book/鬼吹灯
+最后一位为搜索名字
+
+播放列表: http://www.lrts.me/ajax/playlist/2/2065/1
+最后一位为页数
 
 
 

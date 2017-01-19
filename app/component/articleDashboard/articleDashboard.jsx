@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
             $('.articleDashboard').show();
         });
 
-        this.loadTuiJian();
+        //this.loadTuiJian();
     }
 
     loadTuiJian() {
@@ -77,6 +77,27 @@ export default class Dashboard extends Component {
         })
     }
 
+    searchArticle2(e) {
+        if (e.keyCode === 13) {
+            let input = $('.articleSearch').val();
+            let url = 'http://www.lrts.me/search/book/' + input;
+            $.get(url, (result) => {
+                let $li = $(result).find('.book-item');
+                let bookList = [];
+                $.each($li, (i, item) => {
+                    let book = {
+                        id: $(item).find('.btn-collection').attr('entityId'),
+                        image: $(item).find('img').attr('src'),
+                        name: $(item).find('.book-item-name').text(),
+                        anchor: $(item).find('.author').text()
+                    }
+                });
+            }).fail(() => {
+                new Message('warning', '搜索小说失败，请重试。');
+            });
+        }
+    }
+
     searchArticle(e) {
         if (e.keyCode === 13) {
             let input = $('.articleSearch').val();
@@ -107,7 +128,7 @@ export default class Dashboard extends Component {
         })
         return (
             <div className="articleDashboard">
-                <input className="articleSearch" placeholder="搜索小说, 相声" onKeyUp={this.searchArticle.bind(this)} />
+                <input className="articleSearch" placeholder="搜索小说, 相声" onKeyUp={this.searchArticle2.bind(this)} />
                 <ul className="articlecNavbar">
                     <li className="selectedNavbar">主编推荐</li>
                     <li>有声首发</li>
