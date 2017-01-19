@@ -9,7 +9,8 @@ export default class Dashboard extends Component {
     constructor() {
         super();
         this.state = {
-            bookList: []
+            bookList: [],
+            id: ''
         }
     }
 
@@ -22,62 +23,76 @@ export default class Dashboard extends Component {
             $('.articleDashboard').show();
         });
 
-        //this.loadTuiJian();
+        $.subscribe('goToThisPage', (o, args) => {
+            this.goToPage(JSON.parse(args.data));
+        });
     }
 
-    loadTuiJian() {
-        let url = 'http://www.kting.cn/recommend/getRecommendIndex';
-        $.ajax({
-            url: url,
-            method: 'POST',
-            success: (result) => {
-                let list = result.categoryList[0].contentList;
-                this.setState({ bookList: list });
-            },
-            error: (err) => {
-                new Message('warning', '载入小说列表失败。');
-            }
-        })
+    goToPage(data) {
+        let id = this.state.id;
+        let url = 'http://www.lrts.me/ajax/playlist/2/'+ id +'/' + data.from;
+        $.get(url, (result) => {
+            let $li = $(result).find('.section-item');
+            let total = $($(result).find('div')[0]).find('span')[1].innerText;
+            let songs = {
+                data: {
+                    info: []
+                }
+            };
+            $.each($li, (i, item) => {
+                let music = {
+                    songname: $(item).find('span')[1].innerText,
+                    singername: $(item).find('.column2')[1].innerText,
+                    hash: 'article' + i,
+                    album_name: '',
+                    duration: Number($(item).find('.column3')[0].innerText),
+                    data: $(item).find('input')[0].value,
+                    total: Number(total),
+                    current: data.page
+                };
+                songs.data.info.push(music);
+            });
+            $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+        }).fail(() => {
+            new Message('warning', '显示章节失败，请重新选择。');
+        });
     }
 
     openThisArticleList(e) {
         let id = $(e.target).parent().attr('data');
-        let url = 'http://www.kting.cn/book/getBookArticleList';
+        this.setState({id: id});
+        let url = 'http://www.lrts.me/ajax/playlist/2/'+ id +'/1';
         let name = $(e.target).attr('data');
-        $.ajax({
-            url: url,
-            method: 'POST',
-            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-            data: 'id=' + id + '&page=1&pageSize=30',
-            success: (result) => {
-                let list = result.bookArticleList;
-                let songs = {
-                    data: {
-                        info: []
-                    }
+        $.get(url, (result) => {
+            let $li = $(result).find('.section-item');
+            let total = $($(result).find('div')[0]).find('span')[1].innerText;
+            let songs = {
+                data: {
+                    info: []
+                }
+            };
+            $.each($li, (i, item) => {
+                let music = {
+                    songname: $(item).find('span')[1].innerText,
+                    singername: $(item).find('.column2')[1].innerText,
+                    hash: 'article' + i,
+                    album_name: '',
+                    duration: Number($(item).find('.column3')[0].innerText),
+                    data: $(item).find('input')[0].value,
+                    total: Number(total),
+                    current: 1
                 };
-                $.each(list, (i, article) => {
-                    let music = {
-                        songname: article.section_title,
-                        singername: '',
-                        hash: 'article' + i,
-                        album_name: '',
-                        duration: '',
-                        data: article.audio
-                    };
-                    songs.data.info.push(music);
-                });
-                $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-                $.publish('closeArticleDashboard');
-                $.publish('changeSongName', { songName: name });
-            },
-            error: (err) => {
-                new Message('warning', '显示章节失败，请重新选择。');
-            }
-        })
+                songs.data.info.push(music);
+            });
+            $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+            $.publish('closeArticleDashboard');
+            $.publish('changeSongName', { songName: name });
+        }).fail(() => {
+            new Message('warning', '显示章节失败，请重新选择。');
+        });
     }
 
-    searchArticle2(e) {
+    searchArticle(e) {
         if (e.keyCode === 13) {
             let input = $('.articleSearch').val();
             let url = 'http://www.lrts.me/search/book/' + input;
@@ -91,29 +106,12 @@ export default class Dashboard extends Component {
                         name: $(item).find('.book-item-name').text(),
                         anchor: $(item).find('.author').text()
                     }
+                    bookList.push(book);
                 });
+                this.setState({ bookList: bookList });
             }).fail(() => {
                 new Message('warning', '搜索小说失败，请重试。');
             });
-        }
-    }
-
-    searchArticle(e) {
-        if (e.keyCode === 13) {
-            let input = $('.articleSearch').val();
-            let url = 'http://www.kting.cn/book/searchBook';
-            $.ajax({
-                url: url,
-                method: 'POST',
-                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-                data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=10&page=1',
-                success: (result) => {
-                    this.setState({ bookList: result.bookSearchList });
-                },
-                error: (err) => {
-                    new Message('warning', '搜索小说失败，请重试。');
-                }
-            })
         }
     }
 
@@ -128,7 +126,7 @@ export default class Dashboard extends Component {
         })
         return (
             <div className="articleDashboard">
-                <input className="articleSearch" placeholder="搜索小说, 相声" onKeyUp={this.searchArticle2.bind(this)} />
+                <input className="articleSearch" placeholder="搜索小说, 相声" onKeyUp={this.searchArticle.bind(this)} />
                 <ul className="articlecNavbar">
                     <li className="selectedNavbar">主编推荐</li>
                     <li>有声首发</li>

@@ -134,6 +134,11 @@ export default class MusicList extends Component {
         });
     }
 
+    goToThisPage(e) {
+        let data = $(e.target).attr('data');
+        $.publish('goToThisPage', {data: data});
+    }
+
     render() {
         let musicList = this.state.list.map((music, index) => {
             let love;
@@ -155,6 +160,33 @@ export default class MusicList extends Component {
                 </li>
             )
         });
+
+        let foot = [];
+        if(this.state.list[0] && this.state.list[0].hash.indexOf('article') !== -1){
+            let currentPage = this.state.list[0].current;
+            let total = this.state.list[0].total;
+            let pageLength = 10;
+            let number = parseInt(total / pageLength);
+            let showFrom = (currentPage - 2) < 1 ? 1 : currentPage - 2;
+            if(number > 5){
+                number = 5;
+            }
+            for(let i =0; i < number; i++) {
+                let data = {
+                    page: showFrom,
+                    from: (showFrom - 1) * pageLength + 1
+                };
+                if(showFrom > parseInt(total / pageLength)){
+
+                }else if(showFrom === currentPage){
+                    foot.push(<li key={Math.random()} className="current">{showFrom}</li>);
+                }else{
+                    foot.push(<li key={Math.random()} onClick={this.goToThisPage.bind(this)} data={JSON.stringify(data)}>{showFrom}</li>);
+                }
+                showFrom++;
+            }
+        }
+       
         return (
             <div className="musicList">
                 <div className="musicTitle">
@@ -165,6 +197,9 @@ export default class MusicList extends Component {
                 </div>
                 <ul className="listItem">
                     {musicList}
+                </ul>
+                <ul className="pagination">
+                    {foot}
                 </ul>
             </div>
         )

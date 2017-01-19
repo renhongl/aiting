@@ -54,7 +54,7 @@
 .articleDashboard .articleList li{
     float: left;
     list-style-type: none;
-    height: 232px;
+    height: 300px;
     width: 150px;
     margin-left: 46px;
     cursor: pointer;

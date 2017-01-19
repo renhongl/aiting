@@ -32809,6 +32809,12 @@
 	            });
 	        }
 	    }, {
+	        key: 'goToThisPage',
+	        value: function goToThisPage(e) {
+	            var data = (0, _jquery2.default)(e.target).attr('data');
+	            _jquery2.default.publish('goToThisPage', { data: data });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this4 = this;
@@ -32853,6 +32859,39 @@
 	                    love
 	                );
 	            });
+
+	            var foot = [];
+	            if (this.state.list[0] && this.state.list[0].hash.indexOf('article') !== -1) {
+	                var currentPage = this.state.list[0].current;
+	                var total = this.state.list[0].total;
+	                var pageLength = 10;
+	                var number = parseInt(total / pageLength);
+	                var showFrom = currentPage - 2 < 1 ? 1 : currentPage - 2;
+	                if (number > 5) {
+	                    number = 5;
+	                }
+	                for (var i = 0; i < number; i++) {
+	                    var data = {
+	                        page: showFrom,
+	                        from: (showFrom - 1) * pageLength + 1
+	                    };
+	                    if (showFrom > parseInt(total / pageLength)) {} else if (showFrom === currentPage) {
+	                        foot.push(_react2.default.createElement(
+	                            'li',
+	                            { key: Math.random(), className: 'current' },
+	                            showFrom
+	                        ));
+	                    } else {
+	                        foot.push(_react2.default.createElement(
+	                            'li',
+	                            { key: Math.random(), onClick: this.goToThisPage.bind(this), data: JSON.stringify(data) },
+	                            showFrom
+	                        ));
+	                    }
+	                    showFrom++;
+	                }
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'musicList' },
@@ -32884,6 +32923,11 @@
 	                    'ul',
 	                    { className: 'listItem' },
 	                    musicList
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'pagination' },
+	                    foot
 	                )
 	            );
 	        }
@@ -32929,7 +32973,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    overflow: auto;\r\n    height: 465px;\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}", ""]);
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n    overflow: auto;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    /*overflow: auto;*/\r\n    /*height: 465px;*/\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}\r\n\r\n.pagination{\r\n    display: flex;\r\n    margin-top: 20px;\r\n}\r\n\r\n.pagination li{\r\n    background: #cccccc;\r\n    width: 30px;\r\n    margin-left: 10px;\r\n    border-radius: 8px;\r\n    padding-left: 20px;\r\n    cursor: pointer;\r\n    height: 30px;\r\n}\r\n\r\n.pagination .current{\r\n    background: #e6245a;\r\n    color: #fff;\r\n}", ""]);
 
 	// exports
 
@@ -34140,7 +34184,8 @@
 	        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this));
 
 	        _this.state = {
-	            bookList: []
+	            bookList: [],
+	            id: ''
 	        };
 	        return _this;
 	    }
@@ -34148,6 +34193,8 @@
 	    _createClass(Dashboard, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            var _this2 = this;
+
 	            _jquery2.default.subscribe('closeArticleDashboard', function () {
 	                (0, _jquery2.default)('.articleDashboard').hide();
 	            });
@@ -34156,62 +34203,74 @@
 	                (0, _jquery2.default)('.articleDashboard').show();
 	            });
 
-	            this.loadTuiJian();
+	            _jquery2.default.subscribe('goToThisPage', function (o, args) {
+	                _this2.goToPage(JSON.parse(args.data));
+	            });
 	        }
 	    }, {
-	        key: 'loadTuiJian',
-	        value: function loadTuiJian() {
-	            var _this2 = this;
-
-	            var url = 'http://www.kting.cn/recommend/getRecommendIndex';
-	            _jquery2.default.ajax({
-	                url: url,
-	                method: 'POST',
-	                success: function success(result) {
-	                    var list = result.categoryList[0].contentList;
-	                    _this2.setState({ bookList: list });
-	                },
-	                error: function error(err) {
-	                    new _lrhMessage2.default('warning', '载入小说列表失败。');
-	                }
+	        key: 'goToPage',
+	        value: function goToPage(data) {
+	            var id = this.state.id;
+	            var url = 'http://www.lrts.me/ajax/playlist/2/' + id + '/' + data.from;
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('.section-item');
+	                var total = (0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1].innerText;
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('span')[1].innerText,
+	                        singername: (0, _jquery2.default)(item).find('.column2')[1].innerText,
+	                        hash: 'article' + i,
+	                        album_name: '',
+	                        duration: Number((0, _jquery2.default)(item).find('.column3')[0].innerText),
+	                        data: (0, _jquery2.default)(item).find('input')[0].value,
+	                        total: Number(total),
+	                        current: data.page
+	                    };
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '显示章节失败，请重新选择。');
 	            });
 	        }
 	    }, {
 	        key: 'openThisArticleList',
 	        value: function openThisArticleList(e) {
 	            var id = (0, _jquery2.default)(e.target).parent().attr('data');
-	            var url = 'http://www.kting.cn/book/getBookArticleList';
+	            this.setState({ id: id });
+	            var url = 'http://www.lrts.me/ajax/playlist/2/' + id + '/1';
 	            var name = (0, _jquery2.default)(e.target).attr('data');
-	            _jquery2.default.ajax({
-	                url: url,
-	                method: 'POST',
-	                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-	                data: 'id=' + id + '&page=1&pageSize=30',
-	                success: function success(result) {
-	                    var list = result.bookArticleList;
-	                    var songs = {
-	                        data: {
-	                            info: []
-	                        }
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('.section-item');
+	                var total = (0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1].innerText;
+	                var songs = {
+	                    data: {
+	                        info: []
+	                    }
+	                };
+	                _jquery2.default.each($li, function (i, item) {
+	                    var music = {
+	                        songname: (0, _jquery2.default)(item).find('span')[1].innerText,
+	                        singername: (0, _jquery2.default)(item).find('.column2')[1].innerText,
+	                        hash: 'article' + i,
+	                        album_name: '',
+	                        duration: Number((0, _jquery2.default)(item).find('.column3')[0].innerText),
+	                        data: (0, _jquery2.default)(item).find('input')[0].value,
+	                        total: Number(total),
+	                        current: 1
 	                    };
-	                    _jquery2.default.each(list, function (i, article) {
-	                        var music = {
-	                            songname: article.section_title,
-	                            singername: '',
-	                            hash: 'article' + i,
-	                            album_name: '',
-	                            duration: '',
-	                            data: article.audio
-	                        };
-	                        songs.data.info.push(music);
-	                    });
-	                    _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	                    _jquery2.default.publish('closeArticleDashboard');
-	                    _jquery2.default.publish('changeSongName', { songName: name });
-	                },
-	                error: function error(err) {
-	                    new _lrhMessage2.default('warning', '显示章节失败，请重新选择。');
-	                }
+	                    songs.data.info.push(music);
+	                });
+	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	                _jquery2.default.publish('closeArticleDashboard');
+	                _jquery2.default.publish('changeSongName', { songName: name });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '显示章节失败，请重新选择。');
 	            });
 	        }
 	    }, {
@@ -34221,18 +34280,22 @@
 
 	            if (e.keyCode === 13) {
 	                var input = (0, _jquery2.default)('.articleSearch').val();
-	                var url = 'http://www.kting.cn/book/searchBook';
-	                _jquery2.default.ajax({
-	                    url: url,
-	                    method: 'POST',
-	                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-	                    data: 'keyword=' + input + '&sortField=0&bookStatus=0&pageSize=10&page=1',
-	                    success: function success(result) {
-	                        _this3.setState({ bookList: result.bookSearchList });
-	                    },
-	                    error: function error(err) {
-	                        new _lrhMessage2.default('warning', '搜索小说失败，请重试。');
-	                    }
+	                var url = 'http://www.lrts.me/search/book/' + input;
+	                _jquery2.default.get(url, function (result) {
+	                    var $li = (0, _jquery2.default)(result).find('.book-item');
+	                    var bookList = [];
+	                    _jquery2.default.each($li, function (i, item) {
+	                        var book = {
+	                            id: (0, _jquery2.default)(item).find('.btn-collection').attr('entityId'),
+	                            image: (0, _jquery2.default)(item).find('img').attr('src'),
+	                            name: (0, _jquery2.default)(item).find('.book-item-name').text(),
+	                            anchor: (0, _jquery2.default)(item).find('.author').text()
+	                        };
+	                        bookList.push(book);
+	                    });
+	                    _this3.setState({ bookList: bookList });
+	                }).fail(function () {
+	                    new _lrhMessage2.default('warning', '搜索小说失败，请重试。');
 	                });
 	            }
 	        }
@@ -34327,7 +34390,7 @@
 
 
 	// module
-	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 39px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 232px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 39px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 300px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
 
 	// exports
 
