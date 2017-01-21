@@ -29,14 +29,19 @@
 .articlecNavbar li{
     width: 69px;
     float: left;
-    height: 39px;
+    height: 38px;
     text-align: center;
     margin-left: 80px;
     list-style-type: none;
+    cursor: pointer;
+}
+
+.articlecNavbar li:hover{
+    border-bottom: 2px solid #e6245a;
 }
 
 .articlecNavbar .selectedNavbar{
-    border-bottom: 2px solid #e6245a;
+    border-bottom: 3px solid #e6245a;
 }
 
 .articleDashboard .articleSearch{

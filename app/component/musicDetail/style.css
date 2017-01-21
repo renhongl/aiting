@@ -46,9 +46,9 @@
 .detailContent .musicBar{
     position: absolute;
     top: 33px;
-    left: 224px;
+    left: 212px;
     width: 17%;
-    transform: rotate(55deg);
+    transform: rotate(50deg);
 }
 
 @keyframes imageRotate{

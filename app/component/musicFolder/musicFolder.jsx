@@ -30,29 +30,6 @@ export default class MusicFolder extends Component {
             let folderList = $(this.refs.folderList);
             folderList.find('.paiHangBang').removeClass('selected');
         });
-
-        this.loadMusicFolder();
-    }
-
-    loadMusicFolder() {
-        let url = 'http://www.kugou.com/yy/special/index/1-0-1.html';
-        $.get(url, (result) => {
-            let $li = $(result).find('#ulAlbums li');
-            let list = [];
-            $.each($li, (i, item) => {
-                let folder = {
-                    title: $(item).find('a').attr('title'),
-                    url: $(item).find('a').attr('href'),
-                }
-                list.push(folder);
-            });
-            if(list.length > 10){
-                list.length = 10;
-            }
-            this.setState({ folderList: list });
-        }).fail(function () {
-            new Message('warning', '载入歌曲分类失败。');
-        });
     }
 
     addSelectedClass(e) {

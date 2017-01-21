@@ -100,20 +100,32 @@
 
 .pagination{
     display: flex;
-    margin-top: 20px;
+    height: 30px;
+    /* background: red; */
+    padding-top: 30px;
+    width: 100%;
+    margin-bottom: 30px;
 }
 
 .pagination li{
+    width: 25px;
     background: #cccccc;
-    width: 30px;
+    list-style-type: none;
+    height: 25px;
     margin-left: 10px;
-    border-radius: 8px;
-    padding-left: 20px;
+    line-height: 25px;
+    border-radius: 30px;
     cursor: pointer;
-    height: 30px;
+    text-align: center;
+    display: inline-block;
+}
+
+.pagination li:hover{
+    background: #ff6a93;
+    color: #fff;
 }
 
 .pagination .current{
-    background: #e6245a;
+    background: #e6245a !important;
     color: #fff;
 }

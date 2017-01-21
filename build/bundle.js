@@ -32973,7 +32973,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n    overflow: auto;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    /*overflow: auto;*/\r\n    /*height: 465px;*/\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}\r\n\r\n.pagination{\r\n    display: flex;\r\n    margin-top: 20px;\r\n}\r\n\r\n.pagination li{\r\n    background: #cccccc;\r\n    width: 30px;\r\n    margin-left: 10px;\r\n    border-radius: 8px;\r\n    padding-left: 20px;\r\n    cursor: pointer;\r\n    height: 30px;\r\n}\r\n\r\n.pagination .current{\r\n    background: #e6245a;\r\n    color: #fff;\r\n}", ""]);
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n    overflow: auto;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    /*overflow: auto;*/\r\n    /*height: 465px;*/\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}\r\n\r\n.pagination{\r\n    display: flex;\r\n    height: 30px;\r\n    /* background: red; */\r\n    padding-top: 30px;\r\n    width: 100%;\r\n    margin-bottom: 30px;\r\n}\r\n\r\n.pagination li{\r\n    width: 25px;\r\n    background: #cccccc;\r\n    list-style-type: none;\r\n    height: 25px;\r\n    margin-left: 10px;\r\n    line-height: 25px;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    text-align: center;\r\n    display: inline-block;\r\n}\r\n\r\n.pagination li:hover{\r\n    background: #ff6a93;\r\n    color: #fff;\r\n}\r\n\r\n.pagination .current{\r\n    background: #e6245a !important;\r\n    color: #fff;\r\n}", ""]);
 
 	// exports
 
@@ -33051,32 +33051,6 @@
 	                var folderList = (0, _jquery2.default)(_this2.refs.folderList);
 	                folderList.find('.paiHangBang').removeClass('selected');
 	            });
-
-	            this.loadMusicFolder();
-	        }
-	    }, {
-	        key: 'loadMusicFolder',
-	        value: function loadMusicFolder() {
-	            var _this3 = this;
-
-	            var url = 'http://www.kugou.com/yy/special/index/1-0-1.html';
-	            _jquery2.default.get(url, function (result) {
-	                var $li = (0, _jquery2.default)(result).find('#ulAlbums li');
-	                var list = [];
-	                _jquery2.default.each($li, function (i, item) {
-	                    var folder = {
-	                        title: (0, _jquery2.default)(item).find('a').attr('title'),
-	                        url: (0, _jquery2.default)(item).find('a').attr('href')
-	                    };
-	                    list.push(folder);
-	                });
-	                if (list.length > 10) {
-	                    list.length = 10;
-	                }
-	                _this3.setState({ folderList: list });
-	            }).fail(function () {
-	                new _lrhMessage2.default('warning', '载入歌曲分类失败。');
-	            });
 	        }
 	    }, {
 	        key: 'addSelectedClass',
@@ -33089,7 +33063,7 @@
 	    }, {
 	        key: 'showSmallDetail',
 	        value: function showSmallDetail(hash) {
-	            var _this4 = this;
+	            var _this3 = this;
 
 	            if (hash.indexOf('local') !== -1) {
 	                this.setState({ image: './static/images/panda.jpg' });
@@ -33108,9 +33082,9 @@
 	                method: 'GET',
 	                contentType: 'json',
 	                success: function success(result) {
-	                    _this4.setState({ image: JSON.parse(result).data.img });
-	                    _this4.setState({ songName: JSON.parse(result).data.song_name });
-	                    _this4.setState({ singername: JSON.parse(result).data.author_name });
+	                    _this3.setState({ image: JSON.parse(result).data.img });
+	                    _this3.setState({ songName: JSON.parse(result).data.song_name });
+	                    _this3.setState({ singername: JSON.parse(result).data.author_name });
 	                },
 	                error: function error(_error) {
 	                    new _lrhMessage2.default('warning', '小窗口显示错误');
@@ -33135,20 +33109,20 @@
 	    }, {
 	        key: 'openLocalMusic',
 	        value: function openLocalMusic(e) {
-	            var _this5 = this;
+	            var _this4 = this;
 
 	            this.addSelectedClass(e);
 	            this.ipcRenderer.send('openLocalMusic');
 	            this.ipcRenderer.on('loadedFolder', function (e, args) {
 	                var path = args[0];
-	                _this5.setState({ path: path });
+	                _this4.setState({ path: path });
 	                _jquery2.default.publish('localPathChanged', { path: path });
 	                fs.readdir(path, function (err, fiels) {
 	                    if (err) {
 	                        new _lrhMessage2.default('warning', '打开本地歌曲失败。');
 	                        return;
 	                    } else {
-	                        _this5.showLocalMusic(fiels);
+	                        _this4.showLocalMusic(fiels);
 	                    }
 	                });
 	            });
@@ -33156,7 +33130,7 @@
 	    }, {
 	        key: 'showLocalMusic',
 	        value: function showLocalMusic(fiels) {
-	            var _this6 = this;
+	            var _this5 = this;
 
 	            var songs = {
 	                data: {
@@ -33171,7 +33145,7 @@
 	                        hash: 'local' + i,
 	                        album_name: '',
 	                        duration: '',
-	                        data: _this6.state.path + '/' + fullName
+	                        data: _this5.state.path + '/' + fullName
 	                    };
 	                    songs.data.info.push(music);
 	                }
@@ -33577,7 +33551,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 2;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n}\r\n\r\n.detailContent .musicBar{\r\n    position: absolute;\r\n    top: 33px;\r\n    left: 224px;\r\n    width: 17%;\r\n    transform: rotate(55deg);\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
+	exports.push([module.id, ".musicDetail{\r\n    position: absolute;\r\n    z-index: 2;\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #b5b3b3;\r\n    display: none;\r\n}\r\n\r\n.detailHeader i{\r\n    display: inline-block;\r\n    float: right;\r\n    font-size: 20px;\r\n    margin: 27px;\r\n    background: #b5b3b3;\r\n    color: #969090;\r\n    border: 1px solid #a5a0a0;\r\n    width: 40px;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    text-align: center;\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n}\r\n\r\n.detailHeader i:hover{\r\n    background: #fff;\r\n}\r\n\r\n.detailContent{\r\n    position: relative;\r\n}\r\n\r\n.detailContent .musicImg{\r\n    width: 200px;\r\n    height: 200px;\r\n    margin: 60px;\r\n    border-radius: 200px;\r\n    float: left;\r\n    animation: imageRotate 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n    border: 40px solid #3a3838;\r\n}\r\n\r\n.detailContent .musicBar{\r\n    position: absolute;\r\n    top: 33px;\r\n    left: 212px;\r\n    width: 17%;\r\n    transform: rotate(50deg);\r\n}\r\n\r\n@keyframes imageRotate{\r\n   0% {transform: rotate(0deg);}\r\n   50% {transform: rotate(180deg);}\r\n   100% {transform: rotate(360deg);}\r\n}\r\n\r\n.detailName{\r\n    height: 94px;\r\n    width: 38%;\r\n    float: left;\r\n    top: 28px;\r\n    position: absolute;\r\n    right: 88px;\r\n    font-size: 13px;\r\n}\r\n\r\n.detailLyric{\r\n    height: 352px;\r\n    width: 47%;\r\n    float: left;\r\n    overflow: auto;\r\n    position: absolute;\r\n    right: 27px;\r\n    top: 113px;\r\n    font-size: 15px;\r\n}\r\n\r\n.detailLyric p{\r\n    margin: 10px;\r\n    height: 20px;\r\n}", ""]);
 
 	// exports
 
@@ -33973,6 +33947,7 @@
 
 	        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this));
 
+	        _this.current = 1;
 	        _this.state = {
 	            folderList: []
 	        };
@@ -33990,14 +33965,19 @@
 	                (0, _jquery2.default)('.dashboard').show();
 	            });
 
-	            this.loadTuiJianFolder();
+	            (0, _jquery2.default)('.defaultSelected').click();
 	        }
 	    }, {
 	        key: 'loadTuiJianFolder',
-	        value: function loadTuiJianFolder() {
+	        value: function loadTuiJianFolder(page) {
 	            var _this2 = this;
 
-	            var url = 'http://www.kugou.com/yy/special/index/1-0-1.html';
+	            if (typeof page !== 'number') {
+	                this.addSelectedClass(page);
+	                page = 1;
+	            }
+	            this.current = page;
+	            var url = 'http://www.kugou.com/yy/special/index/' + page + '-0-1.html';
 	            _jquery2.default.get(url, function (result) {
 	                var $li = (0, _jquery2.default)(result).find('#ulAlbums li');
 	                var list = [];
@@ -34018,42 +33998,118 @@
 	            });
 	        }
 	    }, {
+	        key: 'goToThisMusicList',
+	        value: function goToThisMusicList(e) {
+	            var page = (0, _jquery2.default)(e.target).text();
+	            this.loadTuiJianFolder(Number(page));
+	        }
+	    }, {
 	        key: 'loadMusicList',
 	        value: function loadMusicList(e) {
 	            var url = (0, _jquery2.default)(e.target).parent().attr('data');
-	            _jquery2.default.get(url, function (result) {
-	                var $li = (0, _jquery2.default)(result).find('#songs li');
-	                var songs = {
-	                    data: {
-	                        info: []
+	            if (url.indexOf('singer') !== -1) {
+	                var value = (0, _jquery2.default)(e.target).next().text();
+	                var _url = 'http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=' + value + '&page=1&pagesize=30&showtype=1&callback=kgJSONP238513750<span style="white-space:pre"></span>';
+	                _jquery2.default.ajax({
+	                    url: _url,
+	                    method: 'GET',
+	                    contentType: 'json',
+	                    success: function success(result) {
+	                        result = result.substring(1, result.length - 1);
+	                        _jquery2.default.publish('showMusicByThisList', { result: result });
+	                        _jquery2.default.publish('listBySearch');
+	                        _jquery2.default.publish('closeDashboard');
+	                        _jquery2.default.publish('closeArticleDashboard');
+	                    },
+	                    error: function error(_error) {
+	                        new _lrhMessage2.default('warning', '搜索歌曲失败，请重新搜索。');
 	                    }
-	                };
-	                _jquery2.default.each($li, function (i, item) {
-	                    var music = {
-	                        songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
-	                        singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
-	                        hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
-	                        album_name: '',
-	                        duration: ''
-	                    };
-	                    songs.data.info.push(music);
 	                });
-	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
-	                _jquery2.default.publish('closeDashboard');
+	            } else {
+	                _jquery2.default.get(url, function (result) {
+	                    var $li = (0, _jquery2.default)(result).find('#songs li');
+	                    var songs = {
+	                        data: {
+	                            info: []
+	                        }
+	                    };
+	                    _jquery2.default.each($li, function (i, item) {
+	                        var music = {
+	                            songname: (0, _jquery2.default)(item).find('.text').text().split(' - ')[1],
+	                            singername: (0, _jquery2.default)(item).find('.text').text().split(' - ')[0],
+	                            hash: (0, _jquery2.default)(item).find('a').attr('data').split('|')[0],
+	                            album_name: '',
+	                            duration: ''
+	                        };
+	                        songs.data.info.push(music);
+	                    });
+	                    _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
+	                    _jquery2.default.publish('closeDashboard');
+	                    _jquery2.default.publish('listBySearch');
+	                }).fail(function () {
+	                    new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'loadSinger',
+	        value: function loadSinger(e) {
+	            var _this3 = this;
+
+	            this.addSelectedClass(e);
+	            var url = 'http://www.kugou.com/yy/html/singer.html';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('#list_head li');
+	                var list = [];
+	                _jquery2.default.each($li, function (i, item) {
+	                    var folder = {
+	                        title: (0, _jquery2.default)(item).find('a').attr('title'),
+	                        url: 'singer' + i,
+	                        image: (0, _jquery2.default)(item).find('img').attr('_src')
+	                    };
+	                    list.push(folder);
+	                });
+	                _this3.setState({ folderList: list });
 	            }).fail(function () {
-	                new _lrhMessage2.default('warning', '歌曲加载失败，请重新点击。');
+	                new _lrhMessage2.default('warning', '加载热门歌手失败，请尝试重新点击。');
 	            });
+	        }
+	    }, {
+	        key: 'addSelectedClass',
+	        value: function addSelectedClass(e) {
+	            (0, _jquery2.default)('.musicNavbar li').removeClass('selectedNavbar');
+	            (0, _jquery2.default)(e.target).addClass('selectedNavbar');
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this3 = this;
+	            var _this4 = this;
+
+	            var current = this.current;
+	            var page = [];
+	            if (this.state.folderList[0] && this.state.folderList[0].url.indexOf('singer') === -1) {
+	                for (var i = 0; i < 5; i++) {
+	                    if (i + 1 === current) {
+	                        page.push(_react2.default.createElement(
+	                            'li',
+	                            { key: Math.random(), className: 'musicCurrentPage' },
+	                            i + 1
+	                        ));
+	                    } else {
+	                        page.push(_react2.default.createElement(
+	                            'li',
+	                            { key: Math.random(), onClick: this.goToThisMusicList.bind(this) },
+	                            i + 1
+	                        ));
+	                    }
+	                }
+	            }
 
 	            var folderList = this.state.folderList.map(function (folder, i) {
 	                return _react2.default.createElement(
 	                    'li',
-	                    { className: 'oneFolder', key: i, data: folder.url, onClick: _this3.loadMusicList.bind(_this3) },
-	                    _react2.default.createElement('img', { src: folder.image }),
+	                    { className: 'oneFolder', key: i, data: folder.url },
+	                    _react2.default.createElement('img', { src: folder.image, onClick: _this4.loadMusicList.bind(_this4) }),
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
@@ -34069,24 +34125,24 @@
 	                    { className: 'musicNavbar' },
 	                    _react2.default.createElement(
 	                        'li',
-	                        { className: 'selectedNavbar', onClick: this.loadTuiJianFolder.bind(this) },
+	                        { className: 'selectedNavbar defaultSelected', onClick: this.loadTuiJianFolder.bind(this) },
 	                        '\u4E2A\u6027\u63A8\u8350'
 	                    ),
 	                    _react2.default.createElement(
 	                        'li',
-	                        null,
+	                        { onClick: this.loadSinger.bind(this) },
 	                        '\u70ED\u95E8\u6B4C\u624B'
-	                    ),
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        '\u65B0\u6B4C'
 	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'ul',
 	                    null,
 	                    folderList
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'musicPagination' },
+	                    page
 	                )
 	            );
 	        }
@@ -34132,7 +34188,7 @@
 
 
 	// module
-	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 154px;\r\n    height: 212px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.oneFolder img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 33px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n    ", ""]);
+	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 154px;\r\n    height: 212px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.oneFolder img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 32px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar li:hover{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 3px solid #e6245a !important;\r\n}\r\n\r\n.musicPagination{\r\n    display: flex;\r\n    height: 30px;\r\n    /* background: red; */\r\n    padding-top: 30px;\r\n    width: 100%;\r\n    margin-bottom: 30px;\r\n}\r\n\r\n.musicPagination li{\r\n    width: 25px;\r\n    background: #cccccc;\r\n    list-style-type: none;\r\n    height: 25px;\r\n    margin-left: 10px;\r\n    line-height: 25px;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n\r\n.musicPagination li:hover{\r\n    background: #ff6a93;\r\n    color: #fff;\r\n}\r\n\r\n.musicPagination .musicCurrentPage{\r\n    background: #e6245a !important;\r\n    color: #fff;\r\n}", ""]);
 
 	// exports
 
@@ -34206,6 +34262,8 @@
 	            _jquery2.default.subscribe('goToThisPage', function (o, args) {
 	                _this2.goToPage(JSON.parse(args.data));
 	            });
+
+	            (0, _jquery2.default)('.defaultBookList').click();
 	        }
 	    }, {
 	        key: 'goToPage',
@@ -34214,7 +34272,12 @@
 	            var url = 'http://www.lrts.me/ajax/playlist/2/' + id + '/' + data.from;
 	            _jquery2.default.get(url, function (result) {
 	                var $li = (0, _jquery2.default)(result).find('.section-item');
-	                var total = (0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1].innerText;
+	                var total = void 0;
+	                if (!(0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1]) {
+	                    total = 10;
+	                } else {
+	                    total = (0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1].innerText;
+	                }
 	                var songs = {
 	                    data: {
 	                        info: []
@@ -34247,7 +34310,12 @@
 	            var name = (0, _jquery2.default)(e.target).attr('data');
 	            _jquery2.default.get(url, function (result) {
 	                var $li = (0, _jquery2.default)(result).find('.section-item');
-	                var total = (0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1].innerText;
+	                var total = void 0;
+	                if (!(0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1]) {
+	                    total = 10;
+	                } else {
+	                    total = (0, _jquery2.default)((0, _jquery2.default)(result).find('div')[0]).find('span')[1].innerText;
+	                }
 	                var songs = {
 	                    data: {
 	                        info: []
@@ -34269,6 +34337,7 @@
 	                _jquery2.default.publish('showMusicByThisList', { result: JSON.stringify(songs) });
 	                _jquery2.default.publish('closeArticleDashboard');
 	                _jquery2.default.publish('changeSongName', { songName: name });
+	                _jquery2.default.publish('listBySearch');
 	            }).fail(function () {
 	                new _lrhMessage2.default('warning', '显示章节失败，请重新选择。');
 	            });
@@ -34300,15 +34369,69 @@
 	            }
 	        }
 	    }, {
+	        key: 'loadTuiJian',
+	        value: function loadTuiJian(e) {
+	            var _this4 = this;
+
+	            this.addSelectedClass(e);
+	            var url = 'http://www.lrts.me/explore/album';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('.album-list li');
+	                var bookList = [];
+	                _jquery2.default.each($li, function (i, item) {
+	                    var book = {
+	                        id: (0, _jquery2.default)(item).find('.album-item-name').attr('href').split('/')[2],
+	                        image: (0, _jquery2.default)(item).find('img').attr('src'),
+	                        name: (0, _jquery2.default)(item).find('.album-item-name').text(),
+	                        anchor: (0, _jquery2.default)(item).find('.author').text()
+	                    };
+	                    bookList.push(book);
+	                });
+	                _this4.setState({ bookList: bookList });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '载入推荐失败，请重新点击。');
+	            });
+	        }
+	    }, {
+	        key: 'loadWenXueMingZhu',
+	        value: function loadWenXueMingZhu(e) {
+	            var _this5 = this;
+
+	            this.addSelectedClass(e);
+	            var url = 'http://www.lrts.me/book/category/78';
+	            _jquery2.default.get(url, function (result) {
+	                var $li = (0, _jquery2.default)(result).find('ul.clearfix li');
+	                var bookList = [];
+	                _jquery2.default.each($li, function (i, item) {
+	                    var book = {
+	                        id: (0, _jquery2.default)(item).find('.book-item-name').attr('href').split('/')[2],
+	                        image: (0, _jquery2.default)(item).find('img').attr('src'),
+	                        name: (0, _jquery2.default)(item).find('.book-item-name').text(),
+	                        anchor: (0, _jquery2.default)(item).find('.author').text()
+	                    };
+	                    bookList.push(book);
+	                });
+	                _this5.setState({ bookList: bookList });
+	            }).fail(function () {
+	                new _lrhMessage2.default('warning', '载入推荐失败，请重新点击。');
+	            });
+	        }
+	    }, {
+	        key: 'addSelectedClass',
+	        value: function addSelectedClass(e) {
+	            (0, _jquery2.default)(".articlecNavbar li").removeClass('selectedNavbar');
+	            (0, _jquery2.default)(e.target).addClass('selectedNavbar');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this4 = this;
+	            var _this6 = this;
 
 	            var articleList = this.state.bookList.map(function (article, i) {
 	                return _react2.default.createElement(
 	                    'li',
 	                    { key: i, data: article.id },
-	                    _react2.default.createElement('img', { src: article.image, data: article.name, onClick: _this4.openThisArticleList.bind(_this4) }),
+	                    _react2.default.createElement('img', { src: article.image, data: article.name, onClick: _this6.openThisArticleList.bind(_this6) }),
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
@@ -34327,18 +34450,13 @@
 	                    { className: 'articlecNavbar' },
 	                    _react2.default.createElement(
 	                        'li',
-	                        { className: 'selectedNavbar' },
+	                        { className: 'selectedNavbar defaultBookList', onClick: this.loadTuiJian.bind(this) },
 	                        '\u4E3B\u7F16\u63A8\u8350'
 	                    ),
 	                    _react2.default.createElement(
 	                        'li',
-	                        null,
-	                        '\u6709\u58F0\u9996\u53D1'
-	                    ),
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        '\u7EFC\u827A'
+	                        { onClick: this.loadWenXueMingZhu.bind(this) },
+	                        '\u6587\u5B66\u540D\u8457'
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -34390,7 +34508,7 @@
 
 
 	// module
-	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 39px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 300px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 0.8;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 38px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.articlecNavbar li:hover{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 3px solid #e6245a;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    float: left;\r\n    list-style-type: none;\r\n    height: 300px;\r\n    width: 150px;\r\n    margin-left: 46px;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
 
 	// exports
 

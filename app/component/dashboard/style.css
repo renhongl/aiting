@@ -35,14 +35,48 @@
     width: 69px;
     float: left;
     height: 41px;
-    margin-top: 33px;
+    margin-top: 32px;
     text-align: center;
     margin-left: 80px;
     list-style-type: none;
+    cursor: pointer;
 }
 
-.musicNavbar .selectedNavbar{
+.musicNavbar li:hover{
     border-bottom: 2px solid #e6245a;
 }
 
-    
+.musicNavbar .selectedNavbar{
+    border-bottom: 3px solid #e6245a !important;
+}
+
+.musicPagination{
+    display: flex;
+    height: 30px;
+    /* background: red; */
+    padding-top: 30px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.musicPagination li{
+    width: 25px;
+    background: #cccccc;
+    list-style-type: none;
+    height: 25px;
+    margin-left: 10px;
+    line-height: 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.musicPagination li:hover{
+    background: #ff6a93;
+    color: #fff;
+}
+
+.musicPagination .musicCurrentPage{
+    background: #e6245a !important;
+    color: #fff;
+}

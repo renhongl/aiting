@@ -26,14 +26,21 @@ export default class Dashboard extends Component {
         $.subscribe('goToThisPage', (o, args) => {
             this.goToPage(JSON.parse(args.data));
         });
+
+        $('.defaultBookList').click();
     }
 
     goToPage(data) {
         let id = this.state.id;
-        let url = 'http://www.lrts.me/ajax/playlist/2/'+ id +'/' + data.from;
+        let url = 'http://www.lrts.me/ajax/playlist/2/' + id + '/' + data.from;
         $.get(url, (result) => {
             let $li = $(result).find('.section-item');
-            let total = $($(result).find('div')[0]).find('span')[1].innerText;
+            let total;
+            if(!$($(result).find('div')[0]).find('span')[1]){
+                total = 10;
+            }else {
+                total = $($(result).find('div')[0]).find('span')[1].innerText;
+            }
             let songs = {
                 data: {
                     info: []
@@ -60,12 +67,17 @@ export default class Dashboard extends Component {
 
     openThisArticleList(e) {
         let id = $(e.target).parent().attr('data');
-        this.setState({id: id});
-        let url = 'http://www.lrts.me/ajax/playlist/2/'+ id +'/1';
+        this.setState({ id: id });
+        let url = 'http://www.lrts.me/ajax/playlist/2/' + id + '/1';
         let name = $(e.target).attr('data');
         $.get(url, (result) => {
             let $li = $(result).find('.section-item');
-            let total = $($(result).find('div')[0]).find('span')[1].innerText;
+            let total;
+            if(!$($(result).find('div')[0]).find('span')[1]){
+                total = 10;
+            }else{  
+                total = $($(result).find('div')[0]).find('span')[1].innerText;
+            }
             let songs = {
                 data: {
                     info: []
@@ -87,6 +99,7 @@ export default class Dashboard extends Component {
             $.publish('showMusicByThisList', { result: JSON.stringify(songs) });
             $.publish('closeArticleDashboard');
             $.publish('changeSongName', { songName: name });
+            $.publish('listBySearch');
         }).fail(() => {
             new Message('warning', '显示章节失败，请重新选择。');
         });
@@ -115,6 +128,53 @@ export default class Dashboard extends Component {
         }
     }
 
+    loadTuiJian(e) {
+        this.addSelectedClass(e);
+        let url = 'http://www.lrts.me/explore/album';
+        $.get(url, (result) => {
+            let $li = $(result).find('.album-list li');
+            let bookList = [];
+            $.each($li, (i, item) => {
+                let book = {
+                    id: $(item).find('.album-item-name').attr('href').split('/')[2],
+                    image: $(item).find('img').attr('src'),
+                    name: $(item).find('.album-item-name').text(),
+                    anchor: $(item).find('.author').text()
+                }
+                bookList.push(book);
+            });
+            this.setState({ bookList: bookList });
+        }).fail(function () {
+            new Message('warning', '载入推荐失败，请重新点击。');
+        });
+    }
+
+    loadWenXueMingZhu(e) {
+        this.addSelectedClass(e);
+        let url = 'http://www.lrts.me/book/category/78';
+        $.get(url, (result) => {
+            let $li = $(result).find('ul.clearfix li');
+            let bookList = [];
+            $.each($li, (i, item) => {
+                let book = {
+                    id: $(item).find('.book-item-name').attr('href').split('/')[2],
+                    image: $(item).find('img').attr('src'),
+                    name: $(item).find('.book-item-name').text(),
+                    anchor: $(item).find('.author').text()
+                }
+                bookList.push(book);
+            });
+            this.setState({ bookList: bookList });
+        }).fail(function () {
+            new Message('warning', '载入推荐失败，请重新点击。');
+        });
+    }
+
+    addSelectedClass(e) {
+        $(".articlecNavbar li").removeClass('selectedNavbar');
+        $(e.target).addClass('selectedNavbar');
+    }
+
     render() {
         let articleList = this.state.bookList.map((article, i) => {
             return (
@@ -128,9 +188,8 @@ export default class Dashboard extends Component {
             <div className="articleDashboard">
                 <input className="articleSearch" placeholder="搜索小说, 相声" onKeyUp={this.searchArticle.bind(this)} />
                 <ul className="articlecNavbar">
-                    <li className="selectedNavbar">主编推荐</li>
-                    <li>有声首发</li>
-                    <li>综艺</li>
+                    <li className="selectedNavbar defaultBookList" onClick={this.loadTuiJian.bind(this)}>主编推荐</li>
+                    <li onClick={this.loadWenXueMingZhu.bind(this)}>文学名著</li>
                 </ul>
                 <ul className="articleList">{articleList}</ul>
             </div>
