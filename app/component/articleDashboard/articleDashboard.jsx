@@ -122,6 +122,7 @@ export default class Dashboard extends Component {
                     bookList.push(book);
                 });
                 this.setState({ bookList: bookList });
+                $(".articlecNavbar li").removeClass('selectedNavbar');
             }).fail(() => {
                 new Message('warning', '搜索小说失败，请重试。');
             });

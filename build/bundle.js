@@ -21752,7 +21752,7 @@
 
 
 	// module
-	exports.push([module.id, ".header{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #e6245a;\r\n}\r\n\r\n.title{\r\n    width: 161px;\r\n    border: 0px solid #fff;\r\n    height: 100%;\r\n    float: left;\r\n    display: flex;\r\n    align-items: center;\r\n    color: #fff;\r\n}\r\n\r\n.title span{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left: 10px;\r\n    float: left;\r\n    font-weight: bold;\r\n}\r\n\r\n.title i{\r\n    margin-left: 10px;\r\n}\r\n\r\n.searchDiv{\r\n    width: 49%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.searchDiv input{\r\n    height: 50%;\r\n    border: none;\r\n    border-radius: 20px;\r\n    width: 80%;\r\n    padding-left: 10px;\r\n    outline: none;\r\n}\r\n\r\n.searchDiv input:focus{\r\n    border: none;\r\n}\r\n\r\n.controlContainer{\r\n    width: 30%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.controlContainer div{\r\n    margin-left: 5px;\r\n    color: #cccccc;\r\n    height: 30%;\r\n    text-align: center;\r\n    width: 20px;\r\n    font-size: 15px;\r\n}\r\n\r\n.controlContainer i:hover{\r\n    color: #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.controlContainer .setting{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .console{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .minus{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .close{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 0px;\r\n    margin-right: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .line{\r\n    width: 1px;\r\n    border-left: 1px solid #aba5a5;\r\n}", ""]);
+	exports.push([module.id, ".header{\r\n    width: 100%;\r\n    height: 50px;\r\n    background: #e6245a;\r\n}\r\n\r\n.title{\r\n    width: 161px;\r\n    border: 0px solid #fff;\r\n    height: 100%;\r\n    float: left;\r\n    display: flex;\r\n    align-items: center;\r\n    color: #fff;\r\n}\r\n\r\n.title span{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left: 10px;\r\n    float: left;\r\n    font-weight: bold;\r\n}\r\n\r\n.title i{\r\n    margin-left: 10px;\r\n}\r\n\r\n.searchDiv{\r\n    width: 49%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.searchDiv input{\r\n    height: 50%;\r\n    border: none;\r\n    border-radius: 20px;\r\n    width: 80%;\r\n    padding-left: 10px;\r\n    outline: none;\r\n}\r\n\r\n.searchDiv input:focus{\r\n    border: none;\r\n}\r\n\r\n.controlContainer{\r\n    width: 30%;\r\n    float: left;\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.controlContainer div{\r\n    margin-left: 5px;\r\n    color: #dedbdb;\r\n    height: 30%;\r\n    text-align: center;\r\n    width: 20px;\r\n    font-size: 15px;\r\n}\r\n\r\n.controlContainer i:hover{\r\n    color: #fff;\r\n    cursor: pointer;\r\n}\r\n\r\n.controlContainer .setting{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .console{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.controlContainer .minus{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .close{\r\n    float: left;\r\n    padding: 5px;\r\n    margin-left: 0px;\r\n    margin-right: 5px;\r\n    width: 15px;\r\n}\r\n\r\n.controlContainer .line{\r\n    width: 1px;\r\n    border-left: 1px solid #aba5a5;\r\n}", ""]);
 
 	// exports
 
@@ -32915,7 +32915,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        { style: { width: '11%' } },
+	                        { style: { width: '10%' } },
 	                        '\u65F6\u957F'
 	                    )
 	                ),
@@ -33675,7 +33675,12 @@
 	                    _this3.setCurrentMuisc();
 	                },
 	                error: function error(_error) {
-	                    new _lrhMessage2.default('warning', '播放歌曲失败，请重新播放。');
+	                    new _lrhMessage2.default('warning', '播放歌曲失败，将播放下一首。');
+	                    if (_this3.state.loop) {
+	                        _jquery2.default.publish('nextMusic', { hash: _this3.state.hash });
+	                    } else {
+	                        _jquery2.default.publish('randomMusic', { hash: _this3.state.hash });
+	                    }
 	                }
 	            });
 	        }
@@ -34363,6 +34368,7 @@
 	                        bookList.push(book);
 	                    });
 	                    _this3.setState({ bookList: bookList });
+	                    (0, _jquery2.default)(".articlecNavbar li").removeClass('selectedNavbar');
 	                }).fail(function () {
 	                    new _lrhMessage2.default('warning', '搜索小说失败，请重试。');
 	                });

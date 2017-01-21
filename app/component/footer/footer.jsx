@@ -71,7 +71,12 @@ export default class Footer extends Component {
                 this.setCurrentMuisc();
             },
             error: (error) => {
-                new Message('warning', '播放歌曲失败，请重新播放。');
+                new Message('warning', '播放歌曲失败，将播放下一首。');
+                if (this.state.loop) {
+                    $.publish('nextMusic', { hash: this.state.hash });
+                } else {
+                    $.publish('randomMusic', { hash: this.state.hash });
+                }
             }
         })
     }

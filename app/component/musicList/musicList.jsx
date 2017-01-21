@@ -193,7 +193,7 @@ export default class MusicList extends Component {
                     <span style={{fontWeight:'bold',width: '43%', paddingLeft: '52px'}}>音乐标题</span>
                     <span style={{width: '26%'}}>歌手</span>
                     <span style={{width: '26%'}}>专辑</span>
-                    <span style={{width: '11%'}}>时长</span>
+                    <span style={{width: '10%'}}>时长</span>
                 </div>
                 <ul className="listItem">
                     {musicList}
