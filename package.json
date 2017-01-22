@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "webpack",
-    "package": "electron-packager . AiTing --ignore=node_modules/electron-* --platform=win32 --arch=x64 --electronVersion=1.4.14 --overwrite --icon=./build/logo1.ico"
+    "package": "electron-packager . AiTing --ignore=node_modules/electron-* --platform=win32 --arch=x64 --electronVersion=1.4.14 --overwrite --icon=./build/logo1.ico",
+	"asar": "asar pack . app.asar"
   },
   "author": "renhongl",
   "license": "MIT",
@@ -24,8 +25,8 @@
     "lrh-message": "^1.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "webpack": "^1.14.0",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.14.0"
+    "url-loader": "^0.5.7"
   }
 }
