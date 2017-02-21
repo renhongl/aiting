@@ -96,7 +96,7 @@ export default class MusicDetail extends Component {
         this.lyrics = this.state.lyric.split('\r\n');
         let lyricLine = this.lyrics.map((line) => {
             return (
-                <p className="lyricLine" key={Math.random()} id={line.split(']')[0]}>{line.split(']')[1]}</p>
+                <p title={line.split(']')[1]} className="lyricLine" key={Math.random()} id={line.split(']')[0]}>{line.split(']')[1]}</p>
             )
         });
         return (
@@ -106,9 +106,9 @@ export default class MusicDetail extends Component {
                     <img className="musicImg" src={this.state.image} />
                     <img className="musicBar" src="./static/images/bar.png" />
                     <p className="detailName">
-                        <span title={this.state.songName} style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px',overflow:'hidden' }}>{this.state.songName}</span><br />
-                        歌手: <span style={{fontWeight: 'bold',display: 'inline-block', marginRight: '10px'}}>{this.state.singername}</span>
-                        专辑: <span style={{fontWeight: 'bold'}}>{this.state.audioName.substring(0, 10)}</span>
+                        <span title={this.state.songName} style={{ fontWeight: 'bold', fontSize: '20px', display: 'inline-block', marginBottom: '10px',overflow:'hidden',width: '300px' }}>{this.state.songName}</span><br />
+                        <span style={{fontWeight: 'bold',display: 'inline-block', marginRight: '10px', width: '100px'}}>歌手: {this.state.singername}</span>
+                        <span style={{fontWeight: 'bold', display: 'inline-block', width: '190px'}}>专辑: {this.state.audioName.substring(0, 10)}</span>
                     </p>
                     <div className="detailLyric">{lyricLine}</div>
                 </div>

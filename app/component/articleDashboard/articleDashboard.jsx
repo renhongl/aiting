@@ -181,7 +181,7 @@ export default class Dashboard extends Component {
             return (
                 <li key={i} data={article.id}>
                     <img src={article.image} data={article.name} onClick={this.openThisArticleList.bind(this)} />
-                    <p>{article.name} 作者: {article.anchor}</p>
+                    <p title={article.name + ' 作者: ' + article.anchor} className="folderTitle">{article.name} 作者: {article.anchor}</p>
                 </li>
             )
         })

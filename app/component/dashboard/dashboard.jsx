@@ -146,8 +146,8 @@ export default class Dashboard extends Component {
         let folderList = this.state.folderList.map((folder, i) => {
             return (
                 <li className="oneFolder" key={i} data={folder.url}>
-                    <img src={folder.image} onClick={this.loadMusicList.bind(this)} />
-                    <p>{folder.title}</p>
+                    <img style={{width:'150px',height:'150px'}} src={folder.image} onClick={this.loadMusicList.bind(this)} />
+                    <p className="folderTitle" title={folder.title}>{folder.title}</p>
                 </li>
             )
         });

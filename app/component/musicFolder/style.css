@@ -65,6 +65,8 @@
     font-size: 12px;
     overflow: hidden;
     height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .fa-expand{

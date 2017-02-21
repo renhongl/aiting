@@ -40,6 +40,8 @@
     font-size: 12px;
     padding-left: 8px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .listItem .row1{
@@ -103,8 +105,9 @@
     height: 30px;
     /* background: red; */
     padding-top: 30px;
-    width: 100%;
+    width: 63%;
     margin-bottom: 30px;
+    margin-left: 175px;
 }
 
 .pagination li{
@@ -128,4 +131,9 @@
 .pagination .current{
     background: #e6245a !important;
     color: #fff;
+}
+
+.songName{
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

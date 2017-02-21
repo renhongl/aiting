@@ -67,6 +67,12 @@
     font-size: 13px;
 }
 
+.detailName span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .detailLyric{
     height: 352px;
     width: 47%;
@@ -81,4 +87,7 @@
 .detailLyric p{
     margin: 10px;
     height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
