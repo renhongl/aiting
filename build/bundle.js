@@ -58,7 +58,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Observer = __webpack_require__(209);
+	var _Observer = __webpack_require__(212);
 
 	var _Observer2 = _interopRequireDefault(_Observer);
 
@@ -21521,19 +21521,19 @@
 
 	var _content2 = _interopRequireDefault(_content);
 
-	var _footer = __webpack_require__(198);
+	var _footer = __webpack_require__(201);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _dashboard = __webpack_require__(201);
+	var _dashboard = __webpack_require__(204);
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	var _articleDashboard = __webpack_require__(204);
+	var _articleDashboard = __webpack_require__(207);
 
 	var _articleDashboard2 = _interopRequireDefault(_articleDashboard);
 
-	__webpack_require__(207);
+	__webpack_require__(210);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21638,6 +21638,11 @@
 	            this.ipcRenderer.send('minMainWindow');
 	        }
 	    }, {
+	        key: 'toggleSetting',
+	        value: function toggleSetting() {
+	            (0, _jquery2.default)('.settingWindow').toggle();
+	        }
+	    }, {
 	        key: 'searchMusic',
 	        value: function searchMusic(e) {
 	            if (e.keyCode === 13) {
@@ -21689,12 +21694,7 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'setting' },
-	                        _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true', title: '\u8BBE\u7F6E' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'console' },
-	                        _react2.default.createElement('i', { className: 'fa fa-chain-broken', 'aria-hidden': 'true', title: '\u63A7\u5236\u53F0' })
+	                        _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true', title: '\u8BBE\u7F6E', onClick: this.toggleSetting.bind(this) })
 	                    ),
 	                    _react2.default.createElement('div', { className: 'line' }),
 	                    _react2.default.createElement(
@@ -32542,6 +32542,10 @@
 
 	var _musicDetail2 = _interopRequireDefault(_musicDetail);
 
+	var _setting = __webpack_require__(198);
+
+	var _setting2 = _interopRequireDefault(_setting);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32556,12 +32560,7 @@
 	    function Content() {
 	        _classCallCheck(this, Content);
 
-	        var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
-
-	        _this.state = {
-	            height: '100%'
-	        };
-	        return _this;
+	        return _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
 	    }
 
 	    _createClass(Content, [{
@@ -32572,7 +32571,8 @@
 	                { className: 'content' },
 	                _react2.default.createElement(_musicFolder2.default, null),
 	                _react2.default.createElement(_musicList2.default, null),
-	                _react2.default.createElement(_musicDetail2.default, null)
+	                _react2.default.createElement(_musicDetail2.default, null),
+	                _react2.default.createElement(_setting2.default, null)
 	            );
 	        }
 	    }]);
@@ -32617,7 +32617,7 @@
 
 
 	// module
-	exports.push([module.id, ".content{\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #fff;\r\n    display: flex;\r\n}", ""]);
+	exports.push([module.id, ".content{\r\n    width: 100%;\r\n    height: 500px;\r\n    background: #fff;\r\n    display: flex;\r\n    position: relative;\r\n}", ""]);
 
 	// exports
 
@@ -32973,7 +32973,7 @@
 
 
 	// module
-	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n    overflow: auto;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    /*overflow: auto;*/\r\n    /*height: 465px;*/\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}\r\n\r\n.pagination{\r\n    display: flex;\r\n    height: 30px;\r\n    /* background: red; */\r\n    padding-top: 30px;\r\n    width: 63%;\r\n    margin-bottom: 30px;\r\n    margin-left: 175px;\r\n}\r\n\r\n.pagination li{\r\n    width: 25px;\r\n    background: #cccccc;\r\n    list-style-type: none;\r\n    height: 25px;\r\n    margin-left: 10px;\r\n    line-height: 25px;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    text-align: center;\r\n    display: inline-block;\r\n}\r\n\r\n.pagination li:hover{\r\n    background: #ff6a93;\r\n    color: #fff;\r\n}\r\n\r\n.pagination .current{\r\n    background: #e6245a !important;\r\n    color: #fff;\r\n}\r\n\r\n.songName{\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n}", ""]);
+	exports.push([module.id, ".musicList{\r\n    width: 80%;\r\n    height: 100%;\r\n    background: #fff;\r\n    border-left: 1px solid #ded7d7;\r\n    overflow: auto;\r\n}\r\n\r\n.musicList li{\r\n    list-style-type: none;\r\n    height: 31px;\r\n    line-height: 30px;\r\n    display: flex;\r\n    color: #808080;\r\n    position: relative;\r\n}\r\n\r\n.musicTitle{\r\n    width: 100%;\r\n    height: 35px;\r\n    display: flex;\r\n    font-size: 15px;\r\n    font-weight: bold;\r\n    line-height: 35px;\r\n}\r\n\r\n.musicTitle span{\r\n    border-bottom: 1px solid #d0d0d0;\r\n    width: 25%;\r\n    /*padding-left: 10px;*/\r\n}\r\n\r\n.listItem {\r\n    /*overflow: auto;*/\r\n    /*height: 465px;*/\r\n}\r\n\r\n.listItem li span{\r\n    width: 25%;\r\n    font-size: 12px;\r\n    padding-left: 8px;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n}\r\n\r\n.listItem .row1{\r\n    background: #fbfbfb;\r\n}\r\n\r\n.listItem li:hover{\r\n    background: #f1efef;\r\n    cursor: pointer;\r\n    color: #000;\r\n}\r\n\r\n.listItem .selected{\r\n    background: #efe8e8 !important;\r\n    color: #000;\r\n}\r\n\r\n.fa-headphones{\r\n    line-height: 30px;\r\n    display: inline-block;\r\n    margin-left: 5px;\r\n    color: #e6245a;\r\n    animation: listenning;\r\n    animation-duration: 5s;\r\n    animation-iteration-count: infinite;\r\n    animation-timing-function: linear;\r\n}\r\n\r\n@keyframes listenning{\r\n    0% {color: orangered}\r\n    20% {color: limegreen}\r\n    40% {color: blueviolet}\r\n    60% {color: yellow}\r\n    80% {color: deepskyblue}\r\n    100% {color: pink}\r\n}\r\n\r\n.addToLove{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n    font-size: 12px;\r\n}\r\n\r\n.addToLove:hover{\r\n    color: #e6245a;\r\n}\r\n\r\n.addToLove.loved{\r\n    display: none;\r\n}\r\n\r\n.fa-trash{\r\n    position: absolute;\r\n    left: 28px;\r\n    top: 9px;\r\n}\r\n\r\n.pagination{\r\n    display: flex;\r\n    height: 30px;\r\n    /* background: red; */\r\n    padding-top: 30px;\r\n    width: 63%;\r\n    margin-bottom: 30px;\r\n    /*margin-left: 175px;*/\r\n}\r\n\r\n.pagination li{\r\n    width: 25px;\r\n    background: #cccccc;\r\n    list-style-type: none;\r\n    height: 25px;\r\n    margin-left: 10px;\r\n    line-height: 25px;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    text-align: center;\r\n    display: inline-block;\r\n}\r\n\r\n.pagination li:hover{\r\n    background: #ff6a93;\r\n    color: #fff;\r\n}\r\n\r\n.pagination .current{\r\n    background: #e6245a !important;\r\n    color: #fff;\r\n}\r\n\r\n.songName{\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n}", ""]);
 
 	// exports
 
@@ -33578,6 +33578,103 @@
 
 	__webpack_require__(199);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Setting = function (_Component) {
+	    _inherits(Setting, _Component);
+
+	    function Setting() {
+	        _classCallCheck(this, Setting);
+
+	        return _possibleConstructorReturn(this, (Setting.__proto__ || Object.getPrototypeOf(Setting)).call(this));
+	    }
+
+	    _createClass(Setting, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'settingWindow' },
+	                '\u670D\u52A1\u5668\u5730\u5740: ',
+	                _react2.default.createElement('input', null),
+	                _react2.default.createElement('input', { type: 'button', value: '\u8FDE\u63A5' })
+	            );
+	        }
+	    }]);
+
+	    return Setting;
+	}(_react.Component);
+
+	exports.default = Setting;
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(200);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(183)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(182)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".settingWindow{\r\n\tposition: absolute;\r\n    z-index: 10;\r\n    width: 300px;\r\n    height: 300px;\r\n    background: #cccccc;\r\n    right: 11px;\r\n    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);\r\n    top: 3px;\r\n\tdisplay: none;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	__webpack_require__(202);
+
 	var _jquery = __webpack_require__(184);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
@@ -33867,13 +33964,13 @@
 	exports.default = Footer;
 
 /***/ },
-/* 199 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(200);
+	var content = __webpack_require__(203);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -33893,7 +33990,7 @@
 	}
 
 /***/ },
-/* 200 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -33907,7 +34004,7 @@
 
 
 /***/ },
-/* 201 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33926,7 +34023,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	__webpack_require__(202);
+	__webpack_require__(205);
 
 	var _jquery = __webpack_require__(184);
 
@@ -34159,13 +34256,13 @@
 	exports.default = Dashboard;
 
 /***/ },
-/* 202 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(203);
+	var content = __webpack_require__(206);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -34185,7 +34282,7 @@
 	}
 
 /***/ },
-/* 203 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -34193,13 +34290,13 @@
 
 
 	// module
-	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 151px;\r\n    height: 151px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n    position: relative;\r\n}\r\n\r\n.oneFolder img{\r\n    opacity: 0.9\r\n}\r\n\r\n.oneFolder img:hover{\r\n    opacity: 1;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 32px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar li:hover{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 3px solid #e6245a !important;\r\n}\r\n\r\n.musicPagination{\r\n    display: flex;\r\n    height: 30px;\r\n    /* background: red; */\r\n    padding-top: 30px;\r\n    width: 64%;\r\n    margin-bottom: 30px;\r\n    padding-left: 222px;\r\n}\r\n\r\n.musicPagination li{\r\n    width: 25px;\r\n    background: #cccccc;\r\n    list-style-type: none;\r\n    height: 25px;\r\n    margin-left: 10px;\r\n    line-height: 25px;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n\r\n.musicPagination li:hover{\r\n    background: #ff6a93;\r\n    color: #fff;\r\n}\r\n\r\n.musicPagination .musicCurrentPage{\r\n    background: #e6245a !important;\r\n    color: #fff;\r\n}\r\n\r\n.folderTitle{\r\n    position: absolute;\r\n    top: 120px;\r\n    background: #e6245a;\r\n    opacity: 0.95;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    width: 100%;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    font-size: 0.9em;\r\n    text-align: center;\r\n     color: #fff; \r\n    font-style: italic;\r\n    font-weight: bold;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, ".dashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n}\r\n\r\n.oneFolder{\r\n    width: 150px;\r\n    height: 150px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n    position: relative;\r\n}\r\n\r\n.oneFolder img{\r\n    opacity: 0.9\r\n}\r\n\r\n.oneFolder img:hover{\r\n    opacity: 1;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar{\r\n    height: 75px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.musicNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 41px;\r\n    margin-top: 32px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.musicNavbar li:hover{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.musicNavbar .selectedNavbar{\r\n    border-bottom: 3px solid #e6245a !important;\r\n}\r\n\r\n.musicPagination{\r\n        display: flex;\r\n    height: 30px;\r\n    /* background: red; */\r\n    padding-top: 30px;\r\n    width: 80%;\r\n    margin-bottom: 30px;\r\n    padding-left: 35px;\r\n}\r\n\r\n.musicPagination li{\r\n    width: 25px;\r\n    background: #cccccc;\r\n    list-style-type: none;\r\n    height: 25px;\r\n    margin-left: 10px;\r\n    line-height: 25px;\r\n    border-radius: 30px;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n\r\n.musicPagination li:hover{\r\n    background: #ff6a93;\r\n    color: #fff;\r\n}\r\n\r\n.musicPagination .musicCurrentPage{\r\n    background: #e6245a !important;\r\n    color: #fff;\r\n}\r\n\r\n.folderTitle{\r\n    position: absolute;\r\n    top: 120px;\r\n    background: #e6245a;\r\n    opacity: 0.95;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    width: 100%;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    font-size: 0.9em;\r\n    text-align: center;\r\n     color: #fff; \r\n    font-style: italic;\r\n    font-weight: bold;\r\n}\r\n\r\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 204 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34218,7 +34315,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	__webpack_require__(205);
+	__webpack_require__(208);
 
 	var _jquery = __webpack_require__(184);
 
@@ -34480,13 +34577,13 @@
 	exports.default = Dashboard;
 
 /***/ },
-/* 205 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(206);
+	var content = __webpack_require__(209);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -34506,7 +34603,7 @@
 	}
 
 /***/ },
-/* 206 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -34514,19 +34611,19 @@
 
 
 	// module
-	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 1;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n    height: 150px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n    margin-bottom: 0;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 38px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.articlecNavbar li:hover{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 3px solid #e6245a !important;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    width: 151px;\r\n    height: 151px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n    position: relative;\r\n}\r\n\r\n.folderTitle{\r\n    position: absolute;\r\n    top: 120px;\r\n    background: #e6245a;\r\n    opacity: 0.95;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    width: 100%;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    font-size: 0.9em;\r\n    text-align: center;\r\n     color: #fff; \r\n    font-style: italic;\r\n    font-weight: bold;\r\n}\r\n", ""]);
+	exports.push([module.id, ".articleDashboard{\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 639px;\r\n    height: 500px;\r\n    top: 50px;\r\n    left: 161px;\r\n    background: #fff;\r\n    overflow-y: auto;\r\n    display: none;\r\n}\r\n\r\n.articleList img:hover{\r\n    opacity: 1;\r\n    cursor: pointer;\r\n}\r\n\r\n.articleList img{\r\n    width: 150px;\r\n    height: 150px;\r\n    opacity: 0.9;\r\n}\r\n\r\n.articlecNavbar{\r\n    height: 40px;\r\n    border-bottom: 1px solid #cccccc;\r\n    width: 86%;\r\n    margin: 50px auto;\r\n    margin-bottom: 0;\r\n}\r\n\r\n.articlecNavbar li{\r\n    width: 69px;\r\n    float: left;\r\n    height: 38px;\r\n    text-align: center;\r\n    margin-left: 80px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.articlecNavbar li:hover{\r\n    border-bottom: 2px solid #e6245a;\r\n}\r\n\r\n.articlecNavbar .selectedNavbar{\r\n    border-bottom: 3px solid #e6245a !important;\r\n}\r\n\r\n.articleDashboard .articleSearch{\r\n    display: inline-block;\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 10px;\r\n    border-radius: 24px;\r\n    height: 23px;\r\n    outline: none;\r\n    border: 1px solid #cccccc;\r\n    padding-left: 5px;\r\n}\r\n\r\n.articleDashboard .articleList li{\r\n    width: 150px;\r\n    height: 150px;\r\n    float: left;\r\n    margin-top: 25px;\r\n    margin-left: 45px;\r\n    list-style-type: none;\r\n    cursor: pointer;\r\n    position: relative;\r\n}\r\n\r\n.folderTitle{\r\n    position: absolute;\r\n    top: 120px;\r\n    background: #e6245a;\r\n    opacity: 0.95;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    width: 100%;\r\n    height: 30px;\r\n    line-height: 30px;\r\n    font-size: 0.9em;\r\n    text-align: center;\r\n     color: #fff; \r\n    font-style: italic;\r\n    font-weight: bold;\r\n}\r\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 207 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(208);
+	var content = __webpack_require__(211);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(183)(content, {});
@@ -34546,7 +34643,7 @@
 	}
 
 /***/ },
-/* 208 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(182)();
@@ -34560,7 +34657,7 @@
 
 
 /***/ },
-/* 209 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

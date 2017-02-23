@@ -3,4 +3,5 @@
     height: 500px;
     background: #fff;
     display: flex;
+    position: relative;
 }

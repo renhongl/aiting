@@ -10,8 +10,8 @@
 }
 
 .oneFolder{
-    width: 151px;
-    height: 151px;
+    width: 150px;
+    height: 150px;
     float: left;
     margin-top: 25px;
     margin-left: 45px;
@@ -56,13 +56,13 @@
 }
 
 .musicPagination{
-    display: flex;
+        display: flex;
     height: 30px;
     /* background: red; */
     padding-top: 30px;
-    width: 64%;
+    width: 80%;
     margin-bottom: 30px;
-    padding-left: 222px;
+    padding-left: 35px;
 }
 
 .musicPagination li{
