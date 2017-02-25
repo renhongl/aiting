@@ -1,4 +1,4 @@
-.articleDashboard{
+.articleDashboard {
     position: absolute;
     z-index: 1;
     width: 639px;
@@ -10,18 +10,18 @@
     display: none;
 }
 
-.articleList img:hover{
-    opacity: 1;
+.articleList img:hover {
+    border: 2px solid #e6245a;
     cursor: pointer;
 }
 
-.articleList img{
+.articleList img {
     width: 150px;
     height: 150px;
-    opacity: 0.9;
+    border: 2px solid #fff;
 }
 
-.articlecNavbar{
+.articlecNavbar {
     height: 40px;
     border-bottom: 1px solid #cccccc;
     width: 86%;
@@ -29,7 +29,7 @@
     margin-bottom: 0;
 }
 
-.articlecNavbar li{
+.articlecNavbar li {
     width: 69px;
     float: left;
     height: 38px;
@@ -39,15 +39,16 @@
     cursor: pointer;
 }
 
-.articlecNavbar li:hover{
-    border-bottom: 2px solid #e6245a;
+.articlecNavbar li:hover {
+    font-weight: bold;
 }
 
-.articlecNavbar .selectedNavbar{
+.articlecNavbar .selectedNavbar {
     border-bottom: 3px solid #e6245a !important;
+    font-weight: bold;
 }
 
-.articleDashboard .articleSearch{
+.articleDashboard .articleSearch {
     display: inline-block;
     float: right;
     margin-right: 10px;
@@ -59,7 +60,7 @@
     padding-left: 5px;
 }
 
-.articleDashboard .articleList li{
+.articleDashboard .articleList li {
     width: 150px;
     height: 150px;
     float: left;
@@ -70,11 +71,11 @@
     position: relative;
 }
 
-.folderTitle{
+.folderTitle {
     position: absolute;
-    top: 120px;
-    background: #e6245a;
-    opacity: 0.95;
+    top: 122px;
+    background: #fff;
+    opacity: 0.7;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -83,7 +84,8 @@
     line-height: 30px;
     font-size: 0.9em;
     text-align: center;
-     color: #fff; 
+    color: #000;
     font-style: italic;
     font-weight: bold;
+    left: 2px;
 }

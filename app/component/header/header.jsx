@@ -20,10 +20,6 @@ export default class Header extends Component {
         this.ipcRenderer.send('minMainWindow');
     }
 
-    toggleSetting() {
-        $('.settingWindow').toggle();
-    }
-
     searchMusic(e) {
         if (e.keyCode === 13) {
             let value = this.refs.searchInput.value;
@@ -54,8 +50,6 @@ export default class Header extends Component {
                 <div className="title"><i className="fa fa-assistive-listening-systems" aria-hidden="true"></i><span>爱 听</span></div>
                 <div className="searchDiv"><input type="text" placeholder="搜索歌名, 歌手, 歌词" onKeyUp={this.searchMusic.bind(this)} ref="searchInput" /></div>
                 <div className="controlContainer">
-                    <div className="setting"><i className="fa fa-cog" aria-hidden="true" title="设置" onClick={this.toggleSetting.bind(this)}></i></div>
-                    <div className="line"></div>
                     <div className="minus"><i className="fa fa-minus" aria-hidden="true" title="最小化" onClick={this.minWindow.bind(this)}></i></div>
                     <div className="close"><i className="fa fa-times" aria-hidden="true" title="关闭" onClick={this.closeWindow.bind(this)}></i></div>
                 </div>

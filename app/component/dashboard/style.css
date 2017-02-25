@@ -1,4 +1,4 @@
-.dashboard{
+.dashboard {
     position: absolute;
     z-index: 1;
     width: 639px;
@@ -9,7 +9,7 @@
     overflow-y: auto;
 }
 
-.oneFolder{
+.oneFolder {
     width: 150px;
     height: 150px;
     float: left;
@@ -20,23 +20,23 @@
     position: relative;
 }
 
-.oneFolder img{
-    opacity: 0.9
+.oneFolder img {
+    border: 2px solid #fff;
 }
 
-.oneFolder img:hover{
-    opacity: 1;
+.oneFolder img:hover {
+    border: 2px solid #e6245a;
     cursor: pointer;
 }
 
-.musicNavbar{
+.musicNavbar {
     height: 75px;
     border-bottom: 1px solid #cccccc;
     width: 86%;
     margin: 0 auto;
 }
 
-.musicNavbar li{
+.musicNavbar li {
     width: 69px;
     float: left;
     height: 41px;
@@ -47,16 +47,17 @@
     cursor: pointer;
 }
 
-.musicNavbar li:hover{
-    border-bottom: 2px solid #e6245a;
+.musicNavbar li:hover {
+    font-weight: bold;
 }
 
-.musicNavbar .selectedNavbar{
+.musicNavbar .selectedNavbar {
     border-bottom: 3px solid #e6245a !important;
+    font-weight: bold;
 }
 
-.musicPagination{
-        display: flex;
+.musicPagination {
+    display: flex;
     height: 30px;
     /* background: red; */
     padding-top: 30px;
@@ -65,7 +66,7 @@
     padding-left: 35px;
 }
 
-.musicPagination li{
+.musicPagination li {
     width: 25px;
     background: #cccccc;
     list-style-type: none;
@@ -77,21 +78,21 @@
     text-align: center;
 }
 
-.musicPagination li:hover{
+.musicPagination li:hover {
     background: #ff6a93;
     color: #fff;
 }
 
-.musicPagination .musicCurrentPage{
+.musicPagination .musicCurrentPage {
     background: #e6245a !important;
     color: #fff;
 }
 
-.folderTitle{
+.folderTitle {
     position: absolute;
-    top: 120px;
-    background: #e6245a;
-    opacity: 0.95;
+    top: 122px;
+    background: #fff;
+    opacity: 0.7;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -100,8 +101,8 @@
     line-height: 30px;
     font-size: 0.9em;
     text-align: center;
-     color: #fff; 
+    color: #000;
     font-style: italic;
     font-weight: bold;
+    left: 2px;
 }
-
